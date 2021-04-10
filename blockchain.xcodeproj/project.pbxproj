@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0787338C2621EBFD0075981C /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787338B2621EBFD0075981C /* main.c */; };
+		0787339B2621EEDC0075981C /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339A2621EEDC0075981C /* main.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +24,9 @@
 
 /* Begin PBXFileReference section */
 		078733882621EBFD0075981C /* blockchain */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = blockchain; sourceTree = BUILT_PRODUCTS_DIR; };
-		0787338B2621EBFD0075981C /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		078733932621EDC10075981C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		078733942621EDE30075981C /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; };
+		0787339A2621EEDC0075981C /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +43,8 @@
 		0787337F2621EBFD0075981C = {
 			isa = PBXGroup;
 			children = (
+				078733932621EDC10075981C /* README.md */,
+				078733942621EDE30075981C /* makefile */,
 				0787338A2621EBFD0075981C /* blockchain */,
 				078733892621EBFD0075981C /* Products */,
 			);
@@ -57,7 +61,7 @@
 		0787338A2621EBFD0075981C /* blockchain */ = {
 			isa = PBXGroup;
 			children = (
-				0787338B2621EBFD0075981C /* main.c */,
+				0787339A2621EEDC0075981C /* main.c */,
 			);
 			path = blockchain;
 			sourceTree = "<group>";
@@ -118,7 +122,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0787338C2621EBFD0075981C /* main.c in Sources */,
+				0787339B2621EEDC0075981C /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

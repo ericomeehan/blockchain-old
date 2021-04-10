@@ -1,14 +1,15 @@
 //
-//  main.c
-//  blockchain
+// ==================================
+// blockchain
 //
-//  Created by Eric Meehan on 4/10/21.
+// an open blockchain network for anything.
+// ==================================
+//
+// main.c
+//
+// Eric Meehan
+// 4/10/21
+//
 //
 
 #include <stdio.h>
-
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    printf("Hello, World!\n");
-    return 0;
-}
