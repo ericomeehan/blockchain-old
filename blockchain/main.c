@@ -12,4 +12,23 @@
 //
 //
 
+#include <libeom/libeom.h>
+
+#include "../../libeom/Systems/Terminal.h"
+
 #include <stdio.h>
+#include <string.h>
+
+#include "Block.h"
+
+void interpreter(const char *command);
+
+int main(int argc, const char *argv[])
+{
+    terminal(argc, argv, interpreter);
+}
+
+void interpreter(const char *command)
+{
+    printf("%s\n", command);
+}

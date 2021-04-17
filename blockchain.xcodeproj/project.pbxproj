@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0787339B2621EEDC0075981C /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339A2621EEDC0075981C /* main.c */; };
+		0787339F2621F0EB0075981C /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339E2621F0EB0075981C /* Block.c */; };
+		07A23B14262219550087BE64 /* libeom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A23B13262219550087BE64 /* libeom.a */; };
+		07A23B2326222B0A0087BE64 /* Reader.c in Sources */ = {isa = PBXBuildFile; fileRef = 07A23B2226222B0A0087BE64 /* Reader.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +30,11 @@
 		078733932621EDC10075981C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		078733942621EDE30075981C /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; };
 		0787339A2621EEDC0075981C /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		0787339D2621F0EB0075981C /* Block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
+		0787339E2621F0EB0075981C /* Block.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Block.c; sourceTree = "<group>"; };
+		07A23B13262219550087BE64 /* libeom.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libeom.a; path = ../../../../usr/local/lib/libeom.a; sourceTree = "<group>"; };
+		07A23B2126222B0A0087BE64 /* Reader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reader.h; sourceTree = "<group>"; };
+		07A23B2226222B0A0087BE64 /* Reader.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Reader.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07A23B14262219550087BE64 /* libeom.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -47,6 +56,7 @@
 				078733942621EDE30075981C /* makefile */,
 				0787338A2621EBFD0075981C /* blockchain */,
 				078733892621EBFD0075981C /* Products */,
+				07A23B12262219550087BE64 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,8 +72,20 @@
 			isa = PBXGroup;
 			children = (
 				0787339A2621EEDC0075981C /* main.c */,
+				0787339D2621F0EB0075981C /* Block.h */,
+				0787339E2621F0EB0075981C /* Block.c */,
+				07A23B2126222B0A0087BE64 /* Reader.h */,
+				07A23B2226222B0A0087BE64 /* Reader.c */,
 			);
 			path = blockchain;
+			sourceTree = "<group>";
+		};
+		07A23B12262219550087BE64 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				07A23B13262219550087BE64 /* libeom.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,6 +145,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				0787339B2621EEDC0075981C /* main.c in Sources */,
+				0787339F2621F0EB0075981C /* Block.c in Sources */,
+				07A23B2326222B0A0087BE64 /* Reader.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +270,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 975P2G4HC3;
 				ENABLE_HARDENED_RUNTIME = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = /usr/local/include;
+				"LIBRARY_SEARCH_PATHS[arch=*]" = /usr/local/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -256,6 +282,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 975P2G4HC3;
 				ENABLE_HARDENED_RUNTIME = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = /usr/local/include;
+				"LIBRARY_SEARCH_PATHS[arch=*]" = /usr/local/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
