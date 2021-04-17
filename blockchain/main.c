@@ -14,21 +14,26 @@
 
 #include <libeom/libeom.h>
 
-#include "../../libeom/Systems/Terminal.h"
+#include "../../libeom/Interfaces/Terminal.h"
 
 #include <stdio.h>
 #include <string.h>
 
 #include "Block.h"
 
-void interpreter(const char *command);
+int interpreter(int argc, const char **argv);
 
-int main(int argc, const char *argv[])
+int main(int argc, const char **argv)
 {
-    terminal(argc, argv, interpreter);
+    char *path = "/Users/eric/Documents/blockchain/pipe";
+    terminal(argc, argv, interpreter, path);
 }
 
-void interpreter(const char *command)
+int interpreter(int argc, const char **argv)
 {
-    printf("%s\n", command);
+    for (int i = 0; i < argc; i++)
+    {
+        printf("%s\n", argv[i]);
+    }
+    return 0;
 }
