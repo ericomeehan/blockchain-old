@@ -11,6 +11,8 @@
 		0787339F2621F0EB0075981C /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339E2621F0EB0075981C /* Block.c */; };
 		07A23B14262219550087BE64 /* libeom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A23B13262219550087BE64 /* libeom.a */; };
 		07A23B2326222B0A0087BE64 /* Reader.c in Sources */ = {isa = PBXBuildFile; fileRef = 07A23B2226222B0A0087BE64 /* Reader.c */; };
+		07CFB7B72635FA6100B2CD0D /* sha512.c in Sources */ = {isa = PBXBuildFile; fileRef = 07CFB7B62635FA6100B2CD0D /* sha512.c */; };
+		07CFB7C7263604C100B2CD0D /* tomcrypt_hash.c in Sources */ = {isa = PBXBuildFile; fileRef = 07CFB7C6263604C100B2CD0D /* tomcrypt_hash.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +37,9 @@
 		07A23B13262219550087BE64 /* libeom.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libeom.a; path = ../../../../usr/local/lib/libeom.a; sourceTree = "<group>"; };
 		07A23B2126222B0A0087BE64 /* Reader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reader.h; sourceTree = "<group>"; };
 		07A23B2226222B0A0087BE64 /* Reader.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Reader.c; sourceTree = "<group>"; };
+		07CFB7B62635FA6100B2CD0D /* sha512.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sha512.c; sourceTree = "<group>"; };
+		07CFB7C5263604C100B2CD0D /* tomcrypt_hash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tomcrypt_hash.h; sourceTree = "<group>"; };
+		07CFB7C6263604C100B2CD0D /* tomcrypt_hash.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = tomcrypt_hash.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +57,7 @@
 		0787337F2621EBFD0075981C = {
 			isa = PBXGroup;
 			children = (
+				07CFB7B42635FA5200B2CD0D /* lib */,
 				078733932621EDC10075981C /* README.md */,
 				078733942621EDE30075981C /* makefile */,
 				0787338A2621EBFD0075981C /* blockchain */,
@@ -86,6 +92,16 @@
 				07A23B13262219550087BE64 /* libeom.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		07CFB7B42635FA5200B2CD0D /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				07CFB7B62635FA6100B2CD0D /* sha512.c */,
+				07CFB7C5263604C100B2CD0D /* tomcrypt_hash.h */,
+				07CFB7C6263604C100B2CD0D /* tomcrypt_hash.c */,
+			);
+			path = lib;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,7 +160,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07CFB7C7263604C100B2CD0D /* tomcrypt_hash.c in Sources */,
 				0787339B2621EEDC0075981C /* main.c in Sources */,
+				07CFB7B72635FA6100B2CD0D /* sha512.c in Sources */,
 				0787339F2621F0EB0075981C /* Block.c in Sources */,
 				07A23B2326222B0A0087BE64 /* Reader.c in Sources */,
 			);

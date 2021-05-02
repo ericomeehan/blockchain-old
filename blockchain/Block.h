@@ -15,19 +15,31 @@
 #ifndef Block_h
 #define Block_h
 
-struct BlockHeaders
-{
-    unsigned char previous_hash[64];
-    unsigned long nonce;
-    unsigned long size;
-}__attribute__((packed));
+typedef unsigned char byte;
+
 
 struct Block
 {
-    struct BlockHeaders headers;
-    unsigned char data;
+    struct BlockHeaders
+    {
+        struct Incidentals
+        {
+            // A reference to another block in the chain.
+            byte previous_hash[64];
+            // A timestamp to designate when the block was created (seconds since epoch UTC)
+            byte timestamp[32];
+        }__attribute__((packed));
+        
+        struct Credentials
+        {
+            // The creator's public key.
+            byte key[64];
+            // A digital signature for the data.
+            byte lock[64];
+            // A nonce to satisfy the difficulty requirement.
+            byte nonce[32];
+        }__attribute__((packed));
+    }__attribute__((packed));
 }__attribute__((packed));
-
-struct Block * block_constructor(unsigned char previous_hash[64], unsigned long nonce, void *data, unsigned long size);
 
 #endif /* Block_h */

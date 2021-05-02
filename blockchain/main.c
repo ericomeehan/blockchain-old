@@ -13,7 +13,7 @@
 //
 
 #include <libeom/libeom.h>
-
+#include "../lib/tomcrypt.h"
 #include "../../libeom/Interfaces/Terminal.h"
 
 #include <stdio.h>
@@ -25,8 +25,9 @@ int interpreter(int argc, const char **argv);
 
 int main(int argc, const char **argv)
 {
-    char *path = "/Users/eric/Documents/blockchain/pipe";
-    terminal(argc, argv, interpreter, path);
+//    char *path = "/Users/eric/Documents/blockchain/pipe";
+//    terminal(argc, argv, interpreter, path);
+    printf("hello\n");
 }
 
 int interpreter(int argc, const char **argv)
