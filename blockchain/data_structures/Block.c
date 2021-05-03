@@ -5,11 +5,15 @@
 // an open blockchain network for anything.
 // ==================================
 //
-// tomcrypt_hash.c
+// Block.c
 //
 // Eric Meehan
-// 4/25/21
+// 4/10/21
 //
 //
 
-#include "tomcrypt_hash.h"
+#include "Block.h"
+#include <stdlib.h>
+#include <string.h>
+
+

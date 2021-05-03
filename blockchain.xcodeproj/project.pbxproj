@@ -7,15 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0787339B2621EEDC0075981C /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339A2621EEDC0075981C /* main.c */; };
+		0720300F263F34DE00804BDD /* Account.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720300E263F34DE00804BDD /* Account.c */; };
+		07203028263F43B400804BDD /* Account.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720300E263F34DE00804BDD /* Account.c */; };
+		0720302B263F441800804BDD /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339A2621EEDC0075981C /* main.c */; };
+		0720302C263F442200804BDD /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720301D263F3C9400804BDD /* main.c */; };
+		0720302D263F446400804BDD /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07203026263F413A00804BDD /* libcrypto.a */; };
+		07203030263F460700804BDD /* crypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0720302F263F460700804BDD /* crypto.a */; };
+		07203032263F464200804BDD /* eom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07203031263F464200804BDD /* eom.a */; };
 		0787339F2621F0EB0075981C /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339E2621F0EB0075981C /* Block.c */; };
 		07A23B14262219550087BE64 /* libeom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A23B13262219550087BE64 /* libeom.a */; };
-		07A23B2326222B0A0087BE64 /* Reader.c in Sources */ = {isa = PBXBuildFile; fileRef = 07A23B2226222B0A0087BE64 /* Reader.c */; };
-		07CFB7B72635FA6100B2CD0D /* sha512.c in Sources */ = {isa = PBXBuildFile; fileRef = 07CFB7B62635FA6100B2CD0D /* sha512.c */; };
-		07CFB7C7263604C100B2CD0D /* tomcrypt_hash.c in Sources */ = {isa = PBXBuildFile; fileRef = 07CFB7C6263604C100B2CD0D /* tomcrypt_hash.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		07203019263F3C9400804BDD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		078733862621EBFD0075981C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -28,6 +40,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0720300D263F34DE00804BDD /* Account.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
+		0720300E263F34DE00804BDD /* Account.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Account.c; sourceTree = "<group>"; };
+		0720301B263F3C9400804BDD /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
+		0720301D263F3C9400804BDD /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		07203022263F3CED00804BDD /* template.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = template.c; sourceTree = "<group>"; };
+		07203024263F3DE600804BDD /* account.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = account.c; sourceTree = "<group>"; };
+		07203026263F413A00804BDD /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../../../usr/local/lib/libcrypto.a; sourceTree = "<group>"; };
+		0720302F263F460700804BDD /* crypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = crypto.a; path = ../../../../usr/local/lib/crypto.a; sourceTree = "<group>"; };
+		07203031263F464200804BDD /* eom.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = eom.a; path = ../../../../usr/local/lib/eom.a; sourceTree = "<group>"; };
 		078733882621EBFD0075981C /* blockchain */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = blockchain; sourceTree = BUILT_PRODUCTS_DIR; };
 		078733932621EDC10075981C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		078733942621EDE30075981C /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; };
@@ -35,18 +56,23 @@
 		0787339D2621F0EB0075981C /* Block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
 		0787339E2621F0EB0075981C /* Block.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Block.c; sourceTree = "<group>"; };
 		07A23B13262219550087BE64 /* libeom.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libeom.a; path = ../../../../usr/local/lib/libeom.a; sourceTree = "<group>"; };
-		07A23B2126222B0A0087BE64 /* Reader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reader.h; sourceTree = "<group>"; };
-		07A23B2226222B0A0087BE64 /* Reader.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Reader.c; sourceTree = "<group>"; };
-		07CFB7B62635FA6100B2CD0D /* sha512.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sha512.c; sourceTree = "<group>"; };
-		07CFB7C5263604C100B2CD0D /* tomcrypt_hash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tomcrypt_hash.h; sourceTree = "<group>"; };
-		07CFB7C6263604C100B2CD0D /* tomcrypt_hash.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = tomcrypt_hash.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		07203018263F3C9400804BDD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07203032263F464200804BDD /* eom.a in Frameworks */,
+				07203030263F460700804BDD /* crypto.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		078733852621EBFD0075981C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0720302D263F446400804BDD /* libcrypto.a in Frameworks */,
 				07A23B14262219550087BE64 /* libeom.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,13 +80,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		07203010263F3BBA00804BDD /* data_structures */ = {
+			isa = PBXGroup;
+			children = (
+				0787339D2621F0EB0075981C /* Block.h */,
+				0787339E2621F0EB0075981C /* Block.c */,
+			);
+			path = data_structures;
+			sourceTree = "<group>";
+		};
+		07203011263F3BDB00804BDD /* cryptography */ = {
+			isa = PBXGroup;
+			children = (
+				0720300D263F34DE00804BDD /* Account.h */,
+				0720300E263F34DE00804BDD /* Account.c */,
+			);
+			path = cryptography;
+			sourceTree = "<group>";
+		};
+		07203012263F3C0E00804BDD /* test */ = {
+			isa = PBXGroup;
+			children = (
+				0720301D263F3C9400804BDD /* main.c */,
+				07203013263F3C1D00804BDD /* unit */,
+				07203022263F3CED00804BDD /* template.c */,
+			);
+			path = test;
+			sourceTree = "<group>";
+		};
+		07203013263F3C1D00804BDD /* unit */ = {
+			isa = PBXGroup;
+			children = (
+				07203014263F3C2500804BDD /* cryptography */,
+			);
+			path = unit;
+			sourceTree = "<group>";
+		};
+		07203014263F3C2500804BDD /* cryptography */ = {
+			isa = PBXGroup;
+			children = (
+				07203024263F3DE600804BDD /* account.c */,
+			);
+			path = cryptography;
+			sourceTree = "<group>";
+		};
 		0787337F2621EBFD0075981C = {
 			isa = PBXGroup;
 			children = (
-				07CFB7B42635FA5200B2CD0D /* lib */,
 				078733932621EDC10075981C /* README.md */,
 				078733942621EDE30075981C /* makefile */,
 				0787338A2621EBFD0075981C /* blockchain */,
+				07203012263F3C0E00804BDD /* test */,
 				078733892621EBFD0075981C /* Products */,
 				07A23B12262219550087BE64 /* Frameworks */,
 			);
@@ -70,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				078733882621EBFD0075981C /* blockchain */,
+				0720301B263F3C9400804BDD /* test */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -77,11 +148,9 @@
 		0787338A2621EBFD0075981C /* blockchain */ = {
 			isa = PBXGroup;
 			children = (
+				07203011263F3BDB00804BDD /* cryptography */,
+				07203010263F3BBA00804BDD /* data_structures */,
 				0787339A2621EEDC0075981C /* main.c */,
-				0787339D2621F0EB0075981C /* Block.h */,
-				0787339E2621F0EB0075981C /* Block.c */,
-				07A23B2126222B0A0087BE64 /* Reader.h */,
-				07A23B2226222B0A0087BE64 /* Reader.c */,
 			);
 			path = blockchain;
 			sourceTree = "<group>";
@@ -89,24 +158,34 @@
 		07A23B12262219550087BE64 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				07203031263F464200804BDD /* eom.a */,
+				0720302F263F460700804BDD /* crypto.a */,
+				07203026263F413A00804BDD /* libcrypto.a */,
 				07A23B13262219550087BE64 /* libeom.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		07CFB7B42635FA5200B2CD0D /* lib */ = {
-			isa = PBXGroup;
-			children = (
-				07CFB7B62635FA6100B2CD0D /* sha512.c */,
-				07CFB7C5263604C100B2CD0D /* tomcrypt_hash.h */,
-				07CFB7C6263604C100B2CD0D /* tomcrypt_hash.c */,
-			);
-			path = lib;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0720301A263F3C9400804BDD /* test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0720301F263F3C9400804BDD /* Build configuration list for PBXNativeTarget "test" */;
+			buildPhases = (
+				07203017263F3C9400804BDD /* Sources */,
+				07203018263F3C9400804BDD /* Frameworks */,
+				07203019263F3C9400804BDD /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = test;
+			productName = test;
+			productReference = 0720301B263F3C9400804BDD /* test */;
+			productType = "com.apple.product-type.tool";
+		};
 		078733872621EBFD0075981C /* blockchain */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0787338F2621EBFD0075981C /* Build configuration list for PBXNativeTarget "blockchain" */;
@@ -132,6 +211,9 @@
 			attributes = {
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
+					0720301A263F3C9400804BDD = {
+						CreatedOnToolsVersion = 12.5;
+					};
 					078733872621EBFD0075981C = {
 						CreatedOnToolsVersion = 12.4;
 					};
@@ -151,26 +233,58 @@
 			projectRoot = "";
 			targets = (
 				078733872621EBFD0075981C /* blockchain */,
+				0720301A263F3C9400804BDD /* test */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		07203017263F3C9400804BDD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0720302C263F442200804BDD /* main.c in Sources */,
+				07203028263F43B400804BDD /* Account.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		078733842621EBFD0075981C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07CFB7C7263604C100B2CD0D /* tomcrypt_hash.c in Sources */,
-				0787339B2621EEDC0075981C /* main.c in Sources */,
-				07CFB7B72635FA6100B2CD0D /* sha512.c in Sources */,
 				0787339F2621F0EB0075981C /* Block.c in Sources */,
-				07A23B2326222B0A0087BE64 /* Reader.c in Sources */,
+				0720300F263F34DE00804BDD /* Account.c in Sources */,
+				0720302B263F441800804BDD /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		07203020263F3C9400804BDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 975P2G4HC3;
+				ENABLE_HARDENED_RUNTIME = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = /usr/local/include;
+				MACOSX_DEPLOYMENT_TARGET = 11.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		07203021263F3C9400804BDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 975P2G4HC3;
+				ENABLE_HARDENED_RUNTIME = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = /usr/local/include;
+				MACOSX_DEPLOYMENT_TARGET = 11.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		0787338D2621EBFD0075981C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -309,6 +423,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0720301F263F3C9400804BDD /* Build configuration list for PBXNativeTarget "test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07203020263F3C9400804BDD /* Debug */,
+				07203021263F3C9400804BDD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		078733832621EBFD0075981C /* Build configuration list for PBXProject "blockchain" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

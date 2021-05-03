@@ -44,12 +44,21 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0720301A263F3C9400804BDD"
+            BuildableName = "test"
+            BlueprintName = "test"
+            ReferencedContainer = "container:blockchain.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
             BlueprintIdentifier = "077A17CA25DF0574009D89B5"
             BuildableName = "test"
             BlueprintName = "test"
             ReferencedContainer = "container:libeom.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
