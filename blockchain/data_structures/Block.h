@@ -23,12 +23,14 @@ struct Incidentals
     byte previous_hash[64];
     // A timestamp to designate when the block was created (seconds since epoch UTC)
     byte timestamp[32];
+    // The target is the largest possible hash value for this block
+    byte target[64];
 }__attribute__((packed));
 
 struct Credentials
 {
     // The creator's public key.
-    byte key[800];
+    byte key[550];
     // A digital signature for the data.
     byte lock[512];
     // A nonce to satisfy the difficulty requirement.

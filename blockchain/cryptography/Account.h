@@ -26,5 +26,6 @@ struct Account
 void create_account(void);
 struct Account activate(char *public_key_file, char *private_key_file);
 void deactivate(void);
-
+short RSASign(EVP_PKEY* rsa, const unsigned char* Msg, size_t MsgLen, unsigned char** EncMsg, size_t* MsgLenEnc);
+short RSAVerifySignature( EVP_PKEY* rsa, unsigned char* MsgHash, size_t MsgHashLen, const char* Msg, size_t MsgLen, short* Authentic);
 #endif /* Account_h */
