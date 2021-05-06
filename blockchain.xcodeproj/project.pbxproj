@@ -10,10 +10,13 @@
 		0720300F263F34DE00804BDD /* Account.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720300E263F34DE00804BDD /* Account.c */; };
 		07203028263F43B400804BDD /* Account.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720300E263F34DE00804BDD /* Account.c */; };
 		0720302B263F441800804BDD /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339A2621EEDC0075981C /* main.c */; };
-		0720302C263F442200804BDD /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720301D263F3C9400804BDD /* main.c */; };
 		0720302D263F446400804BDD /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07203026263F413A00804BDD /* libcrypto.a */; };
 		07203030263F460700804BDD /* crypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0720302F263F460700804BDD /* crypto.a */; };
 		07203032263F464200804BDD /* eom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07203031263F464200804BDD /* eom.a */; };
+		0720B4F4264305DE00EAAE74 /* test.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720B4F3264305DE00EAAE74 /* test.c */; };
+		0720B4F92643066500EAAE74 /* test_account.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720B4F82643066500EAAE74 /* test_account.c */; };
+		0759C1DE2641FDB800AF9407 /* test_block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0759C1DD2641FDB800AF9407 /* test_block.c */; };
+		0759C1DF264200A300AF9407 /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339E2621F0EB0075981C /* Block.c */; };
 		0787339F2621F0EB0075981C /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339E2621F0EB0075981C /* Block.c */; };
 		07A23B14262219550087BE64 /* libeom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A23B13262219550087BE64 /* libeom.a */; };
 /* End PBXBuildFile section */
@@ -43,12 +46,16 @@
 		0720300D263F34DE00804BDD /* Account.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
 		0720300E263F34DE00804BDD /* Account.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Account.c; sourceTree = "<group>"; };
 		0720301B263F3C9400804BDD /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
-		0720301D263F3C9400804BDD /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
-		07203022263F3CED00804BDD /* template.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = template.c; sourceTree = "<group>"; };
-		07203024263F3DE600804BDD /* account.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = account.c; sourceTree = "<group>"; };
 		07203026263F413A00804BDD /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../../../usr/local/lib/libcrypto.a; sourceTree = "<group>"; };
 		0720302F263F460700804BDD /* crypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = crypto.a; path = ../../../../usr/local/lib/crypto.a; sourceTree = "<group>"; };
 		07203031263F464200804BDD /* eom.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = eom.a; path = ../../../../usr/local/lib/eom.a; sourceTree = "<group>"; };
+		0720B4F2264305DE00EAAE74 /* test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
+		0720B4F3264305DE00EAAE74 /* test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test.c; sourceTree = "<group>"; };
+		0720B4F72643066500EAAE74 /* test_account.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test_account.h; sourceTree = "<group>"; };
+		0720B4F82643066500EAAE74 /* test_account.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test_account.c; sourceTree = "<group>"; };
+		0759C1D82640FBD300AF9407 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		0759C1DC2641FDB800AF9407 /* test_block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test_block.h; sourceTree = "<group>"; };
+		0759C1DD2641FDB800AF9407 /* test_block.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test_block.c; sourceTree = "<group>"; };
 		078733882621EBFD0075981C /* blockchain */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = blockchain; sourceTree = BUILT_PRODUCTS_DIR; };
 		078733932621EDC10075981C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		078733942621EDE30075981C /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; };
@@ -101,9 +108,9 @@
 		07203012263F3C0E00804BDD /* test */ = {
 			isa = PBXGroup;
 			children = (
-				0720301D263F3C9400804BDD /* main.c */,
+				0720B4F2264305DE00EAAE74 /* test.h */,
+				0720B4F3264305DE00EAAE74 /* test.c */,
 				07203013263F3C1D00804BDD /* unit */,
-				07203022263F3CED00804BDD /* template.c */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -112,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				07203014263F3C2500804BDD /* cryptography */,
+				0759C1DB2641FD9B00AF9407 /* data_structures */,
 			);
 			path = unit;
 			sourceTree = "<group>";
@@ -119,9 +127,19 @@
 		07203014263F3C2500804BDD /* cryptography */ = {
 			isa = PBXGroup;
 			children = (
-				07203024263F3DE600804BDD /* account.c */,
+				0720B4F72643066500EAAE74 /* test_account.h */,
+				0720B4F82643066500EAAE74 /* test_account.c */,
 			);
 			path = cryptography;
+			sourceTree = "<group>";
+		};
+		0759C1DB2641FD9B00AF9407 /* data_structures */ = {
+			isa = PBXGroup;
+			children = (
+				0759C1DC2641FDB800AF9407 /* test_block.h */,
+				0759C1DD2641FDB800AF9407 /* test_block.c */,
+			);
+			path = data_structures;
 			sourceTree = "<group>";
 		};
 		0787337F2621EBFD0075981C = {
@@ -151,6 +169,7 @@
 				07203011263F3BDB00804BDD /* cryptography */,
 				07203010263F3BBA00804BDD /* data_structures */,
 				0787339A2621EEDC0075981C /* main.c */,
+				0759C1D82640FBD300AF9407 /* main.h */,
 			);
 			path = blockchain;
 			sourceTree = "<group>";
@@ -243,8 +262,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0720302C263F442200804BDD /* main.c in Sources */,
+				0720B4F4264305DE00EAAE74 /* test.c in Sources */,
+				0759C1DE2641FDB800AF9407 /* test_block.c in Sources */,
+				0720B4F92643066500EAAE74 /* test_account.c in Sources */,
 				07203028263F43B400804BDD /* Account.c in Sources */,
+				0759C1DF264200A300AF9407 /* Block.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

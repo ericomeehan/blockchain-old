@@ -12,15 +12,7 @@
 //
 //
 
-#include <libeom/libeom.h>
-#include "../../libeom/Interfaces/Terminal.h"
-
-#include <stdio.h>
-#include <string.h>
-
-#include "Block.h"
-
-static struct Account user = NULL;
+#include "main.h"
 
 int interpreter(int argc, const char **argv);
 
@@ -29,6 +21,7 @@ int main(int argc, const char **argv)
     if (!user)
     {
         
+        user = activate(<#char *public_key_file#>, <#char *private_key_file#>);
     }
 }
 

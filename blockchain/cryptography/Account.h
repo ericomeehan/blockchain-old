@@ -15,7 +15,9 @@
 #ifndef Account_h
 #define Account_h
 
-#include <openssl/rsa.h>
+#include <libeom/libeom.h>
+
+#include <openssl/evp.h>
 
 struct Account
 {
@@ -23,9 +25,11 @@ struct Account
     EVP_PKEY *private_key;
 };
 
-void create_account(void);
-struct Account activate(char *public_key_file, char *private_key_file);
-void deactivate(void);
-short RSASign(EVP_PKEY* rsa, const unsigned char* Msg, size_t MsgLen, unsigned char** EncMsg, size_t* MsgLenEnc);
-short RSAVerifySignature( EVP_PKEY* rsa, unsigned char* MsgHash, size_t MsgHashLen, const char* Msg, size_t MsgLen, short* Authentic);
+static const char *profile_path = "/Users/eric/Desktop/";
+static struct Account user;
+
+bool create(char *name);
+bool activate(char *name);
+bool deactivate(void);
+
 #endif /* Account_h */

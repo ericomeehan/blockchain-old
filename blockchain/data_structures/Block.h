@@ -15,17 +15,22 @@
 #ifndef Block_h
 #define Block_h
 
-typedef unsigned char byte;
+#include <libeom/libeom.h>
+#include "Account.h"
+
+static char *block_path = "/Users/eric/Desktop/";
 
 struct Incidentals
 {
+    // The hash for this block
+    byte hash[64];
     // A reference to another block in the chain.
     byte previous_hash[64];
     // A timestamp to designate when the block was created (seconds since epoch UTC)
     byte timestamp[32];
-    // The target is the largest possible hash value for this block
-    byte target[64];
-}__attribute__((packed));
+    // The size of the block in bytes
+    unsigned long long size;
+}__attribute__((packed)); 
 
 struct Credentials
 {
@@ -34,7 +39,7 @@ struct Credentials
     // A digital signature for the data.
     byte lock[512];
     // A nonce to satisfy the difficulty requirement.
-    byte nonce[32];
+    unsigned long long nonce;
 }__attribute__((packed));
 
 struct BlockHeaders
@@ -48,5 +53,10 @@ struct Block
     struct BlockHeaders headers;
     byte data;
 }__attribute__((packed));
+
+
+bool mine(struct Block *previous, void *data, unsigned long size, byte *hash);
+bool validate(struct Block *block);
+bool load_block(struct Block *block, byte *address);
 
 #endif /* Block_h */
