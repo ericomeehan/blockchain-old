@@ -17,31 +17,38 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include <time.h>
 
 #include <openssl/rsa.h>
 #include <openssl/evp.h>
 #include <openssl/pem.h>
 #include <openssl/bn.h>
 
-bool sign_block(struct Block *block);
-bool validate_signature(struct Block *block);
-bool hash_block(struct Block *block, byte *digest);
-bool validate_hash(struct Block *block);
+bool timestamp(Block *block);
+bool sign_block(Account *user, Block *block);
+bool validate_signature(Block *block);
+bool hash_block(Block *block, byte *digest);
+bool validate_hash(Block *block);
 
-bool mine(struct Block *previous, void *data, unsigned long size, byte *digest)
+bool mine(Account *user, Block *previous, void *data, unsigned long size, byte *digest)
 {
     // Allocate space for the block
     unsigned long block_size = size + sizeof(struct BlockHeaders);
     struct Block *block = malloc(block_size);
+    
     // Initialize some of the fields
     block->headers.credentials.nonce = 0;
+    if (!timestamp(block))
+    {
+        return false;
+    }
     
     // Insert the incidentals and data
     block->headers.incidentals.size = block_size;
     memcpy(&block->data, data, size);
     //memcpy(block->headers.incidentals.previous_hash, previous, size)
     
-    if (!sign_block(block))
+    if (!sign_block(user, block))
     {
         return false;
     }
@@ -59,7 +66,7 @@ bool mine(struct Block *previous, void *data, unsigned long size, byte *digest)
     BIGNUM *value = BN_new();
     BN_bin2bn(digest, 64, value);
     
-    char *path = "";
+    char path[256] = {0};
     strcat(path, block_path);
     strcat(path, BN_bn2hex(value));
     strcat(path, ".block");
@@ -71,15 +78,16 @@ bool mine(struct Block *previous, void *data, unsigned long size, byte *digest)
     
     return true;
 }
-bool validate(struct Block *block)
+bool validate(Block *block)
 {
     return validate_hash(block) && validate_signature(block);
 }
 
-bool sign_block(struct Block *block)
+bool sign_block(Account *user, Block *block)
 {
     // Embed the active user's public key in the block.
-    i2d_PUBKEY(user.public_key, (unsigned char **)&block->headers.credentials.key);
+    memset(&block->headers.credentials.key, 0, 550);
+    i2d_PUBKEY(user->public_key, (unsigned char **)&block->headers.credentials.key);
     // Collect the size of the data embedded within the block.
     unsigned long long size = block->headers.incidentals.size - sizeof(struct BlockHeaders);
     // Prepare an EVP control structure
@@ -87,7 +95,7 @@ bool sign_block(struct Block *block)
     ctx = EVP_MD_CTX_create();
 
     // Create a signature for the block, checking for errors.
-    if ((EVP_DigestSignInit(ctx, NULL, EVP_sha512(), NULL, user.private_key)) <= 0)
+    if ((EVP_DigestSignInit(ctx, NULL, EVP_sha512(), NULL, user->private_key)) <= 0)
     {
         return false;
     }
@@ -108,7 +116,7 @@ bool sign_block(struct Block *block)
 }
 
 
-bool validate_signature(struct Block *block)
+bool validate_signature(Block *block)
 {
     // Prepare an EVP control structure.
     EVP_MD_CTX *ctx = EVP_MD_CTX_create();
@@ -116,8 +124,6 @@ bool validate_signature(struct Block *block)
     EVP_PKEY *key = NULL;
     d2i_PUBKEY(&key, (const unsigned char **)&block->headers.credentials.key, 550);
     // Verify the signature, checking for errors.
-    byte *hash;
-    unsigned long hash_length = 0;
     
     if (EVP_DigestVerifyInit(ctx, NULL, EVP_sha512(), NULL, key) <= 0)
     {
@@ -127,15 +133,17 @@ bool validate_signature(struct Block *block)
     {
         return false;
     }
-    if (EVP_DigestVerifyFinal(ctx, hash, hash_length) <= 0)
+    if (EVP_DigestVerifyFinal(ctx, block->headers.credentials.lock, 512) <= 0)
     {
         return false;
     }
-    // Confirm the signature matches the hash
-    return EVP_DigestVerifyFinal(ctx, hash, hash_length) == 1;
+    else
+    {
+        return true;
+    }
 }
 
-bool hash_block(struct Block *block, byte *digest)
+bool hash_block(Block *block, byte *digest)
 {
     EVP_MD_CTX *ctx = EVP_MD_CTX_new();
     
@@ -156,7 +164,7 @@ bool hash_block(struct Block *block, byte *digest)
     return true;
 }
 
-bool validate_hash(struct Block *block)
+bool validate_hash(Block *block)
 {
     // Create a new bignum control structure
     BN_CTX *ctx = BN_CTX_new();
@@ -170,9 +178,9 @@ bool validate_hash(struct Block *block)
     // The difficulty and value of a block is equal to 10 * √log(block_size) + 1.
     // The reasoning behind this formula is clear when graphed.
     // Truncate the difficulty to an intiger to avoid contentious precision.
-    int difficulty = 512 - (10 * sqrt(log(block->headers.incidentals.size)) + 1);
+    int difficulty = 512 - (51.2 * pow(((block->headers.incidentals.size - 1) / block->headers.incidentals.size), 1000000) + 1);
     char exp[8];
-    sprintf(exp, "%d", difficulty);
+    sprintf(exp, "%df", difficulty);
     BN_dec2bn(&exponent, exp);
     
     BIGNUM *target = BN_new();
@@ -196,9 +204,9 @@ bool validate_hash(struct Block *block)
     return proof_of_work == 1;
 }
 
-bool load_block(struct Block *block, byte *address)
+bool load_block(Block *block, byte *address)
 {
-    char path[64] = {0};
+    char path[256] = {0};
     strcat(path, block_path);
     strcat(path, (char *)address);
     strcat(path, ".block");
@@ -212,5 +220,16 @@ bool load_block(struct Block *block, byte *address)
     fread(&block->data, block->headers.incidentals.size - sizeof(struct BlockHeaders), 1, f);
     
     fclose(f);
+    return true;
+}
+
+bool timestamp(Block *block)
+{
+    struct tm *raw_time;
+    time_t time_object = time(NULL);
+    raw_time = gmtime(&time_object);
+    char timestamp[20] = {0};
+    sprintf(timestamp, "%d-%02d-%02d %02d:%02d:%02d", raw_time->tm_year + 1900, raw_time->tm_mon + 1, raw_time->tm_mday, raw_time->tm_hour, raw_time->tm_min, raw_time->tm_sec);
+    memcpy(block->headers.incidentals.timestamp, timestamp, 20);
     return true;
 }

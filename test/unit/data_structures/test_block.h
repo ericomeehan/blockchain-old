@@ -15,9 +15,9 @@
 #ifndef test_block_h
 #define test_block_h
 
-#include "../../../blockchain/cryptography/Account.h"
-#include "../../../blockchain/data_structures/Block.h"
+#include "Account.h"
+#include "Block.h"
 
-float block_unit_test(void);
+float block_unit_test(Account *user);
 
 #endif /* test_block_h */

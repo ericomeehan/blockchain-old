@@ -22,12 +22,10 @@ static char *block_path = "/Users/eric/Desktop/";
 
 struct Incidentals
 {
-    // The hash for this block
-    byte hash[64];
     // A reference to another block in the chain.
     byte previous_hash[64];
     // A timestamp to designate when the block was created (seconds since epoch UTC)
-    byte timestamp[32];
+    byte timestamp[20];
     // The size of the block in bytes
     unsigned long long size;
 }__attribute__((packed)); 
@@ -42,21 +40,21 @@ struct Credentials
     unsigned long long nonce;
 }__attribute__((packed));
 
-struct BlockHeaders
+typedef struct BlockHeaders
 {
     struct Incidentals incidentals;
     struct Credentials credentials;
-}__attribute__((packed));
+}__attribute__((packed)) BlockHeaders;
 
-struct Block
+typedef struct Block
 {
-    struct BlockHeaders headers;
+    BlockHeaders headers;
     byte data;
-}__attribute__((packed));
+}__attribute__((packed)) Block;
 
 
-bool mine(struct Block *previous, void *data, unsigned long size, byte *hash);
-bool validate(struct Block *block);
-bool load_block(struct Block *block, byte *address);
+bool mine(Account *user, Block *previous, void *data, unsigned long size, byte *hash);
+bool validate(Block *block);
+bool load_block(Block *block, byte *address);
 
 #endif /* Block_h */

@@ -18,6 +18,8 @@
 
 #include <stdio.h>
 
+#include <openssl/pem.h>
+
 bool test_successful_create(void);
 bool test_unsuccessful_create(void);
 bool test_successful_activate(void);
@@ -44,27 +46,39 @@ float account_unit_test()
 
 bool test_successful_create()
 {
-    return create("test");
+    Account test;
+    if (!create(&test, "test"))
+    {
+        return false;
+    }
+    else
+    {
+        return test.private_key && test.public_key;
+    }
 }
 
 bool test_unsuccessful_create()
 {
     // The test account should already exits.
-    return !create("test");
+    Account test;
+    return !create(&test, "test");
 }
 
 bool test_successful_activate(void)
 {
-    return activate("test");
+    Account test;
+    return activate(&test, "test");
 }
 
 bool test_unsuccessful_activate(void)
 {
-    return !activate("NA");
+    Account test;
+    return !activate(&test, "NA");
 }
 
 bool test_successful_deacitvate(void)
 {
-    return deactivate();
+    Account test;
+    return deactivate(&test);
 }
 

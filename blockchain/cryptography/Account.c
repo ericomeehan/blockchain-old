@@ -21,7 +21,7 @@
 #include <openssl/evp.h>
 #include <openssl/rsa.h>
 
-bool create(char *name)
+bool create(Account *user, char *name)
 {
     EVP_PKEY *key = EVP_PKEY_new();
     EVP_PKEY_CTX *ctx = EVP_PKEY_CTX_new_id(EVP_PKEY_RSA, NULL);
@@ -56,10 +56,10 @@ bool create(char *name)
     
     EVP_PKEY_CTX_free(ctx);
     
-    return activate(name);
+    return activate(user, name);
 }
 
-bool activate(char *name)
+bool activate(Account *user, char *name)
 {
     char path[64] = {0};
     strcat(path, profile_path);
@@ -70,8 +70,8 @@ bool activate(char *name)
     {
         return false;
     }
-    user.public_key = EVP_PKEY_new();
-    d2i_PUBKEY_fp(key_file, &user.public_key);
+    user->public_key = EVP_PKEY_new();
+    d2i_PUBKEY_fp(key_file, &user->public_key);
     fclose(key_file);
     
     memset(path, 0, 64);
@@ -83,17 +83,18 @@ bool activate(char *name)
     {
         return false;
     }
-    user.private_key = EVP_PKEY_new();
-    user.private_key = d2i_PrivateKey_ex_fp(key_file, NULL, NULL, NULL);
+    user->private_key = EVP_PKEY_new();
+    user->private_key = d2i_PrivateKey_ex_fp(key_file, &user->private_key, NULL, NULL);
     fclose(key_file);
     
-    return user.public_key && user.private_key;
+    return user->public_key && user->private_key;
 }
 
-bool deactivate()
+bool deactivate(Account *user)
 {
-    user.public_key = NULL;
-    user.private_key = NULL;
     
-    return !user.public_key && !user.private_key;
+    user->public_key = NULL;
+    user->private_key = NULL;
+    
+    return !user->public_key && !user->private_key;
 }

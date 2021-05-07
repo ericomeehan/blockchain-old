@@ -19,15 +19,19 @@
 
 #include <openssl/err.h>
 #include <openssl/evp.h>
+#include <openssl/pem.h>
 
 int main(int argc, const char * argv[]) {
     crypto_init();
-    activate("test");
     float rate = 0;
     int tests = 2;
     
-    //rate += account_unit_test();
-    rate += block_unit_test();
+    rate += account_unit_test();
+    
+    Account user;
+    activate(&user, "test");
+    
+    rate += block_unit_test(&user);
     
     printf("Tests completed with a %f%% success rate.\n", (rate/tests) * 100);
     return 0;

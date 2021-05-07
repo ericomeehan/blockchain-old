@@ -19,17 +19,16 @@
 
 #include <openssl/evp.h>
 
-struct Account
+typedef struct Account
 {
     EVP_PKEY *public_key;
     EVP_PKEY *private_key;
-};
+} Account;
 
 static const char *profile_path = "/Users/eric/Desktop/";
-static struct Account user;
 
-bool create(char *name);
-bool activate(char *name);
-bool deactivate(void);
+bool create(Account *user, char *name);
+bool activate(Account *user, char *name);
+bool deactivate(Account *user);
 
 #endif /* Account_h */
