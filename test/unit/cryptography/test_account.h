@@ -16,7 +16,7 @@
 #define test_account_h
 
 #include <libeom/libeom.h>
-#include "../../../blockchain/cryptography/Account.h"
+#include "Account.h"
 
 float account_unit_test(void);
 

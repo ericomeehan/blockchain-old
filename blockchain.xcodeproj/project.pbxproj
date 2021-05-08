@@ -19,6 +19,7 @@
 		0759C1DF264200A300AF9407 /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339E2621F0EB0075981C /* Block.c */; };
 		0787339F2621F0EB0075981C /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339E2621F0EB0075981C /* Block.c */; };
 		07A23B14262219550087BE64 /* libeom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A23B13262219550087BE64 /* libeom.a */; };
+		07B6B9152644C81A00D1207E /* Author.c in Sources */ = {isa = PBXBuildFile; fileRef = 07B6B9142644C81A00D1207E /* Author.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,6 +64,8 @@
 		0787339D2621F0EB0075981C /* Block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
 		0787339E2621F0EB0075981C /* Block.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Block.c; sourceTree = "<group>"; };
 		07A23B13262219550087BE64 /* libeom.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libeom.a; path = ../../../../usr/local/lib/libeom.a; sourceTree = "<group>"; };
+		07B6B9132644C81A00D1207E /* Author.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Author.h; sourceTree = "<group>"; };
+		07B6B9142644C81A00D1207E /* Author.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Author.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,22 +90,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		07203010263F3BBA00804BDD /* data_structures */ = {
+		07203010263F3BBA00804BDD /* blocks */ = {
 			isa = PBXGroup;
 			children = (
 				0787339D2621F0EB0075981C /* Block.h */,
 				0787339E2621F0EB0075981C /* Block.c */,
 			);
-			path = data_structures;
+			path = blocks;
 			sourceTree = "<group>";
 		};
-		07203011263F3BDB00804BDD /* cryptography */ = {
+		07203011263F3BDB00804BDD /* accounts */ = {
 			isa = PBXGroup;
 			children = (
 				0720300D263F34DE00804BDD /* Account.h */,
 				0720300E263F34DE00804BDD /* Account.c */,
 			);
-			path = cryptography;
+			path = accounts;
 			sourceTree = "<group>";
 		};
 		07203012263F3C0E00804BDD /* test */ = {
@@ -166,8 +169,9 @@
 		0787338A2621EBFD0075981C /* blockchain */ = {
 			isa = PBXGroup;
 			children = (
-				07203011263F3BDB00804BDD /* cryptography */,
-				07203010263F3BBA00804BDD /* data_structures */,
+				07203011263F3BDB00804BDD /* accounts */,
+				07203010263F3BBA00804BDD /* blocks */,
+				07B6B90F2644C77F00D1207E /* interfaces */,
 				0787339A2621EEDC0075981C /* main.c */,
 				0759C1D82640FBD300AF9407 /* main.h */,
 			);
@@ -183,6 +187,15 @@
 				07A23B13262219550087BE64 /* libeom.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		07B6B90F2644C77F00D1207E /* interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				07B6B9132644C81A00D1207E /* Author.h */,
+				07B6B9142644C81A00D1207E /* Author.c */,
+			);
+			path = interfaces;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,7 +241,7 @@
 		078733802621EBFD0075981C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1240;
+				LastUpgradeCheck = 1250;
 				TargetAttributes = {
 					0720301A263F3C9400804BDD = {
 						CreatedOnToolsVersion = 12.5;
@@ -274,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07B6B9152644C81A00D1207E /* Author.c in Sources */,
 				0787339F2621F0EB0075981C /* Block.c in Sources */,
 				0720300F263F34DE00804BDD /* Account.c in Sources */,
 				0720302B263F441800804BDD /* main.c in Sources */,
@@ -286,6 +300,7 @@
 		07203020263F3C9400804BDD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 975P2G4HC3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -298,6 +313,7 @@
 		07203021263F3C9400804BDD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 975P2G4HC3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -421,6 +437,7 @@
 		078733902621EBFD0075981C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 975P2G4HC3;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -433,6 +450,7 @@
 		078733912621EBFD0075981C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 975P2G4HC3;
 				ENABLE_HARDENED_RUNTIME = YES;

@@ -30,5 +30,5 @@ static const char *profile_path = "/Users/eric/Desktop/";
 bool create(Account *user, char *name);
 bool activate(Account *user, char *name);
 bool deactivate(Account *user);
-
+void print_account(Account *user);
 #endif /* Account_h */

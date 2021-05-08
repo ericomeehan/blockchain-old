@@ -32,9 +32,12 @@ bool validate_hash(Block *block);
 
 bool mine(Account *user, Block *previous, void *data, unsigned long size, byte *digest)
 {
+    FILE *f = fopen("/Users/eric/Desktop/test", "w");
+    i2d_PUBKEY_fp(f, user->public_key);
+    fclose(f);
     // Allocate space for the block
-    unsigned long block_size = size + sizeof(struct BlockHeaders);
-    struct Block *block = malloc(block_size);
+    unsigned long block_size = size + sizeof(BlockHeaders);
+    Block *block = malloc(block_size);
     
     // Initialize some of the fields
     block->headers.credentials.nonce = 0;
@@ -75,6 +78,7 @@ bool mine(Account *user, Block *previous, void *data, unsigned long size, byte *
     fclose(block_file);
     
     free(block);
+    BN_free(value);
     
     return true;
 }
@@ -112,6 +116,7 @@ bool sign_block(Account *user, Block *block)
     {
         return false;
     }
+    EVP_MD_CTX_free(ctx);
     return true;
 }
 
@@ -137,10 +142,9 @@ bool validate_signature(Block *block)
     {
         return false;
     }
-    else
-    {
-        return true;
-    }
+    EVP_MD_CTX_free(ctx);
+    EVP_PKEY_free(key);
+    return true;
 }
 
 bool hash_block(Block *block, byte *digest)
@@ -160,7 +164,7 @@ bool hash_block(Block *block, byte *digest)
     {
         return false;
     }
-    
+    EVP_MD_CTX_free(ctx);
     return true;
 }
 
@@ -175,10 +179,8 @@ bool validate_hash(Block *block)
     BN_dec2bn(&base, "2");
     
     BIGNUM *exponent = BN_new();
-    // The difficulty and value of a block is equal to 10 * √log(block_size) + 1.
-    // The reasoning behind this formula is clear when graphed.
     // Truncate the difficulty to an intiger to avoid contentious precision.
-    int difficulty = 512 - (51.2 * pow(((block->headers.incidentals.size - 1) / block->headers.incidentals.size), 1000000) + 1);
+    int difficulty = 512 - pow(log(sqrt(block->headers.incidentals.size)), 2) + 1;
     char exp[8];
     sprintf(exp, "%df", difficulty);
     BN_dec2bn(&exponent, exp);

@@ -24,12 +24,14 @@
 int main(int argc, const char * argv[]) {
     crypto_init();
     float rate = 0;
-    int tests = 2;
+    int tests = 1;
     
-    rate += account_unit_test();
+    //rate += account_unit_test();
     
     Account user;
     activate(&user, "test");
+    
+    //print_account(&user);
     
     rate += block_unit_test(&user);
     

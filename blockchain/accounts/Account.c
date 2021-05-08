@@ -98,3 +98,8 @@ bool deactivate(Account *user)
     
     return !user->public_key && !user->private_key;
 }
+
+void print_account(Account *user)
+{
+    PEM_write_PUBKEY(stdout, user->public_key);
+}
