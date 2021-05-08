@@ -32,9 +32,6 @@ bool validate_hash(Block *block);
 
 bool mine(Account *user, Block *previous, void *data, unsigned long size, byte *digest)
 {
-    FILE *f = fopen("/Users/eric/Desktop/test", "w");
-    i2d_PUBKEY_fp(f, user->public_key);
-    fclose(f);
     // Allocate space for the block
     unsigned long block_size = size + sizeof(BlockHeaders);
     Block *block = malloc(block_size);
@@ -95,8 +92,7 @@ bool sign_block(Account *user, Block *block)
     // Collect the size of the data embedded within the block.
     unsigned long long size = block->headers.incidentals.size - sizeof(struct BlockHeaders);
     // Prepare an EVP control structure
-    EVP_MD_CTX *ctx = NULL;
-    ctx = EVP_MD_CTX_create();
+    EVP_MD_CTX *ctx = EVP_MD_CTX_new();
 
     // Create a signature for the block, checking for errors.
     if ((EVP_DigestSignInit(ctx, NULL, EVP_sha512(), NULL, user->private_key)) <= 0)
@@ -108,10 +104,6 @@ bool sign_block(Account *user, Block *block)
         return false;
     }
     size_t len;
-    if (EVP_DigestSignFinal(ctx, NULL, &len) <= 0)
-    {
-        return false;
-    }
     if (EVP_DigestSignFinal(ctx, (unsigned char *)&block->headers.credentials.lock, &len) <= 0)
     {
         return false;
@@ -124,9 +116,9 @@ bool sign_block(Account *user, Block *block)
 bool validate_signature(Block *block)
 {
     // Prepare an EVP control structure.
-    EVP_MD_CTX *ctx = EVP_MD_CTX_create();
+    EVP_MD_CTX *ctx = EVP_MD_CTX_new();
     // Load the embedded public key as an EVP_PKEY.
-    EVP_PKEY *key = NULL;
+    EVP_PKEY *key = EVP_PKEY_new();
     d2i_PUBKEY(&key, (const unsigned char **)&block->headers.credentials.key, 550);
     // Verify the signature, checking for errors.
     

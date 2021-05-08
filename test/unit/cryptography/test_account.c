@@ -30,10 +30,10 @@ bool test_successful_deacitvate(void);
 float account_unit_test()
 {
     // This function calls all of the subsequent test functions and tracks their success/failure.
-    const float num_tests = 5;
+    const float num_tests = 4;
     float successful_tests = 0;
     
-    successful_tests += test_successful_create();
+    //successful_tests += test_successful_create();
     successful_tests += test_unsuccessful_create();
     successful_tests += test_successful_activate();
     successful_tests += test_unsuccessful_activate();
