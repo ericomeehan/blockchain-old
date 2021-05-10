@@ -10,16 +10,19 @@
 		0720300F263F34DE00804BDD /* Account.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720300E263F34DE00804BDD /* Account.c */; };
 		07203028263F43B400804BDD /* Account.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720300E263F34DE00804BDD /* Account.c */; };
 		0720302B263F441800804BDD /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339A2621EEDC0075981C /* main.c */; };
-		0720302D263F446400804BDD /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07203026263F413A00804BDD /* libcrypto.a */; };
-		07203030263F460700804BDD /* crypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0720302F263F460700804BDD /* crypto.a */; };
-		07203032263F464200804BDD /* eom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07203031263F464200804BDD /* eom.a */; };
 		0720B4F4264305DE00EAAE74 /* test.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720B4F3264305DE00EAAE74 /* test.c */; };
 		0720B4F92643066500EAAE74 /* test_account.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720B4F82643066500EAAE74 /* test_account.c */; };
 		0759C1DE2641FDB800AF9407 /* test_block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0759C1DD2641FDB800AF9407 /* test_block.c */; };
 		0759C1DF264200A300AF9407 /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339E2621F0EB0075981C /* Block.c */; };
+		0779DBA626487B4700B9A249 /* Author.c in Sources */ = {isa = PBXBuildFile; fileRef = 07B6B9142644C81A00D1207E /* Author.c */; };
+		0779DBB02649989E00B9A249 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0779DBAE2649989E00B9A249 /* libcrypto.a */; };
+		0779DBB12649989E00B9A249 /* libeom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0779DBAF2649989E00B9A249 /* libeom.a */; };
+		0779DBB226499C4300B9A249 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0779DBAE2649989E00B9A249 /* libcrypto.a */; };
+		0779DBB326499C4300B9A249 /* libeom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0779DBAF2649989E00B9A249 /* libeom.a */; };
 		0787339F2621F0EB0075981C /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339E2621F0EB0075981C /* Block.c */; };
-		07A23B14262219550087BE64 /* libeom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A23B13262219550087BE64 /* libeom.a */; };
 		07B6B9152644C81A00D1207E /* Author.c in Sources */ = {isa = PBXBuildFile; fileRef = 07B6B9142644C81A00D1207E /* Author.c */; };
+		07B6B9182646F07000D1207E /* Librarian.c in Sources */ = {isa = PBXBuildFile; fileRef = 07B6B9172646F07000D1207E /* Librarian.c */; };
+		07B6B91A2647524900D1207E /* Librarian.c in Sources */ = {isa = PBXBuildFile; fileRef = 07B6B9172646F07000D1207E /* Librarian.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -47,9 +50,6 @@
 		0720300D263F34DE00804BDD /* Account.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
 		0720300E263F34DE00804BDD /* Account.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Account.c; sourceTree = "<group>"; };
 		0720301B263F3C9400804BDD /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
-		07203026263F413A00804BDD /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../../../usr/local/lib/libcrypto.a; sourceTree = "<group>"; };
-		0720302F263F460700804BDD /* crypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = crypto.a; path = ../../../../usr/local/lib/crypto.a; sourceTree = "<group>"; };
-		07203031263F464200804BDD /* eom.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = eom.a; path = ../../../../usr/local/lib/eom.a; sourceTree = "<group>"; };
 		0720B4F2264305DE00EAAE74 /* test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
 		0720B4F3264305DE00EAAE74 /* test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test.c; sourceTree = "<group>"; };
 		0720B4F72643066500EAAE74 /* test_account.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test_account.h; sourceTree = "<group>"; };
@@ -57,15 +57,18 @@
 		0759C1D82640FBD300AF9407 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		0759C1DC2641FDB800AF9407 /* test_block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test_block.h; sourceTree = "<group>"; };
 		0759C1DD2641FDB800AF9407 /* test_block.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test_block.c; sourceTree = "<group>"; };
+		0779DBAE2649989E00B9A249 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../../../usr/local/lib/libcrypto.a; sourceTree = "<group>"; };
+		0779DBAF2649989E00B9A249 /* libeom.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libeom.a; path = ../../../../usr/local/lib/libeom.a; sourceTree = "<group>"; };
 		078733882621EBFD0075981C /* blockchain */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = blockchain; sourceTree = BUILT_PRODUCTS_DIR; };
 		078733932621EDC10075981C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		078733942621EDE30075981C /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; };
 		0787339A2621EEDC0075981C /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		0787339D2621F0EB0075981C /* Block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
 		0787339E2621F0EB0075981C /* Block.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Block.c; sourceTree = "<group>"; };
-		07A23B13262219550087BE64 /* libeom.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libeom.a; path = ../../../../usr/local/lib/libeom.a; sourceTree = "<group>"; };
 		07B6B9132644C81A00D1207E /* Author.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Author.h; sourceTree = "<group>"; };
 		07B6B9142644C81A00D1207E /* Author.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Author.c; sourceTree = "<group>"; };
+		07B6B9162646F07000D1207E /* Librarian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Librarian.h; sourceTree = "<group>"; };
+		07B6B9172646F07000D1207E /* Librarian.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Librarian.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,8 +76,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07203032263F464200804BDD /* eom.a in Frameworks */,
-				07203030263F460700804BDD /* crypto.a in Frameworks */,
+				0779DBB226499C4300B9A249 /* libcrypto.a in Frameworks */,
+				0779DBB326499C4300B9A249 /* libeom.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,8 +85,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0720302D263F446400804BDD /* libcrypto.a in Frameworks */,
-				07A23B14262219550087BE64 /* libeom.a in Frameworks */,
+				0779DBB02649989E00B9A249 /* libcrypto.a in Frameworks */,
+				0779DBB12649989E00B9A249 /* libeom.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,10 +184,8 @@
 		07A23B12262219550087BE64 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				07203031263F464200804BDD /* eom.a */,
-				0720302F263F460700804BDD /* crypto.a */,
-				07203026263F413A00804BDD /* libcrypto.a */,
-				07A23B13262219550087BE64 /* libeom.a */,
+				0779DBAE2649989E00B9A249 /* libcrypto.a */,
+				0779DBAF2649989E00B9A249 /* libeom.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -194,6 +195,8 @@
 			children = (
 				07B6B9132644C81A00D1207E /* Author.h */,
 				07B6B9142644C81A00D1207E /* Author.c */,
+				07B6B9162646F07000D1207E /* Librarian.h */,
+				07B6B9172646F07000D1207E /* Librarian.c */,
 			);
 			path = interfaces;
 			sourceTree = "<group>";
@@ -276,9 +279,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0720B4F4264305DE00EAAE74 /* test.c in Sources */,
+				0779DBA626487B4700B9A249 /* Author.c in Sources */,
 				0759C1DE2641FDB800AF9407 /* test_block.c in Sources */,
 				0720B4F92643066500EAAE74 /* test_account.c in Sources */,
 				07203028263F43B400804BDD /* Account.c in Sources */,
+				07B6B91A2647524900D1207E /* Librarian.c in Sources */,
 				0759C1DF264200A300AF9407 /* Block.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,6 +296,7 @@
 				0787339F2621F0EB0075981C /* Block.c in Sources */,
 				0720300F263F34DE00804BDD /* Account.c in Sources */,
 				0720302B263F441800804BDD /* main.c in Sources */,
+				07B6B9182646F07000D1207E /* Librarian.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,12 +306,10 @@
 		07203020263F3C9400804BDD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 975P2G4HC3;
 				ENABLE_HARDENED_RUNTIME = YES;
-				"HEADER_SEARCH_PATHS[arch=*]" = /usr/local/include;
-				MACOSX_DEPLOYMENT_TARGET = 11.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -313,12 +317,10 @@
 		07203021263F3C9400804BDD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 975P2G4HC3;
 				ENABLE_HARDENED_RUNTIME = YES;
-				"HEADER_SEARCH_PATHS[arch=*]" = /usr/local/include;
-				MACOSX_DEPLOYMENT_TARGET = 11.2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -356,8 +358,13 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=*]" = "";
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -374,10 +381,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				"HEADER_SEARCH_PATHS[arch=*]" = /usr/local/include;
+				"LIBRARY_SEARCH_PATHS[arch=*]" = /usr/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				"OTHER_CODE_SIGN_FLAGS[sdk=*]" = "";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -415,8 +425,11 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -427,7 +440,9 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 11.1;
+				"HEADER_SEARCH_PATHS[arch=*]" = /usr/local/include;
+				"LIBRARY_SEARCH_PATHS[arch=*]" = /usr/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 11.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
@@ -437,12 +452,10 @@
 		078733902621EBFD0075981C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 975P2G4HC3;
 				ENABLE_HARDENED_RUNTIME = YES;
-				"HEADER_SEARCH_PATHS[arch=*]" = /usr/local/include;
-				"LIBRARY_SEARCH_PATHS[arch=*]" = /usr/local/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -450,12 +463,10 @@
 		078733912621EBFD0075981C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 975P2G4HC3;
 				ENABLE_HARDENED_RUNTIME = YES;
-				"HEADER_SEARCH_PATHS[arch=*]" = /usr/local/include;
-				"LIBRARY_SEARCH_PATHS[arch=*]" = /usr/local/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
