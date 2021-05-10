@@ -19,6 +19,8 @@
 		0779DBB12649989E00B9A249 /* libeom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0779DBAF2649989E00B9A249 /* libeom.a */; };
 		0779DBB226499C4300B9A249 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0779DBAE2649989E00B9A249 /* libcrypto.a */; };
 		0779DBB326499C4300B9A249 /* libeom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0779DBAF2649989E00B9A249 /* libeom.a */; };
+		0779DBB72649B33700B9A249 /* Utilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DBB62649B33700B9A249 /* Utilities.c */; };
+		0779DBB82649B38200B9A249 /* Utilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DBB62649B33700B9A249 /* Utilities.c */; };
 		0787339F2621F0EB0075981C /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339E2621F0EB0075981C /* Block.c */; };
 		07B6B9152644C81A00D1207E /* Author.c in Sources */ = {isa = PBXBuildFile; fileRef = 07B6B9142644C81A00D1207E /* Author.c */; };
 		07B6B9182646F07000D1207E /* Librarian.c in Sources */ = {isa = PBXBuildFile; fileRef = 07B6B9172646F07000D1207E /* Librarian.c */; };
@@ -59,6 +61,8 @@
 		0759C1DD2641FDB800AF9407 /* test_block.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test_block.c; sourceTree = "<group>"; };
 		0779DBAE2649989E00B9A249 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../../../usr/local/lib/libcrypto.a; sourceTree = "<group>"; };
 		0779DBAF2649989E00B9A249 /* libeom.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libeom.a; path = ../../../../usr/local/lib/libeom.a; sourceTree = "<group>"; };
+		0779DBB52649B33700B9A249 /* Utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		0779DBB62649B33700B9A249 /* Utilities.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Utilities.c; sourceTree = "<group>"; };
 		078733882621EBFD0075981C /* blockchain */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = blockchain; sourceTree = BUILT_PRODUCTS_DIR; };
 		078733932621EDC10075981C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		078733942621EDE30075981C /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; };
@@ -148,6 +152,15 @@
 			path = data_structures;
 			sourceTree = "<group>";
 		};
+		0779DBB42649B31F00B9A249 /* utilities */ = {
+			isa = PBXGroup;
+			children = (
+				0779DBB52649B33700B9A249 /* Utilities.h */,
+				0779DBB62649B33700B9A249 /* Utilities.c */,
+			);
+			path = utilities;
+			sourceTree = "<group>";
+		};
 		0787337F2621EBFD0075981C = {
 			isa = PBXGroup;
 			children = (
@@ -172,11 +185,12 @@
 		0787338A2621EBFD0075981C /* blockchain */ = {
 			isa = PBXGroup;
 			children = (
+				0787339A2621EEDC0075981C /* main.c */,
+				0759C1D82640FBD300AF9407 /* main.h */,
 				07203011263F3BDB00804BDD /* accounts */,
 				07203010263F3BBA00804BDD /* blocks */,
 				07B6B90F2644C77F00D1207E /* interfaces */,
-				0787339A2621EEDC0075981C /* main.c */,
-				0759C1D82640FBD300AF9407 /* main.h */,
+				0779DBB42649B31F00B9A249 /* utilities */,
 			);
 			path = blockchain;
 			sourceTree = "<group>";
@@ -278,6 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0779DBB82649B38200B9A249 /* Utilities.c in Sources */,
 				0720B4F4264305DE00EAAE74 /* test.c in Sources */,
 				0779DBA626487B4700B9A249 /* Author.c in Sources */,
 				0759C1DE2641FDB800AF9407 /* test_block.c in Sources */,
@@ -292,6 +307,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0779DBB72649B33700B9A249 /* Utilities.c in Sources */,
 				07B6B9152644C81A00D1207E /* Author.c in Sources */,
 				0787339F2621F0EB0075981C /* Block.c in Sources */,
 				0720300F263F34DE00804BDD /* Account.c in Sources */,

@@ -16,16 +16,12 @@
 
 #include "Account.h"
 #include "Block.h"
-#include "interfaces/Librarian.h"
+#include "Librarian.h"
 #include "Author.h"
 
 const char *main_help = "\nblockchain\n\nusage:\n\taccount\t\tAllows activation, deactivation, and creation of accounts.  An account must be active for other modules to function.\n\tlibrarian\t\tStarts and stops server functionality.  This must be active for other modules to function.\n\tauthor\t\tCreates blocks out of files specified by argument or data pipe.\n\tpublisher\t\tShares a block with the network.\n";
 
 int interpreter(int argc, const char **argv);
-bool initialize(void);
-bool user_is_active(Account *user);
-bool initialize_database(void);
-
 
 int main(int argc, const char **argv)
 {
@@ -33,23 +29,44 @@ int main(int argc, const char **argv)
     {
         return EXIT_FAILURE;
     }
-    if (isatty(fileno(stdin)))
+    switch (argc)
     {
-        terminal(argc, argv, interpreter, NULL);
+        // There should always be at least one argument...
+        case 0:
+        {
+            fprintf(stderr, "No arguments given...  How did you do that?\n");
+            return EXIT_FAILURE;
+            break;
+        }
+            
+        // When one argument is given (the program name), print the help message.
+        case 1:
+        {
+            fprintf(stdout, "%s", main_help);
+        }
+        
+        // When two arguments are given, the second is the UUID that will be used to create an application pipeline.
+        case 2:
+        {
+            // Generate a path to a pipe file using the last argument.
+            char path[256] = {0};
+            strcat(path, (char *)PIPE_PATH);
+            strcat(path, argv[argc - 1]);
+            strcat(path, ".fifo");
+            // Decrement argc so that the terminal recognizes this as a piped process.
+            argc -= 1;
+            return terminal(argc, argv, interpreter, path);
+            break;
+        }
+            
+        // If more than one argument is given, execute them as a single command with no pipeline.
+        default:
+        {
+            return terminal(argc, argv, interpreter, NULL);
+            break;
+        }
+            
     }
-    else
-    {
-        char path[256] = {0};
-        strcat(path, (char *)PIPE_PATH);
-        strcat(path, argv[argc - 1]);
-        strcat(path, ".fifo");
-        terminal(argc, argv, interpreter, path);
-    }
-}
-
-bool user_is_active(Account *user)
-{
-    return user->private_key && user->public_key;
 }
 
 int interpreter(int argc, const char **argv)
@@ -113,45 +130,4 @@ int interpreter(int argc, const char **argv)
         return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;
-}
-
-bool initialize()
-{
-    // Load the configuration file.
-    // Load the database.
-    if (!initialize_database())
-    {
-        return false;
-    }
-    return true;
-}
-
-bool initialize_database()
-{
-    int rc = sqlite3_open(DATABASE_PATH, &database);
-    if (rc)
-    {
-        fprintf(stderr, "Cannot open database: %s\n", sqlite3_errmsg(database));
-        sqlite3_close(database);
-        return false;
-    }
-    
-    char *sql = "CREATE TABLE IF NOT EXISTS blocks \
-    (\
-    hash TEXT PRIMARY KEY NOT NULL,\
-    timestamp TEXT NOT NULL,\
-    size INTEGER NOT NULL,\
-    key BLOB NOT NULL,\
-    nonce INTEGER NOT NULL,\
-    FOREIGN KEY(previous) REFERENCES blocks(hash));";
-    char *sql_error = {0};
-    rc = sqlite3_exec(database, sql, NULL, NULL, &sql_error);
-    
-    if (rc != SQLITE_OK)
-    {
-        fprintf(stderr, "SQL Error: %s\n", sql_error);
-        return false;
-    }
-    
-    return true;
 }

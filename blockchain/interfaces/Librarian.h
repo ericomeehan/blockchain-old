@@ -22,6 +22,7 @@
 #include "main.h"
 #include "Account.h"
 #include "Block.h"
+#include "Utilities.h"
 
 int librarian(int argc, const char **argv);
 
