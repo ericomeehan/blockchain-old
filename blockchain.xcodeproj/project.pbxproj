@@ -17,9 +17,12 @@
 		0720B4F92643066500EAAE74 /* test_account.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720B4F82643066500EAAE74 /* test_account.c */; };
 		0759C1DE2641FDB800AF9407 /* test_block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0759C1DD2641FDB800AF9407 /* test_block.c */; };
 		0759C1DF264200A300AF9407 /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339E2621F0EB0075981C /* Block.c */; };
+		0779DBA626487B4700B9A249 /* Author.c in Sources */ = {isa = PBXBuildFile; fileRef = 07B6B9142644C81A00D1207E /* Author.c */; };
 		0787339F2621F0EB0075981C /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339E2621F0EB0075981C /* Block.c */; };
 		07A23B14262219550087BE64 /* libeom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 07A23B13262219550087BE64 /* libeom.a */; };
 		07B6B9152644C81A00D1207E /* Author.c in Sources */ = {isa = PBXBuildFile; fileRef = 07B6B9142644C81A00D1207E /* Author.c */; };
+		07B6B9182646F07000D1207E /* Librarian.c in Sources */ = {isa = PBXBuildFile; fileRef = 07B6B9172646F07000D1207E /* Librarian.c */; };
+		07B6B91A2647524900D1207E /* Librarian.c in Sources */ = {isa = PBXBuildFile; fileRef = 07B6B9172646F07000D1207E /* Librarian.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -66,6 +69,8 @@
 		07A23B13262219550087BE64 /* libeom.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libeom.a; path = ../../../../usr/local/lib/libeom.a; sourceTree = "<group>"; };
 		07B6B9132644C81A00D1207E /* Author.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Author.h; sourceTree = "<group>"; };
 		07B6B9142644C81A00D1207E /* Author.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Author.c; sourceTree = "<group>"; };
+		07B6B9162646F07000D1207E /* Librarian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Librarian.h; sourceTree = "<group>"; };
+		07B6B9172646F07000D1207E /* Librarian.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Librarian.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +199,8 @@
 			children = (
 				07B6B9132644C81A00D1207E /* Author.h */,
 				07B6B9142644C81A00D1207E /* Author.c */,
+				07B6B9162646F07000D1207E /* Librarian.h */,
+				07B6B9172646F07000D1207E /* Librarian.c */,
 			);
 			path = interfaces;
 			sourceTree = "<group>";
@@ -276,9 +283,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0720B4F4264305DE00EAAE74 /* test.c in Sources */,
+				0779DBA626487B4700B9A249 /* Author.c in Sources */,
 				0759C1DE2641FDB800AF9407 /* test_block.c in Sources */,
 				0720B4F92643066500EAAE74 /* test_account.c in Sources */,
 				07203028263F43B400804BDD /* Account.c in Sources */,
+				07B6B91A2647524900D1207E /* Librarian.c in Sources */,
 				0759C1DF264200A300AF9407 /* Block.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,6 +300,7 @@
 				0787339F2621F0EB0075981C /* Block.c in Sources */,
 				0720300F263F34DE00804BDD /* Account.c in Sources */,
 				0720302B263F441800804BDD /* main.c in Sources */,
+				07B6B9182646F07000D1207E /* Librarian.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

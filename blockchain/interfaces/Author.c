@@ -14,9 +14,7 @@
 
 #include "Author.h"
 
-#include <string.h>
-
 int author(int argc, const char **argv)
 {
-    
+    return 1;
 }

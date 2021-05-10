@@ -14,20 +14,9 @@
 
 #include "Block.h"
 
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-#include <time.h>
-
-#include <openssl/rsa.h>
-#include <openssl/evp.h>
-#include <openssl/pem.h>
-#include <openssl/bn.h>
-
 bool timestamp(Block *block);
 bool sign_block(Account *user, Block *block);
 bool validate_signature(Block *block);
-bool hash_block(Block *block, byte *digest);
 bool validate_hash(Block *block);
 
 bool mine(Account *user, Block *previous, void *data, unsigned long size, byte *digest)
@@ -66,8 +55,9 @@ bool mine(Account *user, Block *previous, void *data, unsigned long size, byte *
     BIGNUM *value = BN_new();
     BN_bin2bn(digest, 64, value);
     
+    // SEND THE BLOCK TO THE LIBRARIAN?
     char path[256] = {0};
-    strcat(path, block_path);
+    strcat(path, BLOCK_PATH);
     strcat(path, BN_bn2hex(value));
     strcat(path, ".block");
     FILE *block_file = fopen(path, "w");
@@ -201,7 +191,7 @@ bool validate_hash(Block *block)
 bool load_block(Block *block, byte *address)
 {
     char path[256] = {0};
-    strcat(path, block_path);
+    strcat(path, BLOCK_PATH);
     strcat(path, (char *)address);
     strcat(path, ".block");
     FILE *f = fopen(path, "r");

@@ -14,13 +14,6 @@
 
 #include "Account.h"
 
-#include <string.h>
-#include <unistd.h>
-
-#include <openssl/pem.h>
-#include <openssl/evp.h>
-#include <openssl/rsa.h>
-
 bool create(Account *user, char *name)
 {
     EVP_PKEY *key = EVP_PKEY_new();
@@ -30,7 +23,7 @@ bool create(Account *user, char *name)
     EVP_PKEY_keygen(ctx, &key);
     
     char path[64] = {0};
-    strcat(path, profile_path);
+    strcat(path, PROFILE_PATH);
     strcat(path, name);
     strcat(path, ".der");
     
@@ -46,7 +39,7 @@ bool create(Account *user, char *name)
     fclose(key_file);
     
     memset(path, 0, 64);
-    strcat(path, profile_path);
+    strcat(path, PROFILE_PATH);
     strcat(path, name);
     strcat(path, "_public.der");
     
@@ -62,7 +55,7 @@ bool create(Account *user, char *name)
 bool activate(Account *user, char *name)
 {
     char path[64] = {0};
-    strcat(path, profile_path);
+    strcat(path, PROFILE_PATH);
     strcat(path, name);
     strcat(path, "_public.der");
     FILE *key_file = fopen(path, "r");
@@ -75,7 +68,7 @@ bool activate(Account *user, char *name)
     fclose(key_file);
     
     memset(path, 0, 64);
-    strcat(path, profile_path);
+    strcat(path, PROFILE_PATH);
     strcat(path, name);
     strcat(path, ".der");
     key_file = fopen(path, "r");
