@@ -16,10 +16,10 @@
 
 #include "Account.h"
 #include "Block.h"
-#include "Librarian.h"
+#include "interfaces/Librarian.h"
 #include "Author.h"
 
-const char *help = "\nblockchain\n\nusage:\n\taccount\t\tAllows activation, deactivation, and creation of accounts.  An account must be active for other modules to function.\n\tlibrarian\t\tStarts and stops server functionality.  This must be active for other modules to function.\n\tauthor\t\tCreates blocks out of files specified by argument or data pipe.\n\tpublisher\t\tShares a block with the network.\n";
+const char *main_help = "\nblockchain\n\nusage:\n\taccount\t\tAllows activation, deactivation, and creation of accounts.  An account must be active for other modules to function.\n\tlibrarian\t\tStarts and stops server functionality.  This must be active for other modules to function.\n\tauthor\t\tCreates blocks out of files specified by argument or data pipe.\n\tpublisher\t\tShares a block with the network.\n";
 
 int interpreter(int argc, const char **argv);
 bool initialize(void);
@@ -109,7 +109,7 @@ int interpreter(int argc, const char **argv)
     }
     else
     {
-        fprintf(stdout, "%s", help);
+        fprintf(stdout, "%s", main_help);
         return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;

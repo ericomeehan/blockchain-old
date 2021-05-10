@@ -26,7 +26,7 @@ typedef struct ClientServer
     Server *server;
 } ClientServer;
 
-const char *help = "\nblockchain librarian\n\nusage:\n\tstart\tLaunches the Librarian server (process runs in the background).\n";
+const char *librarian_help = "\nblockchain librarian\n\nusage:\n\tstart\tLaunches the Librarian server (process runs in the background).\n";
 
 volatile sig_atomic_t active = false;
 
@@ -282,7 +282,7 @@ int librarian(int argc, const char **argv)
     }
     else
     {
-        fprintf(stdout, "%s", help);
+        fprintf(stdout, "%s", librarian_help);
         return EXIT_FAILURE;
     }
 }
