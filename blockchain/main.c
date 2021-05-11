@@ -87,7 +87,7 @@ int main(int argc, const char **argv)
         // There should always be at least one argument...
         case 0:
         {
-            fprintf(stderr, "No arguments given...  How did you do that?\n");
+            fprintf(stderr, "BLOCKCHAIN ERROR: No arguments given...  How did you do that?\n");
             return EXIT_FAILURE;
             break;
         }
@@ -144,24 +144,24 @@ int interpreter(int argc, const char **argv)
             {
                 if (!create(&user, (char *)argv[3]))
                 {
-                    fprintf(stderr, "Failed to create account %s\n", argv[3]);
+                    fprintf(stderr, "BLOCKCHAIN ERROR: Failed to create account %s\n", argv[3]);
                     return EXIT_FAILURE;
                 }
                 return EXIT_SUCCESS;
             }
-            fprintf(stderr, "Account %s already exists\n", argv[3]);
+            fprintf(stderr, "BLOCKCHAIN ERROR: Account %s already exists\n", argv[3]);
             return EXIT_FAILURE;
         }
         else if (strcmp(argv[2], "activate") == 0)
         {
             if (!account_exists((char *)argv[3]))
             {
-                fprintf(stderr, "Account %s does not exist\n", argv[3]);
+                fprintf(stderr, "BLOCKCHAIN ERROR: Account %s does not exist\n", argv[3]);
                 return EXIT_FAILURE;
             }
             if (!activate(&user, (char *)argv[3]))
             {
-                fprintf(stderr, "Failed to activate account %s.\n", argv[3]);
+                fprintf(stderr, "BLOCKCHAIN ERROR: Failed to activate account %s.\n", argv[3]);
                 return EXIT_FAILURE;
             }
             else
@@ -174,7 +174,7 @@ int interpreter(int argc, const char **argv)
         {
             if (!deactivate(&user))
             {
-                fprintf(stderr, "Failed to deactivate account %s.\n", argv[3]);
+                fprintf(stderr, "BLOCKCHAIN ERROR: Failed to deactivate account %s.\n", argv[3]);
                 return EXIT_FAILURE;
             }
             else
@@ -195,12 +195,12 @@ int interpreter(int argc, const char **argv)
     {
         if (!account_exists((char *)argv[1]))
         {
-            fprintf(stderr, "Account %s does not exist\n", argv[1]);
+            fprintf(stderr, "BLOCKCHAIN ERROR: Account %s does not exist\n", argv[1]);
             return EXIT_FAILURE;
         }
         if (!activate(&user, (char *)argv[1]))
         {
-            fprintf(stderr, "Failed to activate account %s\n", argv[1]);
+            fprintf(stderr, "BLOCKCHAIN ERROR: Failed to activate account %s\n", argv[1]);
             return EXIT_FAILURE;
         }
         

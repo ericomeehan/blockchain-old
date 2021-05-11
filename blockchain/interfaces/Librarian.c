@@ -166,7 +166,7 @@ char * put(void *arg)
     // Add the block headers to the database.
     if (!db_insert(block))
     {
-        fprintf(stderr, "Failed to add block to database: \n%s\n", digest);
+        fprintf(stderr, "BLOCKCHAIN ERROR: Failed to add block to database: \n%s\n", digest);
         return NULL;
     }
     
@@ -184,7 +184,7 @@ bool db_insert(Block *block)
     int rc = sqlite3_prepare_v2(database, sql, -1, &statement, NULL);
     if (rc != SQLITE_OK)
     {
-        fprintf(stderr, "SQL Error: %s\n", sql_error);
+        fprintf(stderr, "SQL ERROR: %s\n", sql_error);
         return false;
     }
     sqlite3_bind_text(statement, 1, (const char *)digest, 64, NULL);
@@ -198,7 +198,7 @@ bool db_insert(Block *block)
     
     if (rc != SQLITE_OK)
     {
-        fprintf(stderr, "SQL Error: %s\n", sql_error);
+        fprintf(stderr, "SQL ERROR: %s\n", sql_error);
         return false;
     }
     
@@ -300,7 +300,7 @@ int librarian(int argc, const char **argv)
         char *sqlerr = {0};
         if (sqlite3_exec(database, argv[4], sql_callback, NULL, &sqlerr) != SQLITE_OK)
         {
-            fprintf(stderr, "SQL Error: %s\n", sqlerr);
+            fprintf(stderr, "SQL ERROR: %s\n", sqlerr);
             return EXIT_FAILURE;
         }
         return EXIT_SUCCESS;
