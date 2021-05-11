@@ -19,10 +19,7 @@
 #ifndef Librarian_h
 #define Librarian_h
 
-#include "main.h"
-#include "Account.h"
-#include "Block.h"
-#include "Utilities.h"
+#include "../main.h"
 
 int librarian(int argc, const char **argv);
 

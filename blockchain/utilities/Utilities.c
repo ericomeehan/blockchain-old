@@ -47,16 +47,22 @@ bool create_database_tables(void)
 {
     // Creates the database tables if they do not already exist.
     char *sqlerr = {0};
+    char *enable_foreign_keys = "PRAGMA foreign_keys = ON;";
+    if (sqlite3_exec(database, enable_foreign_keys, NULL, NULL, &sqlerr) != SQLITE_OK)
+    {
+        fprintf(stderr, "SQL Error: %s\n", sqlerr);
+        return false;
+    }
+    
     char *create_blocks_table = "CREATE TABLE IF NOT EXISTS blocks \
     (\
     hash TEXT PRIMARY KEY NOT NULL, \
+    previous TEXT NOT NULL,\
     timestamp TEXT NOT NULL, \
     size INTEGER NOT NULL, \
     key BLOB NOT NULL,\
-    nonce INTEGER NOT NULL,\
-    FOREIGN KEY(previous) REFERENCES blocks(hash)\
+    nonce INTEGER NOT NULL\
     );";
-    
     if (sqlite3_exec(database, create_blocks_table, NULL, NULL, &sqlerr) != SQLITE_OK)
     {
         fprintf(stderr, "SQL Error: %s\n", sqlerr);

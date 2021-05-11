@@ -15,9 +15,7 @@
 #ifndef Author_h
 #define Author_h
 
-#include "main.h"
-#include "Account.h"
-#include "Block.h"
+#include "../main.h"
 
 int author(int argc, const char **argv);
 

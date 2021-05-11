@@ -15,7 +15,7 @@
 #ifndef Account_h
 #define Account_h
 
-#include "main.h"
+#include "../main.h"
 
 typedef struct Account
 {

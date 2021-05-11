@@ -15,8 +15,8 @@
 #ifndef Block_h
 #define Block_h
 
-#include "main.h"
-#include "Account.h"
+#include "../main.h"
+#include "../accounts/Account.h"
 
 struct Incidentals
 {
