@@ -36,6 +36,12 @@ const char *help = "\n"
 "\n"
 "USAGE:\n"
 "blockchain                                        Application Name\n"
+"    account                                            Used to create, activate, and deactivate an account\n"
+"        create                                             Creates a new account\n"
+"           [username]\n"
+"        display                                            Prints the account's name and public key\n"
+"           [username]\n"
+"\n"
 "    [username]                                         Specifies an account to be used\n"
 "\n"
 "        author                                         Module for creating blocks\n"
@@ -57,6 +63,15 @@ const char *help = "\n"
 "            [hash of block to be read]\n"
 "\n"
 "\n"
+"GENERAL START SEQUENCE:\n"
+"This sequence of commands will create a new blockchain account, start the librarian server, and then\n"
+"creates and shares a block that identifies you by username on the network.  While the first two commands are\n"
+"required, the third is optional; however, it demonstrates how blockchain takes advantage of pipes.\n"
+"```\n"
+"blockchain account create [username]\n"
+"blockchain [username] librarian start\n"
+"blockchain [username] author \"#mynameis $(blockchain account display [username])\"\n"
+"```\n"
 "For more documentation, consult the README or visit https://github.com/ericomeehan/blockchain\n";
 
 int interpreter(int argc, const char **argv);
@@ -120,62 +135,97 @@ int main(int argc, const char **argv)
 int interpreter(int argc, const char **argv)
 {
     Account user;
-    
-    if (strcmp(argv[0], "account"))
+
+    if (strcmp(argv[1], "account") == 0)
     {
-        if (strcmp(argv[1], "activate") == 0)
+        if (strcmp(argv[2], "create") == 0)
         {
-            if (!activate(&user, (char *)argv[2]))
+            if (!account_exists((char *)argv[3]))
             {
-                fprintf(stderr, "Failed to activate account %s.\n", argv[2]);
+                if (!create(&user, (char *)argv[3]))
+                {
+                    fprintf(stderr, "Failed to create account %s\n", argv[3]);
+                    return EXIT_FAILURE;
+                }
+                return EXIT_SUCCESS;
+            }
+            fprintf(stderr, "Account %s already exists\n", argv[3]);
+            return EXIT_FAILURE;
+        }
+        else if (strcmp(argv[2], "activate") == 0)
+        {
+            if (!account_exists((char *)argv[3]))
+            {
+                fprintf(stderr, "Account %s does not exist\n", argv[3]);
+                return EXIT_FAILURE;
+            }
+            if (!activate(&user, (char *)argv[3]))
+            {
+                fprintf(stderr, "Failed to activate account %s.\n", argv[3]);
                 return EXIT_FAILURE;
             }
             else
             {
-                fprintf(stdout, "Account %s activated.\n", argv[2]);
+                fprintf(stdout, "Account %s activated.\n", argv[3]);
                 return EXIT_SUCCESS;
             }
         }
-        else if (strcmp(argv[1], "deactivate") == 0)
+        else if (strcmp(argv[2], "deactivate") == 0)
         {
             if (!deactivate(&user))
             {
-                fprintf(stderr, "Failed to deactivate account %s.\n", argv[2]);
+                fprintf(stderr, "Failed to deactivate account %s.\n", argv[3]);
                 return EXIT_FAILURE;
             }
             else
             {
-                fprintf(stdout, "Account %s deactivated.", argv[2]);
+                fprintf(stdout, "Account %s deactivated.", argv[3]);
                 return EXIT_SUCCESS;
             }
         }
-        
-    }
-    else if (strcmp(argv[0], "librarian") == 0)
-    {
-        if (!user_is_active(&user))
+        else
         {
-            fprintf(stderr, "Login required.  Use: 'blockchain account activate [username]'\n");
+            fprintf(stderr, "%s", help);
             return EXIT_FAILURE;
         }
-        return librarian(argc - 1, argv + 1);
+        
     }
-    else if (strcmp(argv[0], "author"))
+    // argv[1] is now assumed to be an account that has been previously created.
+    else
     {
-        if (!user_is_active(&user))
+        if (!account_exists((char *)argv[1]))
         {
-            fprintf(stderr, "Login required.  User 'blockchain account activate [username]'\n");
+            fprintf(stderr, "Account %s does not exist\n", argv[1]);
+            return EXIT_FAILURE;
+        }
+        if (!activate(&user, (char *)argv[1]))
+        {
+            fprintf(stderr, "Failed to activate account %s\n", argv[1]);
+            return EXIT_FAILURE;
+        }
+        
+        // Examine argv[2] for next layer.
+        if (strcmp(argv[2], "author") == 0)
+        {
+            return author(argc, argv);
+        }
+        else if (strcmp(argv[2], "librarian") == 0)
+        {
+            return librarian(argc, argv);
+        }
+        else if (strcmp(argv[2], "publisher") == 0)
+        {
+            return EXIT_FAILURE;
+        }
+        else if (strcmp(argv[2], "client"))
+        {
             return EXIT_FAILURE;
         }
         else
         {
-            return author(argc - 1, argv + 1);
+            fprintf(stderr, "%s", help);
+            return EXIT_FAILURE;
         }
-    }
-    else
-    {
-        fprintf(stdout, "%s", help);
-        return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;
 }

@@ -27,5 +27,6 @@ bool create(Account *user, char *name);
 bool activate(Account *user, char *name);
 bool deactivate(Account *user);
 void print_account(Account *user);
+bool account_exists(char *name);
 
 #endif /* Account_h */

@@ -261,17 +261,30 @@ bool launch(void *arg)
     return true;
 }
 
+static int sql_callback(void *unused, int count, char **data, char **columns)
+{
+    int i;
+    for (i = 0; i < count - 1; i++)
+    {
+        char space = ' ';
+        write(STDOUT_FILENO, data[i], sqlite3_msize(data[i]));
+        write(STDOUT_FILENO, &space, 1);
+    }
+    write(STDOUT_FILENO, data[i + 1], sqlite3_msize(data[i + 1]));
+    return 0;
+}
+
 // MARK: MAIN
 
 // The Librarian handles the storage and retrieval of blocks.
 int librarian(int argc, const char **argv)
 {
     Server server = server_constructor(AF_INET, SOCK_STREAM, 0, INADDR_ANY, PORT, 256);
-    byte routes[] = {0, 1};
+    byte routes[] = {1, 2};                                                    // Could change Dictionary object in Server
     server.register_routes(&server, get, (char *)routes);
-    server.register_routes(&server, put, (char *)routes+1);
+    server.register_routes(&server, put, (char *)routes + 1);
     
-    if (strcmp(argv[0], "start") == 0)
+    if (strcmp(argv[3], "start") == 0)
     {
         if (launch(&server))
         {
@@ -281,6 +294,16 @@ int librarian(int argc, const char **argv)
         {
             return EXIT_FAILURE;
         }
+    }
+    else if (strcmp(argv[3], "query") == 0)
+    {
+        char *sqlerr = {0};
+        if (sqlite3_exec(database, argv[4], sql_callback, NULL, &sqlerr) != SQLITE_OK)
+        {
+            fprintf(stderr, "SQL Error: %s\n", sqlerr);
+            return EXIT_FAILURE;
+        }
+        return EXIT_SUCCESS;
     }
     else
     {

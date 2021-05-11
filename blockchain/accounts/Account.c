@@ -25,7 +25,7 @@ bool create(Account *user, char *name)
     char path[64] = {0};
     strcat(path, PROFILE_PATH);
     strcat(path, name);
-    strcat(path, ".der");
+    strcat(path, ".pem");
     
     FILE *key_file = fopen(path, "r");
     if (key_file)
@@ -35,13 +35,13 @@ bool create(Account *user, char *name)
     fclose(key_file);
     
     key_file = fopen(path, "w");
-    i2d_PrivateKey_fp(key_file, key);
+    PEM_write_PrivateKey(key_file, key, EVP_aes_256_cbc(), NULL, 0, NULL, NULL);
     fclose(key_file);
     
     memset(path, 0, 64);
     strcat(path, PROFILE_PATH);
     strcat(path, name);
-    strcat(path, "_public.der");
+    strcat(path, ".der");
     
     key_file = fopen(path, "w");
     i2d_PUBKEY_fp(key_file, key);
@@ -57,7 +57,7 @@ bool activate(Account *user, char *name)
     char path[64] = {0};
     strcat(path, PROFILE_PATH);
     strcat(path, name);
-    strcat(path, "_public.der");
+    strcat(path, ".der");
     FILE *key_file = fopen(path, "r");
     if (!key_file)
     {
@@ -70,14 +70,14 @@ bool activate(Account *user, char *name)
     memset(path, 0, 64);
     strcat(path, PROFILE_PATH);
     strcat(path, name);
-    strcat(path, ".der");
+    strcat(path, ".pem");
     key_file = fopen(path, "r");
     if (!key_file)
     {
         return false;
     }
     user->private_key = EVP_PKEY_new();
-    user->private_key = d2i_PrivateKey_ex_fp(key_file, &user->private_key, NULL, NULL);
+    user->private_key = PEM_read_PrivateKey(key_file, &user->private_key, NULL, NULL);
     fclose(key_file);
     
     return user->public_key && user->private_key;
@@ -95,4 +95,29 @@ bool deactivate(Account *user)
 void print_account(Account *user)
 {
     PEM_write_PUBKEY(stdout, user->public_key);
+}
+
+bool account_exists(char *name)
+{
+    char path[64] = {0};
+    strcat(path, PROFILE_PATH);
+    strcat(path, name);
+    strcat(path, ".der");
+    FILE *key_file = fopen(path, "r");
+    if (!key_file)
+    {
+        return false;
+    }
+    fclose(key_file);
+    
+    memset(path, 0, 64);
+    strcat(path, PROFILE_PATH);
+    strcat(path, name);
+    strcat(path, ".pem");
+    key_file = fopen(path, "r");
+    if (!key_file)
+    {
+        return false;
+    }
+    return true;
 }

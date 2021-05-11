@@ -28,6 +28,7 @@
 bool initialize(void);
 bool connect_to_database(void);
 bool create_database_tables(void);
+
 bool user_is_active(Account *user);
 
 #endif /* Utilities_h */
