@@ -19,8 +19,6 @@
 #include "Librarian.h"
 #include "Author.h"
 
-const char *main_help = "\nblockchain\n\nusage:\n\taccount\t\tAllows activation, deactivation, and creation of accounts.  An account must be active for other modules to function.\n\tlibrarian\t\tStarts and stops server functionality.  This must be active for other modules to function.\n\tauthor\t\tCreates blocks out of files specified by argument or data pipe.\n\tpublisher\t\tShares a block with the network.\n";
-
 int interpreter(int argc, const char **argv);
 
 int main(int argc, const char **argv)
@@ -42,20 +40,30 @@ int main(int argc, const char **argv)
         // When one argument is given (the program name), print the help message.
         case 1:
         {
-            fprintf(stdout, "%s", main_help);
+            fprintf(stdout, "%s", help);
+            return EXIT_SUCCESS;
         }
-        
-        // When two arguments are given, the second is the UUID that will be used to create an application pipeline.
+
+        // When two arguments are given, the second is the UUID that will be used to create an application pipeline... Or a cry for help.
         case 2:
         {
-            // Generate a path to a pipe file using the last argument.
-            char path[256] = {0};
-            strcat(path, (char *)PIPE_PATH);
-            strcat(path, argv[argc - 1]);
-            strcat(path, ".fifo");
-            // Decrement argc so that the terminal recognizes this as a piped process.
-            argc -= 1;
-            return terminal(argc, argv, interpreter, path);
+            if (strcmp(argv[1], "help"))
+            {
+                fprintf(stdout, "%s", help);
+                return EXIT_SUCCESS;
+                
+            }
+            else
+            {
+                // Generate a path to a pipe file using the last argument.
+                char path[256] = {0};
+                strcat(path, (char *)PIPE_PATH);
+                strcat(path, argv[argc - 1]);
+                strcat(path, ".fifo");
+                // Decrement argc so that the terminal recognizes this as a piped process.
+                argc -= 1;
+                return terminal(argc, argv, interpreter, path);
+            }
             break;
         }
             
@@ -126,7 +134,7 @@ int interpreter(int argc, const char **argv)
     }
     else
     {
-        fprintf(stdout, "%s", main_help);
+        fprintf(stdout, "%s", help);
         return EXIT_FAILURE;
     }
     return EXIT_SUCCESS;
