@@ -16,7 +16,8 @@
 #define Author_h
 
 #include "../main.h"
+#include "../accounts/Account.h"
 
-int author(int argc, const char **argv);
+int author(int argc, const char **argv, Account *user);
 
 #endif /* Author_h */

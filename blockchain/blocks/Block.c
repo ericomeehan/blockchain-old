@@ -200,7 +200,12 @@ bool load_block(Block *block, byte *address)
         return false;
     }
 
-    fread(block, sizeof(struct BlockHeaders), 1, f);
+    BlockHeaders temporary;
+    fread(&temporary, sizeof(BlockHeaders), 1, f);
+    unsigned long size = temporary.incidentals.size;
+    
+    block = malloc(size);
+    fseek(f, 0, SEEK_SET);
     fread(&block->data, block->headers.incidentals.size - sizeof(struct BlockHeaders), 1, f);
     
     fclose(f);

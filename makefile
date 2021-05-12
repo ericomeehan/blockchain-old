@@ -21,7 +21,7 @@ cli: interfaces objects utilities
 # MARK: LIBRARY
 ###############################################################################
 lib: interfaces objects utilities
-	ar rcs libblockchain.a Author.o Librarian.o Block.o Utilities.o
+	ar rcs libchain.a Author.o Librarian.o Block.o Utilities.o
 
 ###############################################################################
 # MARK: INTERFACES

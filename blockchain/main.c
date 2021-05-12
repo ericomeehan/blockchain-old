@@ -95,8 +95,7 @@ int main(int argc, const char **argv)
         // When one argument is given (the program name), print the help message.
         case 1:
         {
-            fprintf(stdout, "%s", help);
-            return EXIT_SUCCESS;
+            return terminal(argc, argv, interpreter, NULL);
         }
 
         // When two arguments are given, the second is the UUID that will be used to create an application pipeline... Or a cry for help.
@@ -207,7 +206,7 @@ int interpreter(int argc, const char **argv)
         // Examine argv[2] for next layer.
         if (strcmp(argv[2], "author") == 0)
         {
-            return author(argc, argv);
+            return author(argc, argv, &user);
         }
         else if (strcmp(argv[2], "librarian") == 0)
         {
