@@ -13,8 +13,8 @@
 //
 
 #include "Librarian.h"
-#include "../accounts/Account.h"
-#include "../blocks/Block.h"
+#include "../objects/Account.h"
+#include "../objects/Block.h"
 
 // MARK: DATA TYPES
 

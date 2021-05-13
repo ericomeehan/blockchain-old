@@ -9,20 +9,30 @@
 /* Begin PBXBuildFile section */
 		0720300F263F34DE00804BDD /* Account.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720300E263F34DE00804BDD /* Account.c */; };
 		07203028263F43B400804BDD /* Account.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720300E263F34DE00804BDD /* Account.c */; };
-		0720302B263F441800804BDD /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339A2621EEDC0075981C /* main.c */; };
 		0720B4F4264305DE00EAAE74 /* test.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720B4F3264305DE00EAAE74 /* test.c */; };
 		0720B4F92643066500EAAE74 /* test_account.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720B4F82643066500EAAE74 /* test_account.c */; };
 		0759C1DE2641FDB800AF9407 /* test_block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0759C1DD2641FDB800AF9407 /* test_block.c */; };
 		0759C1DF264200A300AF9407 /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339E2621F0EB0075981C /* Block.c */; };
-		0779DBA626487B4700B9A249 /* Author.c in Sources */ = {isa = PBXBuildFile; fileRef = 07B6B9142644C81A00D1207E /* Author.c */; };
 		0779DBB02649989E00B9A249 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0779DBAE2649989E00B9A249 /* libcrypto.a */; };
 		0779DBB12649989E00B9A249 /* libeom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0779DBAF2649989E00B9A249 /* libeom.a */; };
 		0779DBB226499C4300B9A249 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0779DBAE2649989E00B9A249 /* libcrypto.a */; };
 		0779DBB326499C4300B9A249 /* libeom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0779DBAF2649989E00B9A249 /* libeom.a */; };
-		0779DBB72649B33700B9A249 /* Utilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DBB62649B33700B9A249 /* Utilities.c */; };
-		0779DBB82649B38200B9A249 /* Utilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DBB62649B33700B9A249 /* Utilities.c */; };
+		0779DBB72649B33700B9A249 /* utilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DBB62649B33700B9A249 /* utilities.c */; };
+		0779DBB82649B38200B9A249 /* utilities.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DBB62649B33700B9A249 /* utilities.c */; };
+		0779DBC0264C319E00B9A249 /* blockchain.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DBBF264C319E00B9A249 /* blockchain.c */; };
+		0779DBC3264C33F800B9A249 /* account.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DBC2264C33F800B9A249 /* account.c */; };
+		0779DBC6264C373700B9A249 /* create.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DBC5264C373700B9A249 /* create.c */; };
+		0779DBC9264C4B4100B9A249 /* share.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DBC8264C4B4100B9A249 /* share.c */; };
+		0779DBCC264C4C9400B9A249 /* read.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DBCB264C4C9400B9A249 /* read.c */; };
+		0779DBCF264C539700B9A249 /* query.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DBCE264C539700B9A249 /* query.c */; };
+		0779DBD2264C5A2100B9A249 /* server.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DBD1264C5A2100B9A249 /* server.c */; };
+		0779DBD8264C642700B9A249 /* Client.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DBD7264C642700B9A249 /* Client.c */; };
+		0779DBDE264C64EB00B9A249 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DBDD264C64EB00B9A249 /* sqlite3.c */; };
+		0779DBEF264C6A8400B9A249 /* database.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DBEE264C6A8400B9A249 /* database.c */; };
+		0779DBF2264C9FBB00B9A249 /* mongoose.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DBF0264C9FBB00B9A249 /* mongoose.c */; };
+		0779DBF5264C9FD700B9A249 /* server.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DBF4264C9FD700B9A249 /* server.c */; };
+		0779DBF9264CC03100B9A249 /* block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DBF8264CC03100B9A249 /* block.c */; };
 		0787339F2621F0EB0075981C /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339E2621F0EB0075981C /* Block.c */; };
-		07B6B9152644C81A00D1207E /* Author.c in Sources */ = {isa = PBXBuildFile; fileRef = 07B6B9142644C81A00D1207E /* Author.c */; };
 		07B6B9182646F07000D1207E /* Librarian.c in Sources */ = {isa = PBXBuildFile; fileRef = 07B6B9172646F07000D1207E /* Librarian.c */; };
 		07B6B91A2647524900D1207E /* Librarian.c in Sources */ = {isa = PBXBuildFile; fileRef = 07B6B9172646F07000D1207E /* Librarian.c */; };
 /* End PBXBuildFile section */
@@ -56,22 +66,44 @@
 		0720B4F3264305DE00EAAE74 /* test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test.c; sourceTree = "<group>"; };
 		0720B4F72643066500EAAE74 /* test_account.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test_account.h; sourceTree = "<group>"; };
 		0720B4F82643066500EAAE74 /* test_account.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test_account.c; sourceTree = "<group>"; };
-		0759C1D82640FBD300AF9407 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		0759C1DC2641FDB800AF9407 /* test_block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test_block.h; sourceTree = "<group>"; };
 		0759C1DD2641FDB800AF9407 /* test_block.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test_block.c; sourceTree = "<group>"; };
 		0779DBAE2649989E00B9A249 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../../../usr/local/lib/libcrypto.a; sourceTree = "<group>"; };
 		0779DBAF2649989E00B9A249 /* libeom.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libeom.a; path = ../../../../usr/local/lib/libeom.a; sourceTree = "<group>"; };
-		0779DBB52649B33700B9A249 /* Utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
-		0779DBB62649B33700B9A249 /* Utilities.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Utilities.c; sourceTree = "<group>"; };
+		0779DBB52649B33700B9A249 /* utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = utilities.h; sourceTree = "<group>"; };
+		0779DBB62649B33700B9A249 /* utilities.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = utilities.c; sourceTree = "<group>"; };
 		0779DBB9264A03E300B9A249 /* blockchain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = blockchain.h; sourceTree = "<group>"; };
+		0779DBBF264C319E00B9A249 /* blockchain.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = blockchain.c; sourceTree = "<group>"; };
+		0779DBC1264C33F800B9A249 /* account.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = account.h; sourceTree = "<group>"; };
+		0779DBC2264C33F800B9A249 /* account.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = account.c; sourceTree = "<group>"; };
+		0779DBC4264C373700B9A249 /* create.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = create.h; sourceTree = "<group>"; };
+		0779DBC5264C373700B9A249 /* create.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = create.c; sourceTree = "<group>"; };
+		0779DBC7264C4B4100B9A249 /* share.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = share.h; sourceTree = "<group>"; };
+		0779DBC8264C4B4100B9A249 /* share.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = share.c; sourceTree = "<group>"; };
+		0779DBCA264C4C9400B9A249 /* read.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = read.h; sourceTree = "<group>"; };
+		0779DBCB264C4C9400B9A249 /* read.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = read.c; sourceTree = "<group>"; };
+		0779DBCD264C539700B9A249 /* query.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = query.h; sourceTree = "<group>"; };
+		0779DBCE264C539700B9A249 /* query.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = query.c; sourceTree = "<group>"; };
+		0779DBD0264C5A2100B9A249 /* server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = server.h; sourceTree = "<group>"; };
+		0779DBD1264C5A2100B9A249 /* server.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = server.c; sourceTree = "<group>"; };
+		0779DBD3264C5F6000B9A249 /* libchain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libchain.h; sourceTree = "<group>"; };
+		0779DBD6264C642700B9A249 /* Client.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
+		0779DBD7264C642700B9A249 /* Client.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Client.c; sourceTree = "<group>"; };
+		0779DBDD264C64EB00B9A249 /* sqlite3.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sqlite3.c; sourceTree = "<group>"; };
+		0779DBED264C6A8400B9A249 /* database.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = database.h; sourceTree = "<group>"; };
+		0779DBEE264C6A8400B9A249 /* database.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = database.c; sourceTree = "<group>"; };
+		0779DBF0264C9FBB00B9A249 /* mongoose.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mongoose.c; sourceTree = "<group>"; };
+		0779DBF1264C9FBB00B9A249 /* mongoose.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mongoose.h; sourceTree = "<group>"; };
+		0779DBF3264C9FD700B9A249 /* server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = server.h; sourceTree = "<group>"; };
+		0779DBF4264C9FD700B9A249 /* server.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = server.c; sourceTree = "<group>"; };
+		0779DBF6264CA09D00B9A249 /* sqlite3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sqlite3.h; sourceTree = "<group>"; };
+		0779DBF7264CC03100B9A249 /* block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = block.h; sourceTree = "<group>"; };
+		0779DBF8264CC03100B9A249 /* block.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = block.c; sourceTree = "<group>"; };
 		078733882621EBFD0075981C /* blockchain */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = blockchain; sourceTree = BUILT_PRODUCTS_DIR; };
 		078733932621EDC10075981C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		078733942621EDE30075981C /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; usesTabs = 1; };
-		0787339A2621EEDC0075981C /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		0787339D2621F0EB0075981C /* Block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
 		0787339E2621F0EB0075981C /* Block.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Block.c; sourceTree = "<group>"; };
-		07B6B9132644C81A00D1207E /* Author.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Author.h; sourceTree = "<group>"; };
-		07B6B9142644C81A00D1207E /* Author.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Author.c; sourceTree = "<group>"; };
 		07B6B9162646F07000D1207E /* Librarian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Librarian.h; sourceTree = "<group>"; };
 		07B6B9172646F07000D1207E /* Librarian.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Librarian.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,22 +130,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		07203010263F3BBA00804BDD /* blocks */ = {
-			isa = PBXGroup;
-			children = (
-				0787339D2621F0EB0075981C /* Block.h */,
-				0787339E2621F0EB0075981C /* Block.c */,
-			);
-			path = blocks;
-			sourceTree = "<group>";
-		};
-		07203011263F3BDB00804BDD /* accounts */ = {
+		07203011263F3BDB00804BDD /* objects */ = {
 			isa = PBXGroup;
 			children = (
 				0720300D263F34DE00804BDD /* Account.h */,
 				0720300E263F34DE00804BDD /* Account.c */,
+				0787339D2621F0EB0075981C /* Block.h */,
+				0787339E2621F0EB0075981C /* Block.c */,
 			);
-			path = accounts;
+			path = objects;
 			sourceTree = "<group>";
 		};
 		07203012263F3C0E00804BDD /* test */ = {
@@ -156,10 +181,52 @@
 		0779DBB42649B31F00B9A249 /* utilities */ = {
 			isa = PBXGroup;
 			children = (
-				0779DBB52649B33700B9A249 /* Utilities.h */,
-				0779DBB62649B33700B9A249 /* Utilities.c */,
+				0779DBB52649B33700B9A249 /* utilities.h */,
+				0779DBB62649B33700B9A249 /* utilities.c */,
 			);
 			path = utilities;
+			sourceTree = "<group>";
+		};
+		0779DBE6264C69A300B9A249 /* client */ = {
+			isa = PBXGroup;
+			children = (
+				0779DBD6264C642700B9A249 /* Client.h */,
+				0779DBD7264C642700B9A249 /* Client.c */,
+			);
+			path = client;
+			sourceTree = "<group>";
+		};
+		0779DBE7264C69A900B9A249 /* server */ = {
+			isa = PBXGroup;
+			children = (
+				0779DBF0264C9FBB00B9A249 /* mongoose.c */,
+				0779DBF1264C9FBB00B9A249 /* mongoose.h */,
+				0779DBF3264C9FD700B9A249 /* server.h */,
+				0779DBF4264C9FD700B9A249 /* server.c */,
+				0779DBEC264C6A7200B9A249 /* database */,
+				0779DBE8264C69B400B9A249 /* routes */,
+			);
+			path = server;
+			sourceTree = "<group>";
+		};
+		0779DBE8264C69B400B9A249 /* routes */ = {
+			isa = PBXGroup;
+			children = (
+				0779DBF7264CC03100B9A249 /* block.h */,
+				0779DBF8264CC03100B9A249 /* block.c */,
+			);
+			path = routes;
+			sourceTree = "<group>";
+		};
+		0779DBEC264C6A7200B9A249 /* database */ = {
+			isa = PBXGroup;
+			children = (
+				0779DBF6264CA09D00B9A249 /* sqlite3.h */,
+				0779DBDD264C64EB00B9A249 /* sqlite3.c */,
+				0779DBED264C6A8400B9A249 /* database.h */,
+				0779DBEE264C6A8400B9A249 /* database.c */,
+			);
+			path = database;
 			sourceTree = "<group>";
 		};
 		0787337F2621EBFD0075981C = {
@@ -186,12 +253,13 @@
 		0787338A2621EBFD0075981C /* blockchain */ = {
 			isa = PBXGroup;
 			children = (
-				0787339A2621EEDC0075981C /* main.c */,
-				0759C1D82640FBD300AF9407 /* main.h */,
 				0779DBB9264A03E300B9A249 /* blockchain.h */,
-				07203011263F3BDB00804BDD /* accounts */,
-				07203010263F3BBA00804BDD /* blocks */,
+				0779DBBF264C319E00B9A249 /* blockchain.c */,
+				0779DBD3264C5F6000B9A249 /* libchain.h */,
+				0779DBE6264C69A300B9A249 /* client */,
 				07B6B90F2644C77F00D1207E /* interfaces */,
+				07203011263F3BDB00804BDD /* objects */,
+				0779DBE7264C69A900B9A249 /* server */,
 				0779DBB42649B31F00B9A249 /* utilities */,
 			);
 			path = blockchain;
@@ -209,10 +277,20 @@
 		07B6B90F2644C77F00D1207E /* interfaces */ = {
 			isa = PBXGroup;
 			children = (
-				07B6B9132644C81A00D1207E /* Author.h */,
-				07B6B9142644C81A00D1207E /* Author.c */,
 				07B6B9162646F07000D1207E /* Librarian.h */,
 				07B6B9172646F07000D1207E /* Librarian.c */,
+				0779DBC1264C33F800B9A249 /* account.h */,
+				0779DBC2264C33F800B9A249 /* account.c */,
+				0779DBC4264C373700B9A249 /* create.h */,
+				0779DBC5264C373700B9A249 /* create.c */,
+				0779DBCD264C539700B9A249 /* query.h */,
+				0779DBCE264C539700B9A249 /* query.c */,
+				0779DBCA264C4C9400B9A249 /* read.h */,
+				0779DBCB264C4C9400B9A249 /* read.c */,
+				0779DBD0264C5A2100B9A249 /* server.h */,
+				0779DBD1264C5A2100B9A249 /* server.c */,
+				0779DBC7264C4B4100B9A249 /* share.h */,
+				0779DBC8264C4B4100B9A249 /* share.c */,
 			);
 			path = interfaces;
 			sourceTree = "<group>";
@@ -294,9 +372,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0779DBB82649B38200B9A249 /* Utilities.c in Sources */,
+				0779DBB82649B38200B9A249 /* utilities.c in Sources */,
 				0720B4F4264305DE00EAAE74 /* test.c in Sources */,
-				0779DBA626487B4700B9A249 /* Author.c in Sources */,
 				0759C1DE2641FDB800AF9407 /* test_block.c in Sources */,
 				0720B4F92643066500EAAE74 /* test_account.c in Sources */,
 				07203028263F43B400804BDD /* Account.c in Sources */,
@@ -309,12 +386,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0779DBB72649B33700B9A249 /* Utilities.c in Sources */,
-				07B6B9152644C81A00D1207E /* Author.c in Sources */,
+				0779DBF5264C9FD700B9A249 /* server.c in Sources */,
+				0779DBD8264C642700B9A249 /* Client.c in Sources */,
+				0779DBB72649B33700B9A249 /* utilities.c in Sources */,
+				0779DBF9264CC03100B9A249 /* block.c in Sources */,
+				0779DBF2264C9FBB00B9A249 /* mongoose.c in Sources */,
 				0787339F2621F0EB0075981C /* Block.c in Sources */,
+				0779DBEF264C6A8400B9A249 /* database.c in Sources */,
+				0779DBCC264C4C9400B9A249 /* read.c in Sources */,
+				0779DBC9264C4B4100B9A249 /* share.c in Sources */,
+				0779DBDE264C64EB00B9A249 /* sqlite3.c in Sources */,
 				0720300F263F34DE00804BDD /* Account.c in Sources */,
-				0720302B263F441800804BDD /* main.c in Sources */,
+				0779DBCF264C539700B9A249 /* query.c in Sources */,
+				0779DBC0264C319E00B9A249 /* blockchain.c in Sources */,
+				0779DBC6264C373700B9A249 /* create.c in Sources */,
 				07B6B9182646F07000D1207E /* Librarian.c in Sources */,
+				0779DBD2264C5A2100B9A249 /* server.c in Sources */,
+				0779DBC3264C33F800B9A249 /* account.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,7 +15,7 @@
 #ifndef Account_h
 #define Account_h
 
-#include "../main.h"
+#include "../blockchain.h"
 
 typedef struct Account
 {
@@ -23,10 +23,9 @@ typedef struct Account
     EVP_PKEY *private_key;
 } Account;
 
-bool create(Account *user, char *name);
-bool activate(Account *user, char *name);
-bool deactivate(Account *user);
+bool create_account(Account *user, char *name);
+bool activate_account(Account *user, char *name);
+bool deactivate_account(Account *user);
 void print_account(Account *user);
-bool account_exists(char *name);
 
 #endif /* Account_h */

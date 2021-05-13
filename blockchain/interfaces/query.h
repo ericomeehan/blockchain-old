@@ -5,18 +5,18 @@
 // an open blockchain network for anything.
 // ==================================
 //
-// Author.h
+// query.h
 //
 // Eric Meehan
-// 5/6/21
+// 5/12/21
 //
 //
 
-#ifndef Author_h
-#define Author_h
+#ifndef query_h
+#define query_h
 
 #include "../main.h"
 
-int author(int argc, const char **argv);
+int query(int argc, const char **argv);
 
-#endif /* Author_h */
+#endif /* query_h */

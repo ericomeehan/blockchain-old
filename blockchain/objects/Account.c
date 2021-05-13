@@ -14,7 +14,7 @@
 
 #include "Account.h"
 
-bool create(Account *user, char *name)
+bool create_account(Account *user, char *name)
 {
     EVP_PKEY *key = EVP_PKEY_new();
     EVP_PKEY_CTX *ctx = EVP_PKEY_CTX_new_id(EVP_PKEY_RSA, NULL);
@@ -35,7 +35,11 @@ bool create(Account *user, char *name)
     fclose(key_file);
     
     key_file = fopen(path, "w");
-    PEM_write_PrivateKey(key_file, key, EVP_aes_256_cbc(), NULL, 0, NULL, NULL);
+    if (!PEM_write_PrivateKey(key_file, key, EVP_aes_256_cbc(), NULL, 0, NULL, NULL))
+    {
+        fprintf(stderr, "BLOCKCHAIN ERROR: Failed to write private key for %s\n", name);
+        return EXIT_FAILURE;
+    }
     fclose(key_file);
     
     memset(path, 0, 64);
@@ -44,15 +48,19 @@ bool create(Account *user, char *name)
     strcat(path, ".der");
     
     key_file = fopen(path, "w");
-    i2d_PUBKEY_fp(key_file, key);
+    if (!i2d_PUBKEY_fp(key_file, key))
+    {
+        fprintf(stderr, "BLOCKCHAIN ERROR: Failed to write public key for %s\n", name);
+        return EXIT_FAILURE;
+    }
     fclose(key_file);
     
     EVP_PKEY_CTX_free(ctx);
     
-    return activate(user, name);
+    return true;
 }
 
-bool activate(Account *user, char *name)
+bool activate_account(Account *user, char *name)
 {
     char path[64] = {0};
     strcat(path, PROFILE_PATH);
@@ -83,7 +91,7 @@ bool activate(Account *user, char *name)
     return user->public_key && user->private_key;
 }
 
-bool deactivate(Account *user)
+bool deactivate_account(Account *user)
 {
     
     user->public_key = NULL;
@@ -97,7 +105,7 @@ void print_account(Account *user)
     PEM_write_PUBKEY(stdout, user->public_key);
 }
 
-bool account_exists(char *name)
+bool check_account_exists(char *name)
 {
     char path[64] = {0};
     strcat(path, PROFILE_PATH);

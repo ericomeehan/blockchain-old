@@ -14,36 +14,54 @@ all: cli lib
 ###############################################################################
 # MARK: COMMAND LINE APPLICATION
 ###############################################################################
-cli: interfaces objects utilities
-	gcc -g blockchain/main.c sqlite3.c Utilities.o Account.o Block.o Author.o Librarian.o -leom -lcrypto -lpthread -ldl -o /usr/local/bin/blockchain
+cli: interfaces objects
+	gcc -g blockchain/blockchain.c resources/sqlite3.c Account.o Block.o Client.o Server.o account.o create.o query.o read.o server.o share.o -leom -lcrypto -lpthread -ldl -o /usr/local/bin/blockchain
 
 ###############################################################################
 # MARK: LIBRARY
 ###############################################################################
-lib: interfaces objects utilities
-	ar rcs libblockchain.a Author.o Librarian.o Block.o Utilities.o
+lib: objects
+	ar rcs libblockchain.a Account.o Block.o Client.o Server.o
 
 ###############################################################################
 # MARK: INTERFACES
 ###############################################################################
-interfaces: author librarian
+interfaces: account create query read server share
 
-author:
-	gcc -c blockchain/interfaces/Author.c
+account:
+	gcc -c blockchain/interfaces/account.c
 
-librarian:
-	gcc -c blockchain/interfaces/Librarian.c
+create:
+	gcc -c blockchain/interfaces/create.c
+
+query:
+	gcc -c blockchain/interfaces/query.c
+
+read:
+	gcc -c blockchain/interfaces/read.c
+
+server:
+	gcc -c blockchain/interfaces/server.c
+
+share:
+	gcc -c blockchain/interfaces/share.c
 
 ###############################################################################
 # MARK: OBJECTS
 ###############################################################################
-objects: account block
+objects: account block client server
 
 account:
-	gcc -c blockchain/accounts/Account.c
+	gcc -c blockchain/objects/Account.c
 
 block:
-	gcc -c blockchain/blocks/Block.c
+	gcc -c blockchain/objects/Block.c
+
+client:
+	gcc -c blockchain/objects/Client.c
+
+server:
+	gcc -c blockchain/objects/Server.c
 
 ###############################################################################
 # MARK: UTILITIES

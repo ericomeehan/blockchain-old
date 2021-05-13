@@ -21,7 +21,7 @@
 
 #include "../main.h"
 
-#include "../accounts/Account.h"
+#include "../objects/Account.h"
 
 // MARK: FUNCTION PROTOTYPES
 
