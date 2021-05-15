@@ -12,8 +12,8 @@
 //
 //
 
-#ifndef Account_h
-#define Account_h
+#ifndef OBJ_Account_h
+#define OBJ_Account_h
 
 #include "../blockchain.h"
 
@@ -21,11 +21,13 @@ typedef struct Account
 {
     EVP_PKEY *public_key;
     EVP_PKEY *private_key;
-} Account;
+}
+BLOCKCHAIN_OBJ_Account;
 
-bool create_account(Account *user, char *name);
-bool activate_account(Account *user, char *name);
-bool deactivate_account(Account *user);
-void print_account(Account *user);
+bool BLOCKCHAIN_OBJ_Account_create(BLOCKCHAIN_OBJ_Account *user, char *name);
+bool BLOCKCHAIN_OBJ_Account_activate(BLOCKCHAIN_OBJ_Account *user, char *name);
+bool BLOCKCHAIN_OBJ_Account_deactivate(BLOCKCHAIN_OBJ_Account *user);
+void BLOCKCHAIN_OBJ_Account_print(BLOCKCHAIN_OBJ_Account *user);
+bool BLOCKCHAIN_OBJ_Account_login(BLOCKCHAIN_OBJ_Account *user);
 
-#endif /* Account_h */
+#endif /* OBJ_Account_h */

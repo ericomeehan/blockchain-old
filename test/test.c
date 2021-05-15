@@ -5,46 +5,43 @@
 // an open blockchain network for anything.
 // ==================================
 //
-// main.c
+// test.c
 //
 // Eric Meehan
-// 5/2/21
+// 5/14/21
 //
 //
 
-// This file is used for testing purposes.
-// Include the test file here and call its main function.
 
-#include "test.h"
+#include "../blockchain/blockchain.h"
+#include <stdio.h>
 
-#include <openssl/err.h>
-#include <openssl/evp.h>
-#include <openssl/pem.h>
+static struct Queue trials;
 
-int main(int argc, const char * argv[]) {
-    crypto_init();
-    float rate = 0;
-    int tests = 1;
-    
-    //rate += account_unit_test();
-    
-    Account user;
-    activate(&user, "test");
-    
-    //print_account(&user);
-    
-    rate += block_unit_test(&user);
-    
-    printf("Tests completed with a %f%% success rate.\n", (rate/tests) * 100);
-    return 0;
+static void init(void);
+void init(void)
+{
+    int num_tests = 0;
+    bool(*)(void)tests_to_run[0] = {};
+    for (int i = 0; i < num_tests; i++)
+    {
+        trials.push(&trials, tests_to_run[i]);
+    }
 }
 
-int crypto_init()
+static int main(int argc, char **argv)
 {
-  ERR_load_crypto_strings();
-  OpenSSL_add_all_algorithms();
-  EVP_cleanup();
-  CRYPTO_cleanup_all_ex_data();
-  ERR_free_strings();
-  return 0;
+    init();
+    double num_trials = 0;
+    double num_successes = 0;
+    
+    bool (*trial)(void);
+    while ((trial = trials.peek(&trials)))
+    {
+        num_trials += 1;
+        num_successes += trial();
+        trials.pop(&trials);
+    }
+    
+    printf("Test completed with a %.2f%% success rate\n", num_successes / num_trials);
 }

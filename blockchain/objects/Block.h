@@ -12,8 +12,8 @@
 //
 //
 
-#ifndef Block_h
-#define Block_h
+#ifndef OBJ_Block_h
+#define OBJ_Block_h
 
 #include "../blockchain.h"
 #include "../objects/Account.h"
@@ -32,18 +32,23 @@ typedef struct BlockHeaders
     byte lock[512];
     // A nonce to satisfy the difficulty requirement.
     unsigned long nonce;
-}__attribute__((packed)) BlockHeaders;
+}
+__attribute__((packed))
+BLOCKCHAIN_OBJ_BlockHeaders;
+
 
 typedef struct Block
 {
-    BlockHeaders headers;
+    BLOCKCHAIN_OBJ_BlockHeaders headers;
     byte data;
-}__attribute__((packed)) Block;
+}
+__attribute__((packed))
+BLOCKCHAIN_OBJ_Block;
 
 
-bool mine_block(Account *user, Block *previous, void *data, unsigned long size, byte *hash);
-bool validate_block(Block *block);
-bool hash_block(Block *block, byte *digest);
-bool load_block(Block *block, byte *address);
+bool BLOCKCHAIN_OBJ_Block_mine(BLOCKCHAIN_OBJ_Account *user, BLOCKCHAIN_OBJ_Block *previous, void *data, unsigned long size, byte *hash);
+bool BLOCKCHAIN_OBJ_Block_validate(BLOCKCHAIN_OBJ_Block *block);
+bool BLOCKCHAIN_OBJ_Block_hash(BLOCKCHAIN_OBJ_Block *block, byte *digest);
+bool BLOCKCHAIN_OBJ_Block_load(BLOCKCHAIN_OBJ_Block *block, byte *address);
 
-#endif /* Block_h */
+#endif /* OBJ_Block_h */

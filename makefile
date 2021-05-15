@@ -9,70 +9,60 @@
 ###############################################################################
 # MARK: ALL
 ###############################################################################
-all: cli lib
+all: cli
+
+
 
 ###############################################################################
-# MARK: COMMAND LINE APPLICATION
+# MARK: CLI
 ###############################################################################
-cli: interfaces objects
-	gcc -g blockchain/blockchain.c resources/sqlite3.c Account.o Block.o Client.o Server.o account.o create.o query.o read.o server.o share.o -leom -lcrypto -lpthread -ldl -o /usr/local/bin/blockchain
+cli: src components
+	gcc -g blockchain/blockchain.c *.o -leom -lcrypto -o /usr/local/bin/blockchain
+	make clean
 
-###############################################################################
-# MARK: LIBRARY
-###############################################################################
-lib: objects
-	ar rcs libblockchain.a Account.o Block.o Client.o Server.o
 
 ###############################################################################
-# MARK: INTERFACES
+# MARK: LIB
 ###############################################################################
-interfaces: account create query read server share
 
-account:
-	gcc -c blockchain/interfaces/account.c
 
-create:
-	gcc -c blockchain/interfaces/create.c
 
-query:
-	gcc -c blockchain/interfaces/query.c
+###############################################################################
+# MARK: SRC
+###############################################################################
+src:
+	gcc -c blockchain/src/mongoose/mongoose.c
+	gcc -c blockchain/src/sqlite/sqlite3.c
 
-read:
-	gcc -c blockchain/interfaces/read.c
+
+
+
+###############################################################################
+# MARK: COMPONENTS
+###############################################################################
+components: interfaces objects database server
+
+interfaces:
+	gcc -c blockchain/interfaces/cli/*.c
+	gcc -c blockchain/interfaces/cli.c
+
+objects:
+	gcc -c blockchain/objects/Account.c -o OBJ_Account.o
+	gcc -c blockchain/objects/Block.c -o OBJ_Block.o
+
+database:
+	gcc -c blockchain/database/database.c
 
 server:
-	gcc -c blockchain/interfaces/server.c
+	gcc -c blockchain/server/objects/objects.c
+	gcc -c blockchain/server/protocols/*.c
+	gcc -c blockchain/server/routes/*.c
+	gcc -c blockchain/server/server.c -o SRV_server.o
 
-share:
-	gcc -c blockchain/interfaces/share.c
 
-###############################################################################
-# MARK: OBJECTS
-###############################################################################
-objects: account block client server
-
-account:
-	gcc -c blockchain/objects/Account.c
-
-block:
-	gcc -c blockchain/objects/Block.c
-
-client:
-	gcc -c blockchain/objects/Client.c
-
-server:
-	gcc -c blockchain/objects/Server.c
-
-###############################################################################
-# MARK: UTILITIES
-###############################################################################
-utilities:
-	gcc -c blockchain/utilities/Utilities.c
 
 ###############################################################################
 # MARK: CLEAN
 ###############################################################################
-
-# Remove all .o files
 clean:
 	rm *.o

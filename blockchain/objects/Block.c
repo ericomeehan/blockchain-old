@@ -14,16 +14,16 @@
 
 #include "Block.h"
 
-bool timestamp(Block *block);
-bool sign_block(Account *user, Block *block);
-bool validate_signature(Block *block);
-bool validate_hash(Block *block);
+bool timestamp(BLOCKCHAIN_OBJ_Block *block);
+bool sign_block(BLOCKCHAIN_OBJ_Account *user, BLOCKCHAIN_OBJ_Block *block);
+bool validate_signature(BLOCKCHAIN_OBJ_Block *block);
+bool validate_hash(BLOCKCHAIN_OBJ_Block *block);
 
-bool mine_block(Account *user, Block *previous, void *data, unsigned long size, byte *digest)
+bool BLOCKCHAIN_OBJ_Block_mine(BLOCKCHAIN_OBJ_Account *user, BLOCKCHAIN_OBJ_Block *previous, void *data, unsigned long size, byte *digest)
 {
     // Allocate space for the block
-    unsigned long block_size = size + sizeof(BlockHeaders);
-    Block *block = malloc(block_size);
+    unsigned long block_size = size + sizeof(BLOCKCHAIN_OBJ_BlockHeaders);
+    BLOCKCHAIN_OBJ_Block *block = malloc(block_size);
     
     // Initialize some of the fields
     block->headers.nonce = 0;
@@ -51,16 +51,17 @@ bool mine_block(Account *user, Block *previous, void *data, unsigned long size, 
     }
     
     // Write the new block to a file using its hash as a name
-    hash_block(block, digest);
+    BLOCKCHAIN_OBJ_Block_hash(block, digest);
     BIGNUM *value = BN_new();
     BN_bin2bn(digest, 64, value);
     
     // SEND THE BLOCK TO THE LIBRARIAN?
-    char path[256] = {0};
-    strcat(path, BLOCK_PATH);
-    strcat(path, BN_bn2hex(value));
-    strcat(path, ".block");
-    FILE *block_file = fopen(path, "w");
+    char path_format[512] = {0};
+    char path_final[512] = {0};
+    strcat(path_format, BLOCK_PATH);
+    strcat(path_format, "%0128s.block");
+    sprintf(path_final, path_format, BN_bn2hex(value));
+    FILE *block_file = fopen(path_final, "w");
     fwrite(block, block->headers.size, 1, block_file);
     fclose(block_file);
     
@@ -70,12 +71,12 @@ bool mine_block(Account *user, Block *previous, void *data, unsigned long size, 
     return true;
 }
 
-bool validate_block(Block *block)
+bool BLOCKCHAIN_OBJ_Block_validate(BLOCKCHAIN_OBJ_Block *block)
 {
     return validate_hash(block) && validate_signature(block);
 }
 
-bool hash_block(Block *block, byte *digest)
+bool BLOCKCHAIN_OBJ_Block_hash(BLOCKCHAIN_OBJ_Block *block, byte *digest)
 {
     EVP_MD_CTX *ctx = EVP_MD_CTX_new();
     
@@ -97,7 +98,7 @@ bool hash_block(Block *block, byte *digest)
 }
 
 
-bool load_block(Block *block, byte *address)
+bool BLOCKCHAIN_OBJ_Block_load(BLOCKCHAIN_OBJ_Block *block, byte *address)
 {
     char path[256] = {0};
     strcat(path, BLOCK_PATH);
@@ -108,21 +109,27 @@ bool load_block(Block *block, byte *address)
     {
         return false;
     }
-
-    fread(block, sizeof(BlockHeaders), 1, f);
-    fread(&block->data, block->headers.size - sizeof(BlockHeaders), 1, f);
+    
+    block = malloc(sizeof(BLOCKCHAIN_OBJ_BlockHeaders));
+    fread(block, sizeof(BLOCKCHAIN_OBJ_BlockHeaders), 1, f);
+    unsigned long size = block->headers.size;
+    free(block);
+    
+    block = malloc(size);
+    fseek(f, 0, SEEK_SET);
+    fread(block, size, 1, f);
     
     fclose(f);
     return true;
 }
 
-bool sign_block(Account *user, Block *block)
+bool sign_block(BLOCKCHAIN_OBJ_Account *user, BLOCKCHAIN_OBJ_Block *block)
 {
     // Embed the active user's public key in the block.
     memset(&block->headers.key, 0, 550);
     i2d_PUBKEY(user->public_key, (unsigned char **)&block->headers.key);
     // Collect the size of the data embedded within the block.
-    unsigned long long size = block->headers.size - sizeof(BlockHeaders);
+    unsigned long long size = block->headers.size - sizeof(BLOCKCHAIN_OBJ_BlockHeaders);
     // Prepare an EVP control structure
     EVP_MD_CTX *ctx = EVP_MD_CTX_new();
 
@@ -145,7 +152,7 @@ bool sign_block(Account *user, Block *block)
 }
 
 
-bool validate_signature(Block *block)
+bool validate_signature(BLOCKCHAIN_OBJ_Block *block)
 {
     // Prepare an EVP control structure.
     EVP_MD_CTX *ctx = EVP_MD_CTX_new();
@@ -158,7 +165,7 @@ bool validate_signature(Block *block)
     {
         return false;
     }
-    if (EVP_DigestVerifyUpdate(ctx, &block->data, block->headers.size - sizeof(BlockHeaders)) <= 0)
+    if (EVP_DigestVerifyUpdate(ctx, &block->data, block->headers.size - sizeof(BLOCKCHAIN_OBJ_BlockHeaders)) <= 0)
     {
         return false;
     }
@@ -171,7 +178,7 @@ bool validate_signature(Block *block)
     return true;
 }
 
-bool validate_hash(Block *block)
+bool validate_hash(BLOCKCHAIN_OBJ_Block *block)
 {
     // Create a new bignum control structure
     BN_CTX *ctx = BN_CTX_new();
@@ -193,7 +200,7 @@ bool validate_hash(Block *block)
     
     BIGNUM *hash = BN_new();
     byte digest[64];
-    hash_block(block, digest);
+    BLOCKCHAIN_OBJ_Block_hash(block, digest);
     BN_bin2bn(digest, 64, hash);
     
     // If the block is valid, its hash will be less than the target.
@@ -209,7 +216,7 @@ bool validate_hash(Block *block)
     return proof_of_work == 1;
 }
 
-bool timestamp(Block *block)
+bool timestamp(BLOCKCHAIN_OBJ_Block *block)
 {
     struct tm *raw_time;
     time_t time_object = time(NULL);

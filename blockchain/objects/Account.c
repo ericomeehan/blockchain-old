@@ -14,7 +14,7 @@
 
 #include "Account.h"
 
-bool create_account(Account *user, char *name)
+bool BLOCKCHAIN_OBJ_Account_create(BLOCKCHAIN_OBJ_Account *user, char *name)
 {
     EVP_PKEY *key = EVP_PKEY_new();
     EVP_PKEY_CTX *ctx = EVP_PKEY_CTX_new_id(EVP_PKEY_RSA, NULL);
@@ -60,7 +60,7 @@ bool create_account(Account *user, char *name)
     return true;
 }
 
-bool activate_account(Account *user, char *name)
+bool BLOCKCHAIN_OBJ_Account_activate(BLOCKCHAIN_OBJ_Account *user, char *name)
 {
     char path[64] = {0};
     strcat(path, PROFILE_PATH);
@@ -91,7 +91,7 @@ bool activate_account(Account *user, char *name)
     return user->public_key && user->private_key;
 }
 
-bool deactivate_account(Account *user)
+bool BLOCKCHAIN_OBJ_Account_deactivate(BLOCKCHAIN_OBJ_Account *user)
 {
     
     user->public_key = NULL;
@@ -100,32 +100,22 @@ bool deactivate_account(Account *user)
     return !user->public_key && !user->private_key;
 }
 
-void print_account(Account *user)
+void BLOCKCHAIN_OBJ_Account_print(BLOCKCHAIN_OBJ_Account *user)
 {
     PEM_write_PUBKEY(stdout, user->public_key);
 }
 
-bool check_account_exists(char *name)
+bool BLOCKCHAIN_OBJ_Account_login(BLOCKCHAIN_OBJ_Account *user)
 {
-    char path[64] = {0};
-    strcat(path, PROFILE_PATH);
-    strcat(path, name);
-    strcat(path, ".der");
-    FILE *key_file = fopen(path, "r");
-    if (!key_file)
+    fprintf(stdout, "Username: ");
+    char name[256] = {0};
+    fgets(name, 256, stdin);
+    for (int i = 0; i < strlen(name); i++)
     {
-        return false;
+        if (name[i] == '\n')
+        {
+            name[i] = '\0';
+        }
     }
-    fclose(key_file);
-    
-    memset(path, 0, 64);
-    strcat(path, PROFILE_PATH);
-    strcat(path, name);
-    strcat(path, ".pem");
-    key_file = fopen(path, "r");
-    if (!key_file)
-    {
-        return false;
-    }
-    return true;
+    return BLOCKCHAIN_OBJ_Account_activate(user, name);
 }
