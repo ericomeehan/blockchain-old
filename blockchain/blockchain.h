@@ -52,6 +52,8 @@ static const unsigned long MAX_BLOCK_SIZE = 1000000000;
 static const char *URL = "tcp://0.0.0.0.0:%d/";
 static struct mg_mgr *SERVER;
 static const int SERVER_PULSE = 100;
+static struct mg_mgr *CLIENT;
+static const int CLIENT_PULSE = 1000;
 static sqlite3 *DATABASE;
 
 static const char *HELP = "\n"

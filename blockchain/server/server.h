@@ -27,14 +27,14 @@ typedef struct ThreadJob ThreadJob;
 
 static byte server_routes[3] = {1, 2, 3};
 
-enum labels
+enum BLOCKCHAIN_SRV_labels
 {
     BLOCKCHAIN_CONNECTION_LABEL_STATUS,
     BLOCKCHAIN_CONNECTION_LABEL_DATA,
     BLOCKCHAIN_CONNECTION_LABEL_ROUTE = 9,
 };
 
-enum statuses
+enum BLOCKCHAIN_SRV_statuses
 {
     BLOCKCHAIN_SERVER_INTRODUCTION,
     BLOCKCHAIN_SERVER_ROUTING,

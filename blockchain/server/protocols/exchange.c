@@ -26,22 +26,24 @@ void BLOCKCHAIN_SRV_PTCL_exchange(struct mg_connection *c, int ev, void *ev_data
     {
         case MG_EV_ACCEPT:
         {
+            status = BLOCKCHAIN_SERVER_INTRODUCTION;
             break;
         }
         case MG_EV_READ:
         {
-            void * (*route)(void *arg) = (void * (*)(void *))&c->label[BLOCKCHAIN_CONNECTION_LABEL_ROUTE];
-            //mg_socketpair(&session->blocking_socket, &session->non_blocking_socket);
-            ThreadJob job = thread_job_constructor(route, session);
-            thread_pool.add_work(&thread_pool, job);
+            void (*route)(struct mg_connection *, int, void *, void *) = (void (*)(struct mg_connection *, int, void *, void *))&c->label[BLOCKCHAIN_CONNECTION_LABEL_ROUTE];
+            route(c, ev, ev_data, fn_data);
             break;
         }
         case MG_EV_WRITE:
         {
+            // Loggers...
             break;
         }
         case MG_EV_CLOSE:
         {
+            status = BLOCKCHAIN_SERVER_CLOSING;
+            // Loggers...
             break;
         }
         default:

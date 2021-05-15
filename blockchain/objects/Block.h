@@ -49,6 +49,9 @@ BLOCKCHAIN_OBJ_Block;
 bool BLOCKCHAIN_OBJ_Block_mine(BLOCKCHAIN_OBJ_Account *user, BLOCKCHAIN_OBJ_Block *previous, void *data, unsigned long size, byte *hash);
 bool BLOCKCHAIN_OBJ_Block_validate(BLOCKCHAIN_OBJ_Block *block);
 bool BLOCKCHAIN_OBJ_Block_hash(BLOCKCHAIN_OBJ_Block *block, byte *digest);
+
 bool BLOCKCHAIN_OBJ_Block_load(BLOCKCHAIN_OBJ_Block *block, byte *address);
+bool BLOCKCHAIN_OBJ_Block_save(BLOCKCHAIN_OBJ_Block *block);
+void BLOCKCHAIN_OBJ_Block_get_path(BLOCKCHAIN_OBJ_Block *block, char *path);
 
 #endif /* OBJ_Block_h */

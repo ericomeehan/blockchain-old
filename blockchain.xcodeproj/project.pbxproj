@@ -39,6 +39,7 @@
 		0779DC13264EB31E00B9A249 /* routing.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DC12264EB31E00B9A249 /* routing.c */; };
 		0779DC16264EB41200B9A249 /* exchange.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DC15264EB41200B9A249 /* exchange.c */; };
 		0787339F2621F0EB0075981C /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339E2621F0EB0075981C /* Block.c */; };
+		07C5E349265039ED00539B26 /* client.c in Sources */ = {isa = PBXBuildFile; fileRef = 07C5E348265039ED00539B26 /* client.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -122,6 +123,8 @@
 		078733942621EDE30075981C /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; usesTabs = 1; };
 		0787339D2621F0EB0075981C /* Block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
 		0787339E2621F0EB0075981C /* Block.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Block.c; sourceTree = "<group>"; };
+		07C5E347265039ED00539B26 /* client.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
+		07C5E348265039ED00539B26 /* client.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = client.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,6 +304,8 @@
 		0779DBE6264C69A300B9A249 /* client */ = {
 			isa = PBXGroup;
 			children = (
+				07C5E347265039ED00539B26 /* client.h */,
+				07C5E348265039ED00539B26 /* client.c */,
 			);
 			path = client;
 			sourceTree = "<group>";
@@ -504,6 +509,7 @@
 				0775C85A264F09400086516D /* cli.c in Sources */,
 				0775C853264EE71A0086516D /* server.c in Sources */,
 				0775C843264EE4370086516D /* create.c in Sources */,
+				07C5E349265039ED00539B26 /* client.c in Sources */,
 				0779DC16264EB41200B9A249 /* exchange.c in Sources */,
 				0779DBF2264C9FBB00B9A249 /* mongoose.c in Sources */,
 				0787339F2621F0EB0075981C /* Block.c in Sources */,

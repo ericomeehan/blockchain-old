@@ -16,7 +16,7 @@
 #define SRV_RT_get_h
 
 #include "../../blockchain.h"
+#include "../server.h"
 
-void * BLOCKCHAIN_SRV_RT_get(void *arg);
-
+void BLOCKCHAIN_SRV_RT_get(struct mg_connection *c, int ev, void *ev_data, void *fn_data);
 #endif /* SRV_RT_get_h */

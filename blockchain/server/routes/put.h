@@ -16,7 +16,8 @@
 #define SRV_RT_put_h
 
 #include "../../blockchain.h"
+#include "../server.h"
 
-void * BLOCKCHAIN_SRV_RT_put(void *arg);
+void BLOCKCHAIN_SRV_RT_put(struct mg_connection *c, int ev, void *ev_data, void *fn_data);
 
 #endif /* SRV_RT_put_h */

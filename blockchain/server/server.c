@@ -40,10 +40,12 @@ bool BLOCKCHAIN_SRV_initialize()
     }
     
     mg_mgr_init(SERVER);
+    
     thread_pool = thread_pool_constructor(64);
     routes = dictionary_constructor(compare_string_keys);
-    
     register_default_routes();
+    
+    BLOCKCHAIN_DB_init();
     
     // Mine whoami block
     

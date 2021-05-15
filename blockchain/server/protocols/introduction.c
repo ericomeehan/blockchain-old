@@ -14,6 +14,8 @@
 
 #include "introduction.h"
 #include "../../objects/Block.h"
+#include "../../database/database.h"
+#include "../../database/setup/commands.h"
 
 void BLOCKCHAIN_SRV_PTCL_introduction(struct mg_connection *c, int ev, void *ev_data, void *fn_data)
 {
@@ -25,9 +27,12 @@ void BLOCKCHAIN_SRV_PTCL_introduction(struct mg_connection *c, int ev, void *ev_
     {
         case MG_EV_ACCEPT:
         {
-            session = malloc(sizeof(BLOCKCHAIN_SRV_OBJ_Session));
-            session->blocking_socket = -1;
-            session->non_blocking_socket = -1;
+            if (!session)
+            {
+                session = malloc(sizeof(BLOCKCHAIN_SRV_OBJ_Session));
+                session->blocking_socket = -1;
+                session->non_blocking_socket = -1;
+            }
             status = BLOCKCHAIN_SERVER_INTRODUCTION;
             mg_send(c, data->whoami, data->whoami->headers.size);
             // Session logging...
@@ -43,6 +48,8 @@ void BLOCKCHAIN_SRV_PTCL_introduction(struct mg_connection *c, int ev, void *ev_
             else
             {
                 status = BLOCKCHAIN_SERVER_ROUTING;
+                // Insert into database
+                BLOCKCHAIN_DB_insert_block(whoareyou);
             }
             mg_iobuf_delete(&c->recv, c->recv.len);
             mg_send(c, &response, 1);

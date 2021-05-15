@@ -89,3 +89,29 @@ bool BLOCKCHAIN_DB_create_default_tables()
     }
     return true;
 }
+
+bool BLOCKCHAIN_DB_insert_block(BLOCKCHAIN_OBJ_Block *block)
+{
+    char sql[4096] = {0};
+    
+    byte digest[64] = {0};
+    BLOCKCHAIN_OBJ_Block_hash(block, digest);
+    
+    BIGNUM *value = BN_new();
+    
+    BN_bin2bn(digest, 64, value);
+    char *hash = BN_bn2hex(value);
+    
+    BN_bin2bn(block->headers.previous_hash, 64, value);
+    char *previous_hash = BN_bn2hex(value);
+
+    
+    BN_bin2bn(block->headers.key, 550, value);
+    char *public_key = BN_bn2hex(value);
+    
+    sprintf(sql, BLOCKCHAIN_DB_CMD_TEMPLATE_INSERT_INTO_BLOCKS, hash, previous_hash, block->headers.timestamp, block->headers.size, public_key, block->headers.nonce);
+    
+    BN_free(value);
+    
+    return BLOCKCHAIN_DB_query(sql, NULL, NULL);
+}

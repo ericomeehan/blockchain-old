@@ -21,7 +21,6 @@ const char *BLOCKCHAIN_DB_STUP_CMD_CREATE_TABLE_BLOCKS =
 "previous VARCHAR NOT NULL, "
 "timestamp VARCHAR NOT NULL, "
 "size BIGINT NOT NULL, "
-"difficulty BIGINT NOT NULL, "
 "author VARCHAR NOT NULL, "
 "nonce BIGINT NOT NULL, "
 "FOREIGN KEY(previous) REFERENCES blocks(hash)"
@@ -39,11 +38,11 @@ const char *BLOCKCHAIN_DB_STUP_CMD_CREATE_TABLE_WALLETS =
 "CREATE TABLE IF NOT EXISTS wallets("
 "public_key VARCHAR PRIMARY KEY NOT NULL UNIQUE, "
 "balance DOUBLE DEFAULT 0.0"
-");";
+");"; 
 
 const char *BLOCKCHAIN_DB_CMD_TEMPLATE_INSERT_INTO_BLOCKS =
 "IF NOT EXISTS(SELECT hash FROM blocks WHERE hash = %s) "
-"INSERT INTO blocks (hash, previous, timestamp, size, difficulty, author, nonce) VALUES (%s, %s, %s, %lu, %lu, %s, %lu);";
+"INSERT INTO blocks (hash, previous, timestamp, size, difficulty, author, nonce) VALUES (%0128s, %0128s, %s, %lu, %lu, %s, %lu);";
 
 const char *BLOCKCHAIN_DB_CMD_TEMPLATE_INSERT_INTO_NODES =
 "IF EXISTS(SELECT public_key FROM nodes WHERE public_key = %s) "

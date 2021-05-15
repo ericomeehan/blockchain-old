@@ -13,11 +13,12 @@
 //
 
 #include "Block.h"
+#include "../database/database.h"
 
-bool timestamp(BLOCKCHAIN_OBJ_Block *block);
-bool sign_block(BLOCKCHAIN_OBJ_Account *user, BLOCKCHAIN_OBJ_Block *block);
-bool validate_signature(BLOCKCHAIN_OBJ_Block *block);
-bool validate_hash(BLOCKCHAIN_OBJ_Block *block);
+static bool BLOCKCHAIN_OBJ_PRIVATE_Block_timestamp(BLOCKCHAIN_OBJ_Block *block);
+static bool BLOCKCHAIN_OBJ_PRIVATE_Block_sign(BLOCKCHAIN_OBJ_Account *user, BLOCKCHAIN_OBJ_Block *block);
+static bool BLOCKCHAIN_OBJ_PRIVATE_Block_validate_signature(BLOCKCHAIN_OBJ_Block *block);
+static bool BLOCKCHAIN_OBJ_PRIVATE_Block_validate_hash(BLOCKCHAIN_OBJ_Block *block);
 
 bool BLOCKCHAIN_OBJ_Block_mine(BLOCKCHAIN_OBJ_Account *user, BLOCKCHAIN_OBJ_Block *previous, void *data, unsigned long size, byte *digest)
 {
@@ -27,7 +28,7 @@ bool BLOCKCHAIN_OBJ_Block_mine(BLOCKCHAIN_OBJ_Account *user, BLOCKCHAIN_OBJ_Bloc
     
     // Initialize some of the fields
     block->headers.nonce = 0;
-    if (!timestamp(block))
+    if (!BLOCKCHAIN_OBJ_PRIVATE_Block_timestamp(block))
     {
         return false;
     }
@@ -37,43 +38,31 @@ bool BLOCKCHAIN_OBJ_Block_mine(BLOCKCHAIN_OBJ_Account *user, BLOCKCHAIN_OBJ_Bloc
     memcpy(&block->data, data, size);
     //memcpy(block->headers.incidentals.previous_hash, previous, size)
     
-    if (!sign_block(user, block))
+    if (!BLOCKCHAIN_OBJ_PRIVATE_Block_sign(user, block))
     {
         return false;
     }
-    while (!validate_hash(block))
+    
+    while (!BLOCKCHAIN_OBJ_PRIVATE_Block_validate_hash(block))
     {
         block->headers.nonce += 1;
     }
-    if (!validate_hash(block))
+    
+    if (!BLOCKCHAIN_OBJ_PRIVATE_Block_validate_hash(block))
     {
         return false;
     }
-    
-    // Write the new block to a file using its hash as a name
-    BLOCKCHAIN_OBJ_Block_hash(block, digest);
-    BIGNUM *value = BN_new();
-    BN_bin2bn(digest, 64, value);
-    
-    // SEND THE BLOCK TO THE LIBRARIAN?
-    char path_format[512] = {0};
-    char path_final[512] = {0};
-    strcat(path_format, BLOCK_PATH);
-    strcat(path_format, "%0128s.block");
-    sprintf(path_final, path_format, BN_bn2hex(value));
-    FILE *block_file = fopen(path_final, "w");
-    fwrite(block, block->headers.size, 1, block_file);
-    fclose(block_file);
-    
-    free(block);
-    BN_free(value);
+    if (!BLOCKCHAIN_OBJ_Block_save(block))
+    {
+        return false;
+    }
     
     return true;
 }
 
 bool BLOCKCHAIN_OBJ_Block_validate(BLOCKCHAIN_OBJ_Block *block)
 {
-    return validate_hash(block) && validate_signature(block);
+    return BLOCKCHAIN_OBJ_PRIVATE_Block_validate_hash(block) && BLOCKCHAIN_OBJ_PRIVATE_Block_validate_signature(block);
 }
 
 bool BLOCKCHAIN_OBJ_Block_hash(BLOCKCHAIN_OBJ_Block *block, byte *digest)
@@ -98,12 +87,12 @@ bool BLOCKCHAIN_OBJ_Block_hash(BLOCKCHAIN_OBJ_Block *block, byte *digest)
 }
 
 
+
+
 bool BLOCKCHAIN_OBJ_Block_load(BLOCKCHAIN_OBJ_Block *block, byte *address)
 {
-    char path[256] = {0};
-    strcat(path, BLOCK_PATH);
-    strcat(path, (char *)address);
-    strcat(path, ".block");
+    char path[512] = {0};
+    BLOCKCHAIN_OBJ_Block_get_path(block, path);
     FILE *f = fopen(path, "r");
     if (!f)
     {
@@ -123,7 +112,62 @@ bool BLOCKCHAIN_OBJ_Block_load(BLOCKCHAIN_OBJ_Block *block, byte *address)
     return true;
 }
 
-bool sign_block(BLOCKCHAIN_OBJ_Account *user, BLOCKCHAIN_OBJ_Block *block)
+bool BLOCKCHAIN_OBJ_Block_save(BLOCKCHAIN_OBJ_Block *block)
+{
+    
+    char path[256] = {0};
+    BLOCKCHAIN_OBJ_Block_get_path(block, path);
+    
+    FILE *f = fopen(path, "r");
+    if (f)
+    {
+        fprintf(stdout, "BLOCKCHAIN MESSAGE: Block %s already exists\n", path);
+        return false;
+    }
+    fclose(f);
+    f = fopen(path, "w");
+    if (!f)
+    {
+        fprintf(stderr, "BLOCKCHAIN ERROR: Failed to load block %s\n", path);
+        return false;
+    }
+    
+    BLOCKCHAIN_DB_insert_block(block);
+    fwrite(block, block->headers.size, 1, f);
+    fclose(f);
+    return true;
+}
+
+void BLOCKCHAIN_OBJ_Block_get_path(BLOCKCHAIN_OBJ_Block *block, char *path)
+{
+    char p[256] = {0};
+    strcat(p, BLOCK_PATH);
+    strcat(p, "%0128s.block");
+    
+    byte digest[64] = {0};
+    BLOCKCHAIN_OBJ_Block_hash(block, digest);
+    
+    BIGNUM *hash = BN_new();
+    BN_bin2bn(digest, 64, hash);
+    char *hex = BN_bn2hex(hash);
+    
+    sprintf(path, p, hex);
+}
+
+
+
+bool BLOCKCHAIN_OBJ_PRIVATE_Block_timestamp(BLOCKCHAIN_OBJ_Block *block)
+{
+    struct tm *raw_time;
+    time_t time_object = time(NULL);
+    raw_time = gmtime(&time_object);
+    char timestamp[20] = {0};
+    sprintf(timestamp, "%d-%02d-%02d %02d:%02d:%02d", raw_time->tm_year + 1900, raw_time->tm_mon + 1, raw_time->tm_mday, raw_time->tm_hour, raw_time->tm_min, raw_time->tm_sec);
+    memcpy(block->headers.timestamp, timestamp, 20);
+    return true;
+}
+
+bool BLOCKCHAIN_OBJ_PRIVATE_Block_sign(BLOCKCHAIN_OBJ_Account *user, BLOCKCHAIN_OBJ_Block *block)
 {
     // Embed the active user's public key in the block.
     memset(&block->headers.key, 0, 550);
@@ -152,7 +196,7 @@ bool sign_block(BLOCKCHAIN_OBJ_Account *user, BLOCKCHAIN_OBJ_Block *block)
 }
 
 
-bool validate_signature(BLOCKCHAIN_OBJ_Block *block)
+bool BLOCKCHAIN_OBJ_PRIVATE_Block_validate_signature(BLOCKCHAIN_OBJ_Block *block)
 {
     // Prepare an EVP control structure.
     EVP_MD_CTX *ctx = EVP_MD_CTX_new();
@@ -178,7 +222,7 @@ bool validate_signature(BLOCKCHAIN_OBJ_Block *block)
     return true;
 }
 
-bool validate_hash(BLOCKCHAIN_OBJ_Block *block)
+bool BLOCKCHAIN_OBJ_PRIVATE_Block_validate_hash(BLOCKCHAIN_OBJ_Block *block)
 {
     // Create a new bignum control structure
     BN_CTX *ctx = BN_CTX_new();
@@ -214,15 +258,4 @@ bool validate_hash(BLOCKCHAIN_OBJ_Block *block)
     BN_CTX_free(ctx);
     
     return proof_of_work == 1;
-}
-
-bool timestamp(BLOCKCHAIN_OBJ_Block *block)
-{
-    struct tm *raw_time;
-    time_t time_object = time(NULL);
-    raw_time = gmtime(&time_object);
-    char timestamp[20] = {0};
-    sprintf(timestamp, "%d-%02d-%02d %02d:%02d:%02d", raw_time->tm_year + 1900, raw_time->tm_mon + 1, raw_time->tm_mday, raw_time->tm_hour, raw_time->tm_min, raw_time->tm_sec);
-    memcpy(block->headers.timestamp, timestamp, 20);
-    return true;
 }
