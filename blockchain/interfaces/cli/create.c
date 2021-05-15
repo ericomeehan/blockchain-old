@@ -31,14 +31,12 @@ int BLOCKCHAIN_CLI_create(int argc, const char **argv)
         return EXIT_FAILURE;
     }
     
-    printf("1\n");
     BLOCKCHAIN_OBJ_Block *previous = NULL;
     if (!BLOCKCHAIN_OBJ_Block_load(previous, (byte *)argv[2]))
     {
         fprintf(stderr, "BLOCKCHAIN ERROR: Unable to load block %s\n", argv[2]);
         return EXIT_FAILURE;
     }
-    printf("2\n");
     if (strcmp(argv[3], "from") == 0)
     {
         double trials = 0;
