@@ -12,7 +12,7 @@
 //
 //
 
-#include "Account.h"
+#include "account.h"
 
 bool BLOCKCHAIN_OBJ_Account_create(BLOCKCHAIN_OBJ_Account *user, char *name)
 {

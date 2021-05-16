@@ -12,8 +12,8 @@
 //
 //
 
-#ifndef OBJ_Account_h
-#define OBJ_Account_h
+#ifndef OBJ_account_h
+#define OBJ_account_h
 
 #include "../blockchain.h"
 
@@ -30,4 +30,4 @@ bool BLOCKCHAIN_OBJ_Account_deactivate(BLOCKCHAIN_OBJ_Account *user);
 void BLOCKCHAIN_OBJ_Account_print(BLOCKCHAIN_OBJ_Account *user);
 bool BLOCKCHAIN_OBJ_Account_login(BLOCKCHAIN_OBJ_Account *user);
 
-#endif /* OBJ_Account_h */
+#endif /* OBJ_account_h */

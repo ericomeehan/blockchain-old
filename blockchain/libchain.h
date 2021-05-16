@@ -15,8 +15,8 @@
 #ifndef libchain_h
 #define libchain_h
 
-#include "objects/Account.h"
-#include "objects/Block.h"
+#include "objects/account.h"
+#include "objects/block.h"
 
 #include "interfaces/cli.h"
 

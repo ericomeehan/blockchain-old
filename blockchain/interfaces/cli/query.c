@@ -13,7 +13,7 @@
 //
 
 #include "query.h"
-#include "../../objects/Block.h"
+#include "../../objects/block.h"
 
 int BLOCKCHAIN_CLI_query(int argc, const char **argv)
 {

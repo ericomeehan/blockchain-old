@@ -17,14 +17,13 @@
 
 #include "../blockchain.h"
 
-#include "../objects/Account.h"
-#include "../objects/Block.h"
+#include "../objects/account.h"
+#include "../objects/block.h"
 
 typedef struct BLOCKCHAIN_CLNT_OBJ_request
 {
     BLOCKCHAIN_OBJ_Block *whoami;
     byte *route;
-    unsigned long route_size;
     byte *data;
     unsigned long data_size;
 }
@@ -32,12 +31,19 @@ BLOCKCHAIN_CLNT_OBJ_request;
 
 enum BLOCKCHAIN_CLNT_statuses
 {
-    BLOCKCHAIN_SERVER_INTRODUCTION,
-    BLOCKCHAIN_SERVER_ROUTING,
-    BLOCKCHAIN_SERVER_EXCHANGE,
-    BLOCKCHAIN_SERVER_CLOSING
+    BLOCKCHAIN_CLIENT_INTRODUCTION,
+    BLOCKCHAIN_CLIENT_ROUTING,
+    BLOCKCHAIN_CLIENT_EXCHANGE,
+    BLOCKCHAIN_CLIENT_CLOSING
 };
 
-bool BLOCKCHAIN_CLNT_request(char *address, byte *route, unsigned long route_size, byte *data_to_send, unsigned long data_size);
+enum BLOCKCHAIN_CLNT_labels
+{
+    BLOCKCHAIN_CONNECTION_LABEL_STATUS,
+    BLOCKCHAIN_CONNECTION_LABEL_DATA,
+    BLOCKCHAIN_CONNECTION_LABEL_ROUTE = 9,
+};
+
+bool BLOCKCHAIN_CLNT_request(char *address, byte *route, byte *data_to_send, unsigned long data_size);
 
 #endif /* client_h */

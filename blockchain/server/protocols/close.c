@@ -13,16 +13,22 @@
 //
 
 #include "close.h"
-#include "../../objects/Block.h"
+#include "../../utilities/logger.h"
 
 void BLOCKCHAIN_SRV_PTCL_close(struct mg_connection *c, int ev, void *ev_data, void *fn_data)
 {
-    BLOCKCHAIN_SRV_OBJ_Session *session = (BLOCKCHAIN_SRV_OBJ_Session *)&c->label[BLOCKCHAIN_CONNECTION_LABEL_DATA];
+    BLOCKCHAIN_OBJ_Session *session = (BLOCKCHAIN_OBJ_Session *)fn_data;
     byte status = c->label[BLOCKCHAIN_CONNECTION_LABEL_STATUS];
-    BLOCKCHAIN_SRV_OBJ_ServerData *data = fn_data;
     byte response;
+    
+    char log[512] = {0};
+    
     switch (ev)
     {
+        case MG_EV_POLL:
+        {
+            break;
+        }
         case MG_EV_ACCEPT:
         {
             break;
@@ -37,6 +43,17 @@ void BLOCKCHAIN_SRV_PTCL_close(struct mg_connection *c, int ev, void *ev_data, v
         }
         case MG_EV_CLOSE:
         {
+            BLOCKCHAIN_OBJ_LinkedBlock_next(&session->events);
+            
+            sprintf(log, BLOCKCHAIN_SRV_PTCL_close_log_format, c->peer.ip, c->peer.ip6, c->peer.is_ip6, c->peer.port, status);
+            
+            BLOCKCHAIN_UTIL_logger(stdout, log);
+            
+            byte hash[64] = {0};
+            BLOCKCHAIN_OBJ_Block_mine(&session->user, session->events.previous, log, strlen(log) + 1, hash);
+            
+            free(session->events.previous);
+            
             break;
         }
         default:

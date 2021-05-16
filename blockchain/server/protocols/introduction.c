@@ -13,46 +13,48 @@
 //
 
 #include "introduction.h"
-#include "../../objects/Block.h"
+
 #include "../../database/database.h"
 #include "../../database/setup/commands.h"
 
+#include "../../utilities/logger.h"
+
 void BLOCKCHAIN_SRV_PTCL_introduction(struct mg_connection *c, int ev, void *ev_data, void *fn_data)
 {
-    BLOCKCHAIN_SRV_OBJ_Session *session = (BLOCKCHAIN_SRV_OBJ_Session *)&c->label[BLOCKCHAIN_CONNECTION_LABEL_DATA];
+    BLOCKCHAIN_OBJ_Session *session = (BLOCKCHAIN_OBJ_Session *)fn_data;
     byte status = c->label[BLOCKCHAIN_CONNECTION_LABEL_STATUS];
-    BLOCKCHAIN_SRV_OBJ_ServerData *data = fn_data;
     byte response;
+    
+    char log[512] = {0};
+    
     switch (ev)
     {
+        case MG_EV_POLL:
+        {
+            break;
+        }
         case MG_EV_ACCEPT:
         {
-            if (!session)
-            {
-                session = malloc(sizeof(BLOCKCHAIN_SRV_OBJ_Session));
-                session->blocking_socket = -1;
-                session->non_blocking_socket = -1;
-            }
-            status = BLOCKCHAIN_SERVER_INTRODUCTION;
-            mg_send(c, data->whoami, data->whoami->headers.size);
-            // Session logging...
+            mg_send(c, session->whoami, session->whoami->headers.size);
+            sprintf(log, BLOCKCHAIN_SRV_PTCL_introduction_log_format_ev_accept_format, c->peer.ip, c->peer.ip6, c->peer.is_ip6, c->peer.port, status);
+            BLOCKCHAIN_UTIL_logger(stdout, log);
             break;
         }
         case MG_EV_READ:
         {
-            BLOCKCHAIN_OBJ_Block *whoareyou = (BLOCKCHAIN_OBJ_Block *)c->recv.buf;
-            if (!(response = BLOCKCHAIN_OBJ_Block_validate(whoareyou)))
+            status = ((response = BLOCKCHAIN_OBJ_Block_validate((BLOCKCHAIN_OBJ_Block *)&c->recv.buf)) ? BLOCKCHAIN_SERVER_ROUTING:BLOCKCHAIN_SERVER_CLOSING);
+            if (response)
             {
-                status = BLOCKCHAIN_SERVER_CLOSING;
-            }
-            else
-            {
-                status = BLOCKCHAIN_SERVER_ROUTING;
-                // Insert into database
-                BLOCKCHAIN_DB_insert_block(whoareyou);
+                BLOCKCHAIN_DB_insert_block((BLOCKCHAIN_OBJ_Block *)&c->recv.buf);
+                byte hash[64] = {0};
+                BLOCKCHAIN_OBJ_Block_hash((BLOCKCHAIN_OBJ_Block *)&c->recv.buf, hash);
+                BLOCKCHAIN_OBJ_Block_load(session->events.block, hash);
             }
             mg_iobuf_delete(&c->recv, c->recv.len);
             mg_send(c, &response, 1);
+            
+            sprintf(log, BLOCKCHAIN_SRV_PTCL_introduction_log_format_ev_read_format, c->peer.ip, c->peer.ip6, c->peer.is_ip6, c->peer.port, status, response);
+            BLOCKCHAIN_UTIL_logger(stdout, log);
             break;
         }
         case MG_EV_WRITE:

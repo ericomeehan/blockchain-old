@@ -40,21 +40,26 @@
 #include <unistd.h>
 
 static const char *PIPE_PATH = "/Users/eric/Desktop/";
-static char *BLOCK_PATH = "/Users/eric/Desktop/";
 static const char *PROFILE_PATH = "/Users/eric/Desktop/";
-static const char *DATABASE_PATH = "/Users/eric/Desktop/blockchain.db";
 
-static const unsigned int PORT = 1248;
+static const char *LOG_PATH = "/Users/eric/Desktop/";
+
 static const unsigned int NUM_THREADS = 32;
 
+static char *BLOCK_PATH = "/Users/eric/Desktop/";
 static const unsigned long MAX_BLOCK_SIZE = 1000000000;
 
 static const char *URL = "tcp://0.0.0.0.0:%d/";
-static struct mg_mgr *SERVER;
+static const unsigned int PORT = 1248;
 static const int SERVER_PULSE = 100;
+static struct mg_mgr *SERVER;
+
 static struct mg_mgr *CLIENT;
 static const int CLIENT_PULSE = 1000;
+
+static const char *DATABASE_PATH = "/Users/eric/Desktop/blockchain.db";
 static sqlite3 *DATABASE;
+
 
 static const char *HELP = "\n"
 "\n"

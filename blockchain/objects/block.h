@@ -12,11 +12,11 @@
 //
 //
 
-#ifndef OBJ_Block_h
-#define OBJ_Block_h
+#ifndef OBJ_block_h
+#define OBJ_block_h
 
 #include "../blockchain.h"
-#include "../objects/Account.h"
+#include "account.h"
 
 typedef struct BlockHeaders
 {
@@ -54,4 +54,4 @@ bool BLOCKCHAIN_OBJ_Block_load(BLOCKCHAIN_OBJ_Block *block, byte *address);
 bool BLOCKCHAIN_OBJ_Block_save(BLOCKCHAIN_OBJ_Block *block);
 void BLOCKCHAIN_OBJ_Block_get_path(BLOCKCHAIN_OBJ_Block *block, char *path);
 
-#endif /* OBJ_Block_h */
+#endif /* OBJ_block_h */

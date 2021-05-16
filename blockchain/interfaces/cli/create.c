@@ -13,8 +13,8 @@
 //
 
 #include "create.h"
-#include "../../objects/Account.h"
-#include "../../objects/Block.h"
+#include "../../objects/account.h"
+#include "../../objects/block.h"
 
 int BLOCKCHAIN_CLI_create(int argc, const char **argv)
 {

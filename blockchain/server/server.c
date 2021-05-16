@@ -25,6 +25,8 @@
 #include "routes/put.h"
 #include "routes/sql.h"
 
+#include "../utilities/logger.h"
+
 volatile sig_atomic_t active = false;
 
 static void event_handler(struct mg_connection *c, int ev, void *ev_data, void *fn_data);
@@ -33,21 +35,47 @@ static void register_default_routes(void);
 
 bool BLOCKCHAIN_SRV_initialize()
 {
-    if (!BLOCKCHAIN_OBJ_Account_login(&data.user))
+    BLOCKCHAIN_UTIL_logger(stdout, "Initializing blockchain server...\n");
+    BLOCKCHAIN_UTIL_logger(stdout, "Login required\n");
+    if (!BLOCKCHAIN_OBJ_Account_login(&server_session.user))
     {
-        fprintf(stderr, "BLOCKCHAIN ERROR: Failed to initialize server\n");
+        BLOCKCHAIN_UTIL_logger(stderr, "BLOCKCHAIN ERROR: Failed to initialize server\n");
         return false;
     }
     
-    mg_mgr_init(SERVER);
-    
-    thread_pool = thread_pool_constructor(64);
+    BLOCKCHAIN_UTIL_logger(stdout, "Initializing server varaiables...\n");
     routes = dictionary_constructor(compare_string_keys);
     register_default_routes();
+    BLOCKCHAIN_UTIL_logger(stdout, "Server variables initialized\n");
     
+    BLOCKCHAIN_UTIL_logger(stdout, "Initializing Mongoose event manager...\n");
+    mg_mgr_init(SERVER);
+    BLOCKCHAIN_UTIL_logger(stdout, "Mongoose Initialized\n");
+    
+    BLOCKCHAIN_UTIL_logger(stdout, "Initializing SQLite database...\n");
     BLOCKCHAIN_DB_init();
+    BLOCKCHAIN_UTIL_logger(stdout, "SQLite initialized\n");
     
-    // Mine whoami block
+    BLOCKCHAIN_UTIL_logger(stdout, "Mining session block...\n");
+    // mine
+    BLOCKCHAIN_UTIL_logger(stdout, "Session block mined\n");
+
+    BLOCKCHAIN_UTIL_logger(stdout, "Server initialized\n");
+    
+    
+    if (isatty(fileno(stderr)))
+    {
+        BLOCKCHAIN_UTIL_logger(stdout, "Redirecting stdout and stderr to logs\n");
+        char path[256] = {0};
+        strcat(path, LOG_PATH);
+        strcat(path, "server_error.log");
+        freopen(path, "a+", stderr);
+        memset(path, 0, 256);
+        strcat(path, LOG_PATH);
+        strcat(path, "server_event.log");
+        freopen(path, "a+", stdout);
+    }
+    
     
     return true;
 }
@@ -62,7 +90,7 @@ void BLOCKCHAIN_SRV_launch(void)
     action.sa_handler = terminate;
     sigaction(SIGTERM, &action, NULL);
     
-    mg_listen(SERVER, listen_address, event_handler, &data);
+    mg_listen(SERVER, listen_address, event_handler, &server_session);
     active = true;
     while (active)
     {
@@ -113,7 +141,7 @@ void terminate(int signum)
 
 void register_default_routes(void)
 {
-    BLOCKCHAIN_SRV_OBJ_Route get_route;
+    BLOCKCHAIN_SRV_OBJ_Route get_route; 
     get_route.route_function = BLOCKCHAIN_SRV_RT_get;
     routes.insert(&routes, server_routes, 1, &get_route, sizeof(get_route));
     

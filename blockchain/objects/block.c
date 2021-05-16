@@ -12,7 +12,7 @@
 //
 //
 
-#include "Block.h"
+#include "block.h"
 #include "../database/database.h"
 
 static bool BLOCKCHAIN_OBJ_PRIVATE_Block_timestamp(BLOCKCHAIN_OBJ_Block *block);

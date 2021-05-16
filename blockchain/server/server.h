@@ -17,13 +17,18 @@
 
 #include "../blockchain.h"
 
-#include "../objects/Account.h"
-#include "../objects/Block.h"
-
-#include "objects/objects.h"
+#include "../objects/account.h"
+#include "../objects/block.h"
+#include "../objects/session.h"
 
 typedef struct ThreadPool ThreadPool;
 typedef struct ThreadJob ThreadJob;
+
+typedef struct Route
+{
+    void (*route_function)(struct mg_connection *, int, void *, void *);
+}
+BLOCKCHAIN_SRV_OBJ_Route;
 
 static byte server_routes[3] = {1, 2, 3};
 
@@ -42,9 +47,8 @@ enum BLOCKCHAIN_SRV_statuses
     BLOCKCHAIN_SERVER_CLOSING
 };
 
-static ThreadPool thread_pool;
+static BLOCKCHAIN_OBJ_Session server_session;
 static struct Dictionary routes;
-static BLOCKCHAIN_SRV_OBJ_ServerData data;
 
 bool BLOCKCHAIN_SRV_initialize(void);
 void BLOCKCHAIN_SRV_launch(void);

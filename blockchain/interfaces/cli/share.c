@@ -13,7 +13,7 @@
 //
 
 #include "share.h"
-#include "../../objects/Block.h"
+#include "../../objects/block.h"
 
 int BLOCKCHAIN_CLI_share(int argc, const char **argv)
 {

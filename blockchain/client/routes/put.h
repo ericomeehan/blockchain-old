@@ -5,19 +5,18 @@
 // an open blockchain network for anything.
 // ==================================
 //
-// CLI_account.h
+// put.h
 //
 // Eric Meehan
-// 5/14/21
+// 5/15/21
 //
 //
 
-#ifndef CLI_account_h
-#define CLI_account_h
+#ifndef CLNT_RT_put_h
+#define CLNT_RT_put_h
 
 #include "../../blockchain.h"
-#include "../../objects/account.h"
 
-int BLOCKCHAIN_CLI_account(int argc, const char **argv);
+void BLOCKCHAIN_CLNT_RT_put(struct mg_connection *c, int ev, void *ev_data, void *fn_data);
 
-#endif /* CLI_account_h */
+#endif /* CLNT_RT_put_h */

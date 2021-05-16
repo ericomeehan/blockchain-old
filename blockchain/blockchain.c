@@ -15,8 +15,6 @@
 #include "blockchain.h"
 
 #include "interfaces/cli.h"
-#include "objects/Block.h"
-#include "objects/Account.h"
 
 
 int main(int argc, const char **argv)

@@ -17,9 +17,8 @@
 
 void BLOCKCHAIN_SRV_RT_put(struct mg_connection *c, int ev, void *ev_data, void *fn_data)
 {
-    BLOCKCHAIN_SRV_OBJ_Session *session = (BLOCKCHAIN_SRV_OBJ_Session *)&c->label[BLOCKCHAIN_CONNECTION_LABEL_DATA];
+    BLOCKCHAIN_OBJ_Session *session = (BLOCKCHAIN_OBJ_Session *)fn_data;
     byte status = c->label[BLOCKCHAIN_CONNECTION_LABEL_STATUS];
-    BLOCKCHAIN_SRV_OBJ_ServerData *data = fn_data;
     byte response;
     switch (ev)
     {

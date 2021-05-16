@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0716C1F3264EB6FB00A81888 /* close.c in Sources */ = {isa = PBXBuildFile; fileRef = 0716C1F2264EB6FB00A81888 /* close.c */; };
-		0720300F263F34DE00804BDD /* Account.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720300E263F34DE00804BDD /* Account.c */; };
-		07203028263F43B400804BDD /* Account.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720300E263F34DE00804BDD /* Account.c */; };
+		0720300F263F34DE00804BDD /* account.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720300E263F34DE00804BDD /* account.c */; };
+		07203028263F43B400804BDD /* account.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720300E263F34DE00804BDD /* account.c */; };
 		0720B4F92643066500EAAE74 /* test_account.c in Sources */ = {isa = PBXBuildFile; fileRef = 0720B4F82643066500EAAE74 /* test_account.c */; };
 		0759C1DE2641FDB800AF9407 /* test_block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0759C1DD2641FDB800AF9407 /* test_block.c */; };
-		0759C1DF264200A300AF9407 /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339E2621F0EB0075981C /* Block.c */; };
+		0759C1DF264200A300AF9407 /* block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339E2621F0EB0075981C /* block.c */; };
 		0775C831264ECAC10086516D /* get.c in Sources */ = {isa = PBXBuildFile; fileRef = 0775C830264ECAC10086516D /* get.c */; };
 		0775C834264ECAC90086516D /* put.c in Sources */ = {isa = PBXBuildFile; fileRef = 0775C833264ECAC90086516D /* put.c */; };
 		0775C837264ECAD10086516D /* sql.c in Sources */ = {isa = PBXBuildFile; fileRef = 0775C836264ECAD10086516D /* sql.c */; };
@@ -23,7 +23,6 @@
 		0775C84C264EE45F0086516D /* server.c in Sources */ = {isa = PBXBuildFile; fileRef = 0775C84B264EE45F0086516D /* server.c */; };
 		0775C84F264EE46A0086516D /* share.c in Sources */ = {isa = PBXBuildFile; fileRef = 0775C84E264EE46A0086516D /* share.c */; };
 		0775C853264EE71A0086516D /* server.c in Sources */ = {isa = PBXBuildFile; fileRef = 0775C852264EE71A0086516D /* server.c */; };
-		0775C857264EE88D0086516D /* objects.c in Sources */ = {isa = PBXBuildFile; fileRef = 0775C856264EE88D0086516D /* objects.c */; };
 		0775C85A264F09400086516D /* cli.c in Sources */ = {isa = PBXBuildFile; fileRef = 0775C859264F09400086516D /* cli.c */; };
 		0775C85C264F0B6F0086516D /* test.c in Sources */ = {isa = PBXBuildFile; fileRef = 0775C85B264F0B6F0086516D /* test.c */; };
 		0775C864264F0F6A0086516D /* test_cli.c in Sources */ = {isa = PBXBuildFile; fileRef = 0775C863264F0F6A0086516D /* test_cli.c */; };
@@ -38,8 +37,17 @@
 		0779DC10264E177500B9A249 /* introduction.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DC0F264E177500B9A249 /* introduction.c */; };
 		0779DC13264EB31E00B9A249 /* routing.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DC12264EB31E00B9A249 /* routing.c */; };
 		0779DC16264EB41200B9A249 /* exchange.c in Sources */ = {isa = PBXBuildFile; fileRef = 0779DC15264EB41200B9A249 /* exchange.c */; };
-		0787339F2621F0EB0075981C /* Block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339E2621F0EB0075981C /* Block.c */; };
+		0787339F2621F0EB0075981C /* block.c in Sources */ = {isa = PBXBuildFile; fileRef = 0787339E2621F0EB0075981C /* block.c */; };
 		07C5E349265039ED00539B26 /* client.c in Sources */ = {isa = PBXBuildFile; fileRef = 07C5E348265039ED00539B26 /* client.c */; };
+		07C5E34D2650463100539B26 /* get.c in Sources */ = {isa = PBXBuildFile; fileRef = 07C5E34C2650463100539B26 /* get.c */; };
+		07C5E3502650465000539B26 /* put.c in Sources */ = {isa = PBXBuildFile; fileRef = 07C5E34F2650465000539B26 /* put.c */; };
+		07C5E3532650465700539B26 /* sql.c in Sources */ = {isa = PBXBuildFile; fileRef = 07C5E3522650465700539B26 /* sql.c */; };
+		07C5E358265049E200539B26 /* exchange.c in Sources */ = {isa = PBXBuildFile; fileRef = 07C5E357265049E200539B26 /* exchange.c */; };
+		07C5E35B26504A2600539B26 /* introduction.c in Sources */ = {isa = PBXBuildFile; fileRef = 07C5E35A26504A2600539B26 /* introduction.c */; };
+		07C5E35E26504A3000539B26 /* routing.c in Sources */ = {isa = PBXBuildFile; fileRef = 07C5E35D26504A3000539B26 /* routing.c */; };
+		07C5E36126504A3C00539B26 /* close.c in Sources */ = {isa = PBXBuildFile; fileRef = 07C5E36026504A3C00539B26 /* close.c */; };
+		07C5E364265055CC00539B26 /* session.c in Sources */ = {isa = PBXBuildFile; fileRef = 07C5E363265055CC00539B26 /* session.c */; };
+		07C5E36C2650AD8E00539B26 /* logger.c in Sources */ = {isa = PBXBuildFile; fileRef = 07C5E36B2650AD8E00539B26 /* logger.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -66,8 +74,8 @@
 /* Begin PBXFileReference section */
 		0716C1F1264EB6FB00A81888 /* close.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = close.h; sourceTree = "<group>"; };
 		0716C1F2264EB6FB00A81888 /* close.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = close.c; sourceTree = "<group>"; };
-		0720300D263F34DE00804BDD /* Account.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
-		0720300E263F34DE00804BDD /* Account.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Account.c; sourceTree = "<group>"; };
+		0720300D263F34DE00804BDD /* account.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = account.h; sourceTree = "<group>"; };
+		0720300E263F34DE00804BDD /* account.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = account.c; sourceTree = "<group>"; };
 		0720301B263F3C9400804BDD /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
 		0720B4F72643066500EAAE74 /* test_account.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test_account.h; sourceTree = "<group>"; };
 		0720B4F82643066500EAAE74 /* test_account.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test_account.c; sourceTree = "<group>"; };
@@ -93,8 +101,6 @@
 		0775C84E264EE46A0086516D /* share.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = share.c; sourceTree = "<group>"; };
 		0775C851264EE71A0086516D /* server.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = server.h; sourceTree = "<group>"; };
 		0775C852264EE71A0086516D /* server.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = server.c; sourceTree = "<group>"; };
-		0775C855264EE88D0086516D /* objects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = objects.h; sourceTree = "<group>"; };
-		0775C856264EE88D0086516D /* objects.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = objects.c; sourceTree = "<group>"; };
 		0775C858264F09400086516D /* cli.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cli.h; sourceTree = "<group>"; };
 		0775C859264F09400086516D /* cli.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cli.c; sourceTree = "<group>"; };
 		0775C85B264F0B6F0086516D /* test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test.c; sourceTree = "<group>"; };
@@ -121,10 +127,28 @@
 		078733882621EBFD0075981C /* blockchain */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = blockchain; sourceTree = BUILT_PRODUCTS_DIR; };
 		078733932621EDC10075981C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		078733942621EDE30075981C /* makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = makefile; sourceTree = "<group>"; usesTabs = 1; };
-		0787339D2621F0EB0075981C /* Block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
-		0787339E2621F0EB0075981C /* Block.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = Block.c; sourceTree = "<group>"; };
+		0787339D2621F0EB0075981C /* block.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = block.h; sourceTree = "<group>"; };
+		0787339E2621F0EB0075981C /* block.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = block.c; sourceTree = "<group>"; };
 		07C5E347265039ED00539B26 /* client.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = client.h; sourceTree = "<group>"; };
 		07C5E348265039ED00539B26 /* client.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = client.c; sourceTree = "<group>"; };
+		07C5E34B2650463100539B26 /* get.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = get.h; sourceTree = "<group>"; };
+		07C5E34C2650463100539B26 /* get.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = get.c; sourceTree = "<group>"; };
+		07C5E34E2650465000539B26 /* put.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = put.h; sourceTree = "<group>"; };
+		07C5E34F2650465000539B26 /* put.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = put.c; sourceTree = "<group>"; };
+		07C5E3512650465700539B26 /* sql.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sql.h; sourceTree = "<group>"; };
+		07C5E3522650465700539B26 /* sql.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = sql.c; sourceTree = "<group>"; };
+		07C5E356265049E200539B26 /* exchange.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = exchange.h; sourceTree = "<group>"; };
+		07C5E357265049E200539B26 /* exchange.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = exchange.c; sourceTree = "<group>"; };
+		07C5E35926504A2600539B26 /* introduction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = introduction.h; sourceTree = "<group>"; };
+		07C5E35A26504A2600539B26 /* introduction.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = introduction.c; sourceTree = "<group>"; };
+		07C5E35C26504A3000539B26 /* routing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = routing.h; sourceTree = "<group>"; };
+		07C5E35D26504A3000539B26 /* routing.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = routing.c; sourceTree = "<group>"; };
+		07C5E35F26504A3C00539B26 /* close.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = close.h; sourceTree = "<group>"; };
+		07C5E36026504A3C00539B26 /* close.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = close.c; sourceTree = "<group>"; };
+		07C5E362265055CC00539B26 /* session.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = session.h; sourceTree = "<group>"; };
+		07C5E363265055CC00539B26 /* session.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = session.c; sourceTree = "<group>"; };
+		07C5E36A2650AD8E00539B26 /* logger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = logger.h; sourceTree = "<group>"; };
+		07C5E36B2650AD8E00539B26 /* logger.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = logger.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,10 +176,12 @@
 		07203011263F3BDB00804BDD /* objects */ = {
 			isa = PBXGroup;
 			children = (
-				0720300D263F34DE00804BDD /* Account.h */,
-				0720300E263F34DE00804BDD /* Account.c */,
-				0787339D2621F0EB0075981C /* Block.h */,
-				0787339E2621F0EB0075981C /* Block.c */,
+				0720300D263F34DE00804BDD /* account.h */,
+				0720300E263F34DE00804BDD /* account.c */,
+				0787339D2621F0EB0075981C /* block.h */,
+				0787339E2621F0EB0075981C /* block.c */,
+				07C5E362265055CC00539B26 /* session.h */,
+				07C5E363265055CC00539B26 /* session.c */,
 			);
 			path = objects;
 			sourceTree = "<group>";
@@ -243,15 +269,6 @@
 			path = cli;
 			sourceTree = "<group>";
 		};
-		0775C854264EE8240086516D /* objects */ = {
-			isa = PBXGroup;
-			children = (
-				0775C855264EE88D0086516D /* objects.h */,
-				0775C856264EE88D0086516D /* objects.c */,
-			);
-			path = objects;
-			sourceTree = "<group>";
-		};
 		0775C85D264F0EDD0086516D /* client */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +323,8 @@
 			children = (
 				07C5E347265039ED00539B26 /* client.h */,
 				07C5E348265039ED00539B26 /* client.c */,
+				07C5E3542650499E00539B26 /* protocols */,
+				07C5E34A2650462800539B26 /* routes */,
 			);
 			path = client;
 			sourceTree = "<group>";
@@ -315,7 +334,6 @@
 			children = (
 				0775C851264EE71A0086516D /* server.h */,
 				0775C852264EE71A0086516D /* server.c */,
-				0775C854264EE8240086516D /* objects */,
 				0779DC0D264E176500B9A249 /* protocols */,
 				0779DBE8264C69B400B9A249 /* routes */,
 			);
@@ -393,6 +411,7 @@
 				0779DBEC264C6A7200B9A249 /* database */,
 				0779DBE7264C69A900B9A249 /* server */,
 				0775C83B264ED51D0086516D /* src */,
+				07C5E3692650AD7A00539B26 /* utilities */,
 			);
 			path = blockchain;
 			sourceTree = "<group>";
@@ -414,6 +433,43 @@
 				0775C850264EE67D0086516D /* cli */,
 			);
 			path = interfaces;
+			sourceTree = "<group>";
+		};
+		07C5E34A2650462800539B26 /* routes */ = {
+			isa = PBXGroup;
+			children = (
+				07C5E34B2650463100539B26 /* get.h */,
+				07C5E34C2650463100539B26 /* get.c */,
+				07C5E34E2650465000539B26 /* put.h */,
+				07C5E34F2650465000539B26 /* put.c */,
+				07C5E3512650465700539B26 /* sql.h */,
+				07C5E3522650465700539B26 /* sql.c */,
+			);
+			path = routes;
+			sourceTree = "<group>";
+		};
+		07C5E3542650499E00539B26 /* protocols */ = {
+			isa = PBXGroup;
+			children = (
+				07C5E356265049E200539B26 /* exchange.h */,
+				07C5E357265049E200539B26 /* exchange.c */,
+				07C5E35926504A2600539B26 /* introduction.h */,
+				07C5E35A26504A2600539B26 /* introduction.c */,
+				07C5E35C26504A3000539B26 /* routing.h */,
+				07C5E35D26504A3000539B26 /* routing.c */,
+				07C5E35F26504A3C00539B26 /* close.h */,
+				07C5E36026504A3C00539B26 /* close.c */,
+			);
+			path = protocols;
+			sourceTree = "<group>";
+		};
+		07C5E3692650AD7A00539B26 /* utilities */ = {
+			isa = PBXGroup;
+			children = (
+				07C5E36A2650AD8E00539B26 /* logger.h */,
+				07C5E36B2650AD8E00539B26 /* logger.c */,
+			);
+			path = utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -496,9 +552,9 @@
 				0775C85C264F0B6F0086516D /* test.c in Sources */,
 				0759C1DE2641FDB800AF9407 /* test_block.c in Sources */,
 				0720B4F92643066500EAAE74 /* test_account.c in Sources */,
-				07203028263F43B400804BDD /* Account.c in Sources */,
+				07203028263F43B400804BDD /* account.c in Sources */,
 				0775C864264F0F6A0086516D /* test_cli.c in Sources */,
-				0759C1DF264200A300AF9407 /* Block.c in Sources */,
+				0759C1DF264200A300AF9407 /* block.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,26 +562,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07C5E364265055CC00539B26 /* session.c in Sources */,
 				0775C85A264F09400086516D /* cli.c in Sources */,
 				0775C853264EE71A0086516D /* server.c in Sources */,
 				0775C843264EE4370086516D /* create.c in Sources */,
 				07C5E349265039ED00539B26 /* client.c in Sources */,
 				0779DC16264EB41200B9A249 /* exchange.c in Sources */,
+				07C5E35B26504A2600539B26 /* introduction.c in Sources */,
 				0779DBF2264C9FBB00B9A249 /* mongoose.c in Sources */,
-				0787339F2621F0EB0075981C /* Block.c in Sources */,
+				07C5E34D2650463100539B26 /* get.c in Sources */,
+				0787339F2621F0EB0075981C /* block.c in Sources */,
 				0779DBEF264C6A8400B9A249 /* database.c in Sources */,
+				07C5E358265049E200539B26 /* exchange.c in Sources */,
+				07C5E3502650465000539B26 /* put.c in Sources */,
+				07C5E36126504A3C00539B26 /* close.c in Sources */,
+				07C5E3532650465700539B26 /* sql.c in Sources */,
 				0775C84C264EE45F0086516D /* server.c in Sources */,
+				07C5E36C2650AD8E00539B26 /* logger.c in Sources */,
 				0779DC10264E177500B9A249 /* introduction.c in Sources */,
 				0716C1F3264EB6FB00A81888 /* close.c in Sources */,
-				0775C857264EE88D0086516D /* objects.c in Sources */,
 				0775C837264ECAD10086516D /* sql.c in Sources */,
 				0779DC13264EB31E00B9A249 /* routing.c in Sources */,
 				0775C834264ECAC90086516D /* put.c in Sources */,
 				0775C849264EE4540086516D /* read.c in Sources */,
 				0775C831264ECAC10086516D /* get.c in Sources */,
+				07C5E35E26504A3000539B26 /* routing.c in Sources */,
 				0779DBDE264C64EB00B9A249 /* sqlite3.c in Sources */,
 				0775C846264EE4460086516D /* query.c in Sources */,
-				0720300F263F34DE00804BDD /* Account.c in Sources */,
+				0720300F263F34DE00804BDD /* account.c in Sources */,
 				0779DBC0264C319E00B9A249 /* blockchain.c in Sources */,
 				0775C840264EE4290086516D /* account.c in Sources */,
 				0775C84F264EE46A0086516D /* share.c in Sources */,
