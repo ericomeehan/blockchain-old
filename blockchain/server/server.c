@@ -29,9 +29,9 @@
 
 volatile sig_atomic_t active = false;
 
-static void event_handler(struct mg_connection *c, int ev, void *ev_data, void *fn_data);
-static void terminate(int signum);
-static void register_default_routes(void);
+static void BLOCKCHAIN_SRV_PRIVATE_register_default_routes(void);
+static void BLOCKCHAIN_SRV_PRIVATE_event_handler(struct mg_connection *c, int ev, void *ev_data, void *fn_data);
+static void BLOCKCHAIN_SRV_PRIVATE_terminate(int signum);
 
 bool BLOCKCHAIN_SRV_initialize()
 {
@@ -45,11 +45,11 @@ bool BLOCKCHAIN_SRV_initialize()
     
     BLOCKCHAIN_UTIL_logger(stdout, "Initializing server varaiables...\n");
     routes = dictionary_constructor(compare_string_keys);
-    register_default_routes();
+    BLOCKCHAIN_SRV_PRIVATE_register_default_routes();
     BLOCKCHAIN_UTIL_logger(stdout, "Server variables initialized\n");
     
     BLOCKCHAIN_UTIL_logger(stdout, "Initializing Mongoose event manager...\n");
-    mg_mgr_init(SERVER);
+    mg_mgr_init(&SERVER);
     BLOCKCHAIN_UTIL_logger(stdout, "Mongoose Initialized\n");
     
     BLOCKCHAIN_UTIL_logger(stdout, "Initializing SQLite database...\n");
@@ -57,7 +57,13 @@ bool BLOCKCHAIN_SRV_initialize()
     BLOCKCHAIN_UTIL_logger(stdout, "SQLite initialized\n");
     
     BLOCKCHAIN_UTIL_logger(stdout, "Mining session block...\n");
-    // mine
+    byte hash[64] = {0};
+    uuid_t binuuid;
+    uuid_generate_random(binuuid);
+    char uuid[37];
+    uuid_unparse_upper(binuuid, uuid);
+    BLOCKCHAIN_OBJ_Block_mine(&server_session.user, NULL, uuid, 37, hash);
+    BLOCKCHAIN_OBJ_Block_load(server_session.whoami, hash);
     BLOCKCHAIN_UTIL_logger(stdout, "Session block mined\n");
 
     BLOCKCHAIN_UTIL_logger(stdout, "Server initialized\n");
@@ -87,14 +93,14 @@ void BLOCKCHAIN_SRV_launch(void)
     
     struct sigaction action;
     memset(&action, 0, sizeof(struct sigaction));
-    action.sa_handler = terminate;
+    action.sa_handler = BLOCKCHAIN_SRV_PRIVATE_terminate;
     sigaction(SIGTERM, &action, NULL);
     
-    mg_listen(SERVER, listen_address, event_handler, &server_session);
+    mg_listen(&SERVER, listen_address, BLOCKCHAIN_SRV_PRIVATE_event_handler, &server_session);
     active = true;
     while (active)
     {
-        mg_mgr_poll(SERVER, SERVER_PULSE);
+        mg_mgr_poll(&SERVER, SERVER_PULSE);
     }
 }
 
@@ -129,6 +135,7 @@ static void event_handler(struct mg_connection *c, int ev, void *ev_data, void *
         }
         default:
         {
+            c->label[BLOCKCHAIN_CONNECTION_LABEL_STATUS] = BLOCKCHAIN_SERVER_INTRODUCTION;
             break;
         }
     }

@@ -16,6 +16,7 @@
 #define CLNT_RT_get_h
 
 #include "../../blockchain.h"
+#include "../client.h"
 
 void BLOCKCHAIN_CLNT_RT_get(struct mg_connection *c, int ev, void *ev_data, void *fn_data);
 

@@ -12,8 +12,8 @@
 //
 //
 
-#ifndef client_h
-#define client_h
+#ifndef CLNT_client_h
+#define CLNT_client_h
 
 #include "../blockchain.h"
 
@@ -22,6 +22,7 @@
 
 typedef struct BLOCKCHAIN_CLNT_OBJ_request
 {
+    BLOCKCHAIN_OBJ_Account *user;
     BLOCKCHAIN_OBJ_Block *whoami;
     byte *route;
     byte *data;
@@ -41,9 +42,10 @@ enum BLOCKCHAIN_CLNT_labels
 {
     BLOCKCHAIN_CONNECTION_LABEL_STATUS,
     BLOCKCHAIN_CONNECTION_LABEL_DATA,
-    BLOCKCHAIN_CONNECTION_LABEL_ROUTE = 9,
+    BLOCKCHAIN_CONNECTION_LABEL_ITERATION,
+    BLOCKCHAIN_CONNECTION_LABEL_UUID
 };
 
 bool BLOCKCHAIN_CLNT_request(char *address, byte *route, byte *data_to_send, unsigned long data_size);
 
-#endif /* client_h */
+#endif /* CLNT_client_h */

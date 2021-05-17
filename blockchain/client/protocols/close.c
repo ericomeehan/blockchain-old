@@ -13,11 +13,14 @@
 //
 
 #include "close.h"
+#include "../../utilities/logger.h"
 
 void BLOCKCHAIN_CLNT_PTCL_close(struct mg_connection *c, int ev, void *ev_data, void *fn_data)
 {
-    byte status = c->label[BLOCKCHAIN_CONNECTION_LABEL_STATUS];
     BLOCKCHAIN_CLNT_OBJ_request *request = fn_data;
+    byte status = c->label[BLOCKCHAIN_CONNECTION_LABEL_STATUS];
+    char log[512] = {0};
+    
     switch (ev)
     {
         case MG_EV_POLL:
@@ -42,6 +45,8 @@ void BLOCKCHAIN_CLNT_PTCL_close(struct mg_connection *c, int ev, void *ev_data, 
         }
         case MG_EV_CLOSE:
         {
+            sprintf(log, CLIENT_LOGGING_FORMAT, request->whoami->data, c->peer.ip, c->peer.ip6, c->peer.is_ip6, c->peer.port, status, ev, "CLOSED");
+            BLOCKCHAIN_UTIL_logger(stdout, log);
             break;
         }
         default:

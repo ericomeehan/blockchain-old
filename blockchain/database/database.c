@@ -13,7 +13,41 @@
 //
 
 #include "database.h"
-#include "setup/commands.h"
+
+static const char *BLOCKCHAIN_DB_STUP_CMD_CREATE_TABLE_BLOCKS =
+"CREATE TABLE IF NOT EXISTS blocks("
+"hash TEXT PRIMARY KEY NOT NULL UNIQUE, "
+"previous TEXT NOT NULL, "
+"timestamp TEXT NOT NULL, "
+"size INTEGER NOT NULL, "
+"author TEXT NOT NULL, "
+"nonce INTEGER NOT NULL"
+");";
+
+static const char *BLOCKCHAIN_DB_STUP_CMD_CREATE_TABLE_NODES =
+"CREATE TABLE IF NOT EXISTS nodes("
+"public_key TEXT PRIMARY KEY NOT NULL UNIQUE, "
+"name TEXT DEFAULT \"anonymous\","
+"last_ip TEXT DEFAULT \"255.255.255.255\", "
+"last_connection TEXT DEFAULT \"20000-01-01 00:00:00\""
+");";
+
+static const char *BLOCKCHAIN_DB_STUP_CMD_CREATE_TABLE_WALLETS =
+"CREATE TABLE IF NOT EXISTS wallets("
+"public_key TEXT PRIMARY KEY NOT NULL UNIQUE, "
+"balance INTEGER DEFAULT 0.0"
+");";
+
+static const char *BLOCKCHAIN_DB_CMD_TEMPLATE_INSERT_INTO_BLOCKS =
+"IF NOT EXISTS(SELECT hash FROM blocks WHERE hash = %s) "
+"INSERT INTO blocks (hash, previous, timestamp, size, difficulty, author, nonce) VALUES (%0128s, %0128s, %s, %lu, %lu, %s, %lu);";
+
+static const char *BLOCKCHAIN_DB_CMD_TEMPLATE_INSERT_INTO_NODES =
+"IF EXISTS(SELECT public_key FROM nodes WHERE public_key = %s) "
+"UPDATE nodes SET name = %s, last_ip = %s, last_connection = %s WHERE public_key = %s "
+"ELSE "
+"INSERT INTO nodes (public_key, name, last_ip, last_connection) VALUES (%s, %s, %s, %s);";
+
 
 static bool BLOCKCHAIN_DB_connect(void);
 static bool BLOCKCHAIN_DB_create_default_tables(void);
@@ -33,7 +67,7 @@ bool BLOCKCHAIN_DB_query(char *sql, int (*callback)(void *callback_argument, int
     char *sqlerr = {0};
     if (!sqlite3_exec(DATABASE, sql, callback, callback_argument, &sqlerr))
     {
-        fprintf(stderr, "SQL ERROR: %s\n", sqlerr);
+        fprintf(stderr, "SQL ERROR: %s\n%s\n", sqlerr, sql);
         return false;
     }
     return true;
@@ -72,19 +106,19 @@ bool BLOCKCHAIN_DB_connect()
 bool BLOCKCHAIN_DB_create_default_tables()
 {
     char *sqlerr = {0};
-    if (!sqlite3_exec(DATABASE, BLOCKCHAIN_DB_STUP_CMD_CREATE_TABLE_BLOCKS, NULL, NULL, &sqlerr))
+    if (sqlite3_exec(DATABASE, BLOCKCHAIN_DB_STUP_CMD_CREATE_TABLE_BLOCKS, NULL, NULL, &sqlerr) != SQLITE_OK)
     {
-        fprintf(stderr, "SQL ERROR: %s\n", sqlerr);
+        fprintf(stderr, "SQL ERROR: %s\n%s\n", sqlerr, BLOCKCHAIN_DB_STUP_CMD_CREATE_TABLE_BLOCKS);
         return false;
     }
-    if (!sqlite3_exec(DATABASE, BLOCKCHAIN_DB_STUP_CMD_CREATE_TABLE_NODES, NULL, NULL, &sqlerr))
+    if (sqlite3_exec(DATABASE, BLOCKCHAIN_DB_STUP_CMD_CREATE_TABLE_NODES, NULL, NULL, &sqlerr) != SQLITE_OK)
     {
-        fprintf(stderr, "SQL ERROR: %s\n", sqlerr);
+        fprintf(stderr, "SQL ERROR: %s\n%s\n", sqlerr, BLOCKCHAIN_DB_STUP_CMD_CREATE_TABLE_NODES);
         return false;
     }
-    if (!sqlite3_exec(DATABASE, BLOCKCHAIN_DB_STUP_CMD_CREATE_TABLE_WALLETS, NULL, NULL, &sqlerr))
+    if (sqlite3_exec(DATABASE, BLOCKCHAIN_DB_STUP_CMD_CREATE_TABLE_WALLETS, NULL, NULL, &sqlerr) != SQLITE_OK)
     {
-        fprintf(stderr, "SQL ERROR: %s\n", sqlerr);
+        fprintf(stderr, "SQL ERROR: %s\n%s\n", sqlerr, BLOCKCHAIN_DB_STUP_CMD_CREATE_TABLE_WALLETS);
         return false;
     }
     return true;

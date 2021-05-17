@@ -13,21 +13,23 @@
 //
 
 #include "routing.h"
+#include "../../utilities/logger.h"
 
 void BLOCKCHAIN_CLNT_PTCL_routing(struct mg_connection *c, int ev, void *ev_data, void *fn_data)
 {
     byte status = c->label[BLOCKCHAIN_CONNECTION_LABEL_STATUS];
     BLOCKCHAIN_CLNT_OBJ_request *request = fn_data;
-    int *iteration = (int *)c->label;
+    
+    char log[512] = {0};
+    
     switch (ev)
     {
         case MG_EV_POLL:
         {
-            if (!*iteration)
-            {
-                mg_send(c, request->route, strlen((const char *)request->route) + 1);
-                *iteration += 1;
-            }
+            mg_send(c, request->route, strlen((const char *)request->route) + 1);
+            
+            sprintf(log, CLIENT_LOGGING_FORMAT, request->whoami->data, c->peer.ip, c->peer.ip6, c->peer.is_ip6, c->peer.port, status, ev, "ROUTE REQUESTED");
+            BLOCKCHAIN_UTIL_logger(stdout, log);
             
             break;
         }
@@ -42,6 +44,10 @@ void BLOCKCHAIN_CLNT_PTCL_routing(struct mg_connection *c, int ev, void *ev_data
         case MG_EV_READ:
         {
             status = (c->recv.buf[0] ? BLOCKCHAIN_CLIENT_EXCHANGE:BLOCKCHAIN_CLIENT_CLOSING);
+            
+            sprintf(log, CLIENT_LOGGING_FORMAT, c->peer.ip, c->peer.ip6, c->peer.is_ip6, c->peer.port, status, ev, "SERVER RESPONSE");
+            BLOCKCHAIN_UTIL_logger(stdout, log);
+        
             break;
         }
         case MG_EV_WRITE:

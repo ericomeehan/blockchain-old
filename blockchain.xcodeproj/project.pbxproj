@@ -106,7 +106,6 @@
 		0775C85B264F0B6F0086516D /* test.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test.c; sourceTree = "<group>"; };
 		0775C862264F0F6A0086516D /* test_cli.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test_cli.h; sourceTree = "<group>"; };
 		0775C863264F0F6A0086516D /* test_cli.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = test_cli.c; sourceTree = "<group>"; };
-		0775C866264F35450086516D /* commands.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = commands.h; sourceTree = "<group>"; };
 		0779DBAE2649989E00B9A249 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = ../../../../usr/local/lib/libcrypto.a; sourceTree = "<group>"; };
 		0779DBAF2649989E00B9A249 /* libeom.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libeom.a; path = ../../../../usr/local/lib/libeom.a; sourceTree = "<group>"; };
 		0779DBB9264A03E300B9A249 /* blockchain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = blockchain.h; sourceTree = "<group>"; };
@@ -310,14 +309,6 @@
 			path = interfaces;
 			sourceTree = "<group>";
 		};
-		0775C865264F35090086516D /* setup */ = {
-			isa = PBXGroup;
-			children = (
-				0775C866264F35450086516D /* commands.h */,
-			);
-			path = setup;
-			sourceTree = "<group>";
-		};
 		0779DBE6264C69A300B9A249 /* client */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,7 +349,6 @@
 			children = (
 				0779DBED264C6A8400B9A249 /* database.h */,
 				0779DBEE264C6A8400B9A249 /* database.c */,
-				0775C865264F35090086516D /* setup */,
 			);
 			path = database;
 			sourceTree = "<group>";

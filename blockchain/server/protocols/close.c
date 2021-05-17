@@ -18,8 +18,9 @@
 void BLOCKCHAIN_SRV_PTCL_close(struct mg_connection *c, int ev, void *ev_data, void *fn_data)
 {
     BLOCKCHAIN_OBJ_Session *session = (BLOCKCHAIN_OBJ_Session *)fn_data;
+    byte *uuid = (byte *)&c->label[BLOCKCHAIN_CONNECTION_LABEL_UUID];
     byte status = c->label[BLOCKCHAIN_CONNECTION_LABEL_STATUS];
-    byte response;
+    byte response = 0;
     
     char log[512] = {0};
     
@@ -45,15 +46,12 @@ void BLOCKCHAIN_SRV_PTCL_close(struct mg_connection *c, int ev, void *ev_data, v
         {
             BLOCKCHAIN_OBJ_LinkedBlock_next(&session->events);
             
-            sprintf(log, BLOCKCHAIN_SRV_PTCL_close_log_format, c->peer.ip, c->peer.ip6, c->peer.is_ip6, c->peer.port, status);
-            
+            sprintf(log, SERVER_LOGGING_FORMAT, uuid, c->peer.ip, c->peer.ip6, c->peer.is_ip6, c->peer.port, status, ev, "CLOSE", response, "CLOSING");
             BLOCKCHAIN_UTIL_logger(stdout, log);
             
             byte hash[64] = {0};
-            BLOCKCHAIN_OBJ_Block_mine(&session->user, session->events.previous, log, strlen(log) + 1, hash);
-            
+            BLOCKCHAIN_OBJ_Block_mine(&session->user, session->events.previous, log, strlen(log) + 1, hash);            
             free(session->events.previous);
-            
             break;
         }
         default:

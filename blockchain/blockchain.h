@@ -38,6 +38,7 @@
 #include <string.h>
 #include <time.h>
 #include <unistd.h>
+#include <uuid/uuid.h>
 
 static const char *PIPE_PATH = "/Users/eric/Desktop/";
 static const char *PROFILE_PATH = "/Users/eric/Desktop/";
@@ -52,13 +53,41 @@ static const unsigned long MAX_BLOCK_SIZE = 1000000000;
 static const char *URL = "tcp://0.0.0.0.0:%d/";
 static const unsigned int PORT = 1248;
 static const int SERVER_PULSE = 100;
-static struct mg_mgr *SERVER;
+struct mg_mgr SERVER;
+static const char *SERVER_LOGGING_FORMAT = "{"
+"\"session\": \"%s\", "
+"\"client\": { "
+"\t\"ip\": %lu, "
+"\t\"ip6\": %lu, "
+"\t\"is_ip6\": %d, "
+"\t\"port\": %lu "
+"\t} "
+"\"status\": %d, "
+"\"event\": %d, "
+"\"route\": \"%s\", "
+"\"response\", %d, "
+"\"notes\": \"%s\""
+"}\n";
 
-static struct mg_mgr *CLIENT;
+struct mg_mgr *CLIENT;
 static const int CLIENT_PULSE = 1000;
+static const char *CLIENT_LOGGING_FORMAT = "{"
+"\"session\": \"%s\", "
+"\"server\": { "
+"\t\"ip\": %lu, "
+"\t\"ip6\": %lu, "
+"\t\"is_ip6\": %d, "
+"\t\"port\": %lu "
+"\t} "
+"\"status\": %d, "
+"\"event\": %d, "
+"\"notes\": \"%s\""
+"}\n";
 
 static const char *DATABASE_PATH = "/Users/eric/Desktop/blockchain.db";
 static sqlite3 *DATABASE;
+
+
 
 
 static const char *HELP = "\n"
