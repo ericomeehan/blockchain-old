@@ -18,17 +18,17 @@ static const char *BLOCKCHAIN_DB_STUP_CMD_CREATE_TABLE_BLOCKS =
 "CREATE TABLE IF NOT EXISTS blocks("
 "hash TEXT PRIMARY KEY NOT NULL UNIQUE, "
 "previous TEXT NOT NULL, "
+"author TEXT NOT NULL, "
 "timestamp TEXT NOT NULL, "
 "size INTEGER NOT NULL, "
-"author TEXT NOT NULL, "
-"nonce INTEGER NOT NULL"
+"nonce INTEGER NOT NULL, "
+"is_log INTEGER DEFAULT 0"
 ");";
 
 static const char *BLOCKCHAIN_DB_STUP_CMD_CREATE_TABLE_NODES =
 "CREATE TABLE IF NOT EXISTS nodes("
-"public_key TEXT PRIMARY KEY NOT NULL UNIQUE, "
-"name TEXT DEFAULT \"anonymous\","
-"last_ip TEXT DEFAULT \"255.255.255.255\", "
+"ip TEXT PRIMARY KEY NOT NULL, "
+"account TEXT DEFAULT \"anonymous\", "
 "last_connection TEXT DEFAULT \"20000-01-01 00:00:00\""
 ");";
 

@@ -21,22 +21,18 @@
 #include "../objects/block.h"
 #include "../objects/session.h"
 
-typedef struct ThreadPool ThreadPool;
-typedef struct ThreadJob ThreadJob;
-
 typedef struct Route
 {
     void (*route_function)(struct mg_connection *, int, void *, void *);
 }
 BLOCKCHAIN_SRV_OBJ_Route;
 
-static byte server_routes[3] = {1, 2, 3};
-
 enum BLOCKCHAIN_SRV_labels
 {
     BLOCKCHAIN_CONNECTION_LABEL_STATUS,
-    BLOCKCHAIN_CONNECTION_LABEL_ROUTE,
-    BLOCKCHAIN_CONNECTION_LABEL_UUID = sizeof(void *) + 1,
+    BLOCKCHAIN_CONNECTION_LABEL_SESSION,
+    BLOCKCHAIN_CONNECTION_LABEL_ROUTE = 5,
+    BLOCKCHAIN_CONNECTION_LABEL_UUID = 9
 };
 
 enum BLOCKCHAIN_SRV_statuses
@@ -47,8 +43,9 @@ enum BLOCKCHAIN_SRV_statuses
     BLOCKCHAIN_SERVER_CLOSING
 };
 
-static BLOCKCHAIN_OBJ_Session server_session;
-static struct Dictionary routes;
+static BLOCKCHAIN_OBJ_Session SERVER_SESSION;
+static struct Dictionary SERVER_ROUTES;
+static byte BLOCKCHAIN_SERVER_ROUTE_ADDRESSES[3] = {1, 2, 3};
 
 bool BLOCKCHAIN_SRV_initialize(void);
 void BLOCKCHAIN_SRV_launch(void);

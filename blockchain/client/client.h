@@ -19,16 +19,31 @@
 
 #include "../objects/account.h"
 #include "../objects/block.h"
+#include "../objects/session.h"
+
+typedef struct BLOCKCHAIN_CLNT_OBJ_Route
+{
+    void (*route_function)(struct mg_connection *, int, void *, void *);
+}
+BLOCKCHAIN_CLNT_OBJ_Route;
+
 
 typedef struct BLOCKCHAIN_CLNT_OBJ_request
 {
     BLOCKCHAIN_OBJ_Account *user;
-    BLOCKCHAIN_OBJ_Block *whoami;
+    BLOCKCHAIN_OBJ_LinkedBlock events;
     byte *route;
     byte *data;
     unsigned long data_size;
 }
 BLOCKCHAIN_CLNT_OBJ_request;
+
+enum BLOCKCHAIN_CLNT_labels
+{
+    BLOCKCHAIN_CONNECTION_LABEL_STATUS,
+    BLOCKCHAIN_CONNECTION_LABEL_ITERATION,
+    BLOCKCHAIN_CONNECTION_LABEL_UUID
+};
 
 enum BLOCKCHAIN_CLNT_statuses
 {
@@ -38,13 +53,8 @@ enum BLOCKCHAIN_CLNT_statuses
     BLOCKCHAIN_CLIENT_CLOSING
 };
 
-enum BLOCKCHAIN_CLNT_labels
-{
-    BLOCKCHAIN_CONNECTION_LABEL_STATUS,
-    BLOCKCHAIN_CONNECTION_LABEL_DATA,
-    BLOCKCHAIN_CONNECTION_LABEL_ITERATION,
-    BLOCKCHAIN_CONNECTION_LABEL_UUID
-};
+static struct Dictionary CLIENT_ROUTES;
+static byte BLOCKCHAIN_CLNT_ROUTE_ADDRESSES[3] = {1, 2, 3};
 
 bool BLOCKCHAIN_CLNT_request(char *address, byte *route, byte *data_to_send, unsigned long data_size);
 

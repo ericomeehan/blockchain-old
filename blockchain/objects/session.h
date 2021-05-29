@@ -31,7 +31,8 @@ void BLOCKCHAIN_OBJ_LinkedBlock_next(BLOCKCHAIN_OBJ_LinkedBlock *linked_block);
 typedef struct Session
 {
     BLOCKCHAIN_OBJ_Account user;
-    BLOCKCHAIN_OBJ_Block *whoami;
+    BLOCKCHAIN_OBJ_Block *block;
+    byte digest[64];
     BLOCKCHAIN_OBJ_LinkedBlock events;
 }
 BLOCKCHAIN_OBJ_Session;

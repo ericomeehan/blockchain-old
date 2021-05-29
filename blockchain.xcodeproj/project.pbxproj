@@ -48,6 +48,7 @@
 		07C5E36126504A3C00539B26 /* close.c in Sources */ = {isa = PBXBuildFile; fileRef = 07C5E36026504A3C00539B26 /* close.c */; };
 		07C5E364265055CC00539B26 /* session.c in Sources */ = {isa = PBXBuildFile; fileRef = 07C5E363265055CC00539B26 /* session.c */; };
 		07C5E36C2650AD8E00539B26 /* logger.c in Sources */ = {isa = PBXBuildFile; fileRef = 07C5E36B2650AD8E00539B26 /* logger.c */; };
+		07C5E37226521BA300539B26 /* uuid.c in Sources */ = {isa = PBXBuildFile; fileRef = 07C5E37126521BA300539B26 /* uuid.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -148,6 +149,8 @@
 		07C5E363265055CC00539B26 /* session.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = session.c; sourceTree = "<group>"; };
 		07C5E36A2650AD8E00539B26 /* logger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = logger.h; sourceTree = "<group>"; };
 		07C5E36B2650AD8E00539B26 /* logger.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = logger.c; sourceTree = "<group>"; };
+		07C5E37026521BA300539B26 /* uuid.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = uuid.h; sourceTree = "<group>"; };
+		07C5E37126521BA300539B26 /* uuid.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = uuid.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -458,6 +461,8 @@
 			children = (
 				07C5E36A2650AD8E00539B26 /* logger.h */,
 				07C5E36B2650AD8E00539B26 /* logger.c */,
+				07C5E37026521BA300539B26 /* uuid.h */,
+				07C5E37126521BA300539B26 /* uuid.c */,
 			);
 			path = utilities;
 			sourceTree = "<group>";
@@ -568,6 +573,7 @@
 				07C5E36126504A3C00539B26 /* close.c in Sources */,
 				07C5E3532650465700539B26 /* sql.c in Sources */,
 				0775C84C264EE45F0086516D /* server.c in Sources */,
+				07C5E37226521BA300539B26 /* uuid.c in Sources */,
 				07C5E36C2650AD8E00539B26 /* logger.c in Sources */,
 				0779DC10264E177500B9A249 /* introduction.c in Sources */,
 				0716C1F3264EB6FB00A81888 /* close.c in Sources */,

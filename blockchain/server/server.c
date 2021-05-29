@@ -26,6 +26,7 @@
 #include "routes/sql.h"
 
 #include "../utilities/logger.h"
+#include "../utilities/uuid.h"
 
 volatile sig_atomic_t active = false;
 
@@ -37,14 +38,14 @@ bool BLOCKCHAIN_SRV_initialize()
 {
     BLOCKCHAIN_UTIL_logger(stdout, "Initializing blockchain server...\n");
     BLOCKCHAIN_UTIL_logger(stdout, "Login required\n");
-    if (!BLOCKCHAIN_OBJ_Account_login(&server_session.user))
+    if (!BLOCKCHAIN_OBJ_Account_login(&SERVER_SESSION.user))
     {
         BLOCKCHAIN_UTIL_logger(stderr, "BLOCKCHAIN ERROR: Failed to initialize server\n");
         return false;
     }
     
     BLOCKCHAIN_UTIL_logger(stdout, "Initializing server varaiables...\n");
-    routes = dictionary_constructor(compare_string_keys);
+    SERVER_ROUTES = dictionary_constructor(compare_string_keys);
     BLOCKCHAIN_SRV_PRIVATE_register_default_routes();
     BLOCKCHAIN_UTIL_logger(stdout, "Server variables initialized\n");
     
@@ -57,13 +58,11 @@ bool BLOCKCHAIN_SRV_initialize()
     BLOCKCHAIN_UTIL_logger(stdout, "SQLite initialized\n");
     
     BLOCKCHAIN_UTIL_logger(stdout, "Mining session block...\n");
-    byte hash[64] = {0};
-    uuid_t binuuid;
-    uuid_generate_random(binuuid);
+//    byte hash[64] = {0};
     char uuid[37];
-    uuid_unparse_upper(binuuid, uuid);
-    BLOCKCHAIN_OBJ_Block_mine(&server_session.user, NULL, uuid, 37, hash);
-    BLOCKCHAIN_OBJ_Block_load(server_session.whoami, hash);
+    BLOCKCHAIN_UTIL_gen_uuid(uuid);
+    BLOCKCHAIN_OBJ_Block_mine(&SERVER_SESSION.user, NULL, uuid, 37, SERVER_SESSION.digest);
+    BLOCKCHAIN_OBJ_Block_load(SERVER_SESSION.block, SERVER_SESSION.digest);
     BLOCKCHAIN_UTIL_logger(stdout, "Session block mined\n");
 
     BLOCKCHAIN_UTIL_logger(stdout, "Server initialized\n");
@@ -96,7 +95,7 @@ void BLOCKCHAIN_SRV_launch(void)
     action.sa_handler = BLOCKCHAIN_SRV_PRIVATE_terminate;
     sigaction(SIGTERM, &action, NULL);
     
-    mg_listen(&SERVER, listen_address, BLOCKCHAIN_SRV_PRIVATE_event_handler, &server_session);
+    mg_listen(&SERVER, listen_address, BLOCKCHAIN_SRV_PRIVATE_event_handler, &SERVER_SESSION);
     active = true;
     while (active)
     {
@@ -105,7 +104,7 @@ void BLOCKCHAIN_SRV_launch(void)
 }
 
 
-static void event_handler(struct mg_connection *c, int ev, void *ev_data, void *fn_data)
+static void BLOCKCHAIN_SRV_PRIVATE_event_handler(struct mg_connection *c, int ev, void *ev_data, void *fn_data)
 {
     switch (c->label[BLOCKCHAIN_CONNECTION_LABEL_STATUS])
     {
@@ -141,22 +140,22 @@ static void event_handler(struct mg_connection *c, int ev, void *ev_data, void *
     }
 }
 
-void terminate(int signum)
+void BLOCKCHAIN_SRV_PRIVATE_terminate(int signum)
 {
     active = false;
 }
 
-void register_default_routes(void)
+void BLOCKCHAIN_SRV_PRIVATE_register_default_routes(void)
 {
     BLOCKCHAIN_SRV_OBJ_Route get_route; 
     get_route.route_function = BLOCKCHAIN_SRV_RT_get;
-    routes.insert(&routes, server_routes, 1, &get_route, sizeof(get_route));
+    SERVER_ROUTES.insert(&SERVER_ROUTES, route_addresses, 1, &get_route, sizeof(get_route));
     
     BLOCKCHAIN_SRV_OBJ_Route put_route;
     put_route.route_function = BLOCKCHAIN_SRV_RT_put;
-    routes.insert(&routes, server_routes + 1, 1, &get_route, sizeof(get_route));
+    SERVER_ROUTES.insert(&SERVER_ROUTES, route_addresses + 1, 1, &get_route, sizeof(get_route));
     
     BLOCKCHAIN_SRV_OBJ_Route sql_route;
     sql_route.route_function = BLOCKCHAIN_SRV_RT_sql;
-    routes.insert(&routes, server_routes + 2, 1, &get_route, sizeof(get_route));
+    SERVER_ROUTES.insert(&SERVER_ROUTES, route_addresses + 2, 1, &get_route, sizeof(get_route));
 }
